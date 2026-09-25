@@ -10,234 +10,191 @@
     --lav:#F3F1FF; --lav-2:#E7E3FF; --line:#DDD8FA;
     --yellow:#FFD21A; --yellow-soft:#FFF7D1; --amber:#F4A614;
   }
-  @page{ size:A4; margin:16mm 15mm 16mm 15mm; }
+  @page{ size:A4; margin:14mm 14mm 15mm 14mm; }
   *{ box-sizing:border-box; }
   html,body{ margin:0; background:transparent; }
+  /* весь текст: Times New Roman 14 пт, межстрочный интервал 1,5 */
   body{ font-family:"Times New Roman","Liberation Serif",serif; font-size:14pt; line-height:1.5; color:var(--ink);
         -webkit-print-color-adjust:exact; print-color-adjust:exact; }
-  b,strong{ color:var(--deep); }
+  b{ color:var(--deep); }
+  .ref{ color:var(--violet); font-weight:bold; white-space:nowrap; }
 
-  /* фоновые пятна фирменного стиля — повторяются на каждой странице */
-  .bg{ position:fixed; z-index:-1; border-radius:50%; filter:blur(38px); opacity:.55; }
-  .bg.b1{ width:95mm; height:95mm; top:-40mm; right:-35mm; background:radial-gradient(circle at 35% 40%, #FFC94A 0%, #8C5CF0 55%, transparent 72%); }
-  .bg.b2{ width:110mm; height:110mm; bottom:-58mm; left:-52mm; background:radial-gradient(circle at 60% 35%, #FFB938 0%, #5B4BE8 58%, transparent 74%); }
-  .dot{ position:fixed; z-index:-1; width:7mm; height:7mm; border-radius:50%;
-        background:radial-gradient(circle at 70% 35%, #FFC94A 0 22%, #5B4BE8 45%); }
-  .dot.d1{ top:58mm; right:4mm; } .dot.d2{ bottom:92mm; left:3mm; width:5mm; height:5mm; }
-
-  .ui{ font-family:"Manrope","Liberation Sans",sans-serif; }
-  .display{ font-family:"Unbounded","Liberation Sans",sans-serif; }
-
-  /* ---------- HERO ---------- */
-  .hero{ position:relative; border-radius:22px; padding:6.5mm 8mm 6mm; color:#fff; overflow:hidden;
+  /* ---------- шапка ---------- */
+  .hero{ position:relative; border-radius:22px; padding:5.5mm 8mm 5.5mm; color:#fff; overflow:hidden;
          background:linear-gradient(125deg,#3A22B8 0%,#5B4BE8 48%,#8A6BFF 100%); }
   .hero::after{ content:""; position:absolute; right:-18mm; top:-22mm; width:70mm; height:70mm; border-radius:50%;
-         background:radial-gradient(circle,#FFD21A 0%,rgba(255,210,26,.0) 65%); opacity:.55; }
-  .hero .eyebrow{ display:inline-block; background:var(--yellow); color:var(--deep); font-weight:800; font-size:8.5pt;
-         letter-spacing:.08em; padding:1.6mm 3.6mm; border-radius:999px; text-transform:uppercase; }
-  .hero h1{ font-family:"Unbounded",sans-serif; font-weight:800; font-size:25pt; line-height:1.1; margin:3.5mm 0 1.2mm; letter-spacing:-.01em; }
-  .hero .sub{ font-family:"Manrope",sans-serif; font-weight:700; font-size:11.5pt; opacity:.92; }
-  .hero .logo{ position:absolute; right:6mm; top:50%; transform:translateY(-50%); width:31mm; background:#fff; border-radius:16px; padding:2.4mm 3mm; z-index:1;
-         box-shadow:0 6px 18px rgba(20,8,90,.25); }
+         background:radial-gradient(circle,#FFD21A 0%,rgba(255,210,26,0) 65%); opacity:.5; }
+  .eyebrow{ display:inline-block; background:var(--yellow); color:var(--deep); font-family:"Manrope",sans-serif; font-weight:800;
+         font-size:8.5pt; line-height:1.4; letter-spacing:.08em; padding:1.2mm 3.4mm; border-radius:999px; text-transform:uppercase; }
+  .hero h1{ font-family:"Unbounded",sans-serif; font-weight:800; font-size:24pt; line-height:1.1; margin:2.6mm 0 1mm; }
+  .hero .sub{ font-family:"Manrope",sans-serif; font-weight:700; font-size:11pt; line-height:1.3; opacity:.92; }
+  .hero .logo{ position:absolute; right:6mm; top:50%; transform:translateY(-50%); width:30mm; background:#fff; border-radius:14px;
+         padding:2mm 2.6mm; z-index:1; box-shadow:0 6px 18px rgba(20,8,90,.25); }
   .hero .logo img{ width:100%; display:block; }
 
-  /* ---------- паспорт команды ---------- */
-  .meta{ display:grid; grid-template-columns:1fr 1fr; gap:3mm; margin:4mm 0 0; }
-  .meta .cell{ background:var(--lav); border:1px solid var(--line); border-radius:14px; padding:2.6mm 4mm 3mm; }
-  .meta .k{ font-family:"Manrope",sans-serif; font-weight:800; font-size:8pt; letter-spacing:.09em; color:var(--violet); text-transform:uppercase; }
-  .meta .v{ line-height:1.3; margin-top:.8mm; }
-  .meta .blank{ height:6mm; border-bottom:1.5px dashed #B9B1EE; }
-  .meta .wide{ grid-column:1 / -1; }
+  .meta{ display:grid; grid-template-columns:1fr 1fr 34mm; gap:2.6mm; margin-top:3mm; }
+  .meta .cell{ background:var(--lav); border:1px solid var(--line); border-radius:14px; padding:1.6mm 4mm 1.8mm; }
+  .meta .wide{ grid-column:1 / 3; }
+  .k{ font-family:"Manrope",sans-serif; font-weight:800; font-size:8pt; line-height:1.3; letter-spacing:.09em; color:var(--violet); text-transform:uppercase; }
+  .meta .blank{ height:7.4mm; border-bottom:1.5px dashed #B9B1EE; }
 
   /* ---------- секции ---------- */
-  .sec{ margin-top:4.5mm; }
-  .card,.stats,.stat,.persona .row,.persona .top,.facts tr,.src-list li{ break-inside:avoid; }
-  .sec-h{ display:flex; align-items:center; gap:3mm; margin-bottom:2.6mm; break-after:avoid; }
-  .num{ flex:none; width:10mm; height:10mm; border-radius:10px; display:grid; place-items:center;
-        font-family:"Unbounded",sans-serif; font-weight:800; font-size:10.5pt; color:#fff;
+  .sec{ margin-top:4.6mm; }
+  .sec-h{ display:flex; align-items:center; gap:3mm; margin-bottom:2.2mm; break-after:avoid; }
+  .num{ flex:none; width:9.5mm; height:9.5mm; border-radius:10px; display:grid; place-items:center;
+        font-family:"Unbounded",sans-serif; font-weight:800; font-size:10pt; line-height:1; color:#fff;
         background:linear-gradient(135deg,var(--violet),var(--violet-2)); box-shadow:0 3px 8px rgba(91,75,232,.35); }
   .num.y{ background:linear-gradient(135deg,#FFC21A,#FFD84D); color:var(--deep); box-shadow:0 3px 8px rgba(244,166,20,.35); }
-  .sec-h h2{ margin:0; font-family:"Unbounded",sans-serif; font-weight:600; font-size:13.5pt; line-height:1.2; color:var(--deep); }
-  .part{ margin:7mm 0 0; display:flex; align-items:baseline; gap:3mm; break-after:avoid; }
-  .part .tag{ font-family:"Manrope",sans-serif; font-weight:800; font-size:8pt; letter-spacing:.1em; text-transform:uppercase;
-              background:var(--yellow); color:var(--deep); padding:1.2mm 3mm; border-radius:999px; }
-  .part h3{ margin:0; font-family:"Unbounded",sans-serif; font-weight:800; font-size:17pt; color:var(--deep); }
+  .sec-h h2{ margin:0; font-family:"Unbounded",sans-serif; font-weight:600; font-size:13pt; line-height:1.2; color:var(--deep); }
+  .sec-h .hint{ margin-left:auto; font-family:"Manrope",sans-serif; font-weight:700; font-size:8.5pt; line-height:1.2; color:var(--muted);
+        background:var(--lav); border-radius:999px; padding:1mm 3mm; white-space:nowrap; }
 
-  .card{ background:#fff; border:1px solid var(--line); border-radius:18px; padding:4mm 5mm; box-shadow:0 4px 14px rgba(60,40,160,.07); }
-  .card p{ margin:0; text-align:left; }
-  .card.callout{ background:linear-gradient(135deg,#FFF9DB,#FFF2B3); border:1px solid #F7DE7A; position:relative; padding-left:9mm; }
-  .card.callout::before{ content:""; position:absolute; left:4mm; top:4mm; bottom:4mm; width:2.2mm; border-radius:3px; background:var(--amber); }
-  .card.final{ background:linear-gradient(125deg,#3A22B8,#5B4BE8 60%,#7B6CFF); border:none; color:#fff; padding:5mm 6mm; }
-  .card.final p{ font-weight:bold; text-align:left; }
-  .card.final b{ color:var(--yellow); }
+  .card{ border:1px solid var(--line); border-radius:18px; padding:3mm 5mm; background:#fff; box-shadow:0 4px 14px rgba(60,40,160,.07); break-inside:avoid; }
+  .card p{ margin:0; }
 
-  /* ---------- цифры ---------- */
-  .stats{ display:grid; grid-template-columns:repeat(4,1fr); gap:3mm; margin-top:3.4mm; }
-  .stat{ border-radius:16px; padding:3mm 3.2mm 3mm; background:var(--lav); border:1px solid var(--line); }
-  .stat .n{ font-family:"Unbounded",sans-serif; font-weight:800; font-size:17pt; line-height:1.1; color:var(--violet); white-space:nowrap; }
-  .stat .l{ font-family:"Manrope",sans-serif; font-weight:700; font-size:8.3pt; line-height:1.3; color:var(--muted); margin-top:1.2mm; }
-  .stat.hot{ background:linear-gradient(135deg,#5B4BE8,#7B6CFF); border:none; }
-  .stat.hot .n{ color:var(--yellow); } .stat.hot .l{ color:#E9E5FF; }
-
-  /* ---------- таблица фактов ---------- */
-  table{ width:100%; border-collapse:separate; border-spacing:0; }
-  .facts{ border:1px solid var(--line); border-radius:18px; overflow:hidden; box-shadow:0 4px 14px rgba(60,40,160,.07); }
-  .facts th{ background:linear-gradient(90deg,var(--violet),var(--violet-2)); color:#fff; text-align:left;
-             font-family:"Manrope",sans-serif; font-weight:800; font-size:8.5pt; letter-spacing:.08em; text-transform:uppercase; padding:2.6mm 4mm; }
-  .facts td{ padding:1.8mm 4mm; vertical-align:top; border-top:1px solid var(--line); line-height:1.3; font-size:12pt; }
-  .facts tr:nth-child(even) td{ background:#FAF9FF; }
-  .facts td.src{ width:30%; font-family:"Manrope",sans-serif; font-weight:700; font-size:9.5pt; color:var(--muted); }
-  .chip{ display:inline-block; font-family:"Manrope",sans-serif; font-weight:800; font-size:8pt; color:var(--violet);
-         background:var(--lav-2); border-radius:999px; padding:.4mm 2mm; margin-left:1mm; }
-  .facts td .chip{ margin:0 1.5mm 0 0; }
+  /* ---------- факты ---------- */
+  .facts{ border:1px solid var(--line); border-radius:18px; overflow:hidden; box-shadow:0 4px 14px rgba(60,40,160,.07); background:#fff; }
+  .fact{ display:grid; grid-template-columns:31mm 1fr; align-items:center; border-top:1px solid #EFECFD; break-inside:avoid; }
+  .fact:first-child{ border-top:none; }
+  .fact:nth-child(even){ background:#FAF9FF; }
+  .fact .big{ align-self:stretch; display:flex; align-items:center; justify-content:center; text-align:center; padding:2mm;
+              font-family:"Unbounded",sans-serif; font-weight:800; font-size:14pt; line-height:1.1; color:var(--violet); background:var(--lav); }
+  .fact.hot .big{ background:linear-gradient(135deg,var(--violet),var(--violet-2)); color:var(--yellow); }
+  .fact .t{ padding:1.4mm 4.5mm; }
 
   /* ---------- портреты ---------- */
-  .persona{ border-radius:20px; overflow:hidden; border:1px solid var(--line); box-shadow:0 4px 14px rgba(60,40,160,.07); }
-  .persona .top{ display:flex; align-items:center; gap:3.5mm; padding:2.4mm 5mm; background:linear-gradient(90deg,var(--lav),#fff); border-bottom:1px solid var(--line); }
-  .persona .ava{ width:11mm; height:11mm; border-radius:50%; display:grid; place-items:center; background:var(--violet); color:#fff;
-                 font-family:"Unbounded",sans-serif; font-weight:800; font-size:12pt; }
-  .persona .who{ font-family:"Manrope",sans-serif; font-weight:700; font-size:10pt; color:var(--muted); line-height:1.35; }
-  .persona .who b{ display:block; font-family:"Unbounded",sans-serif; font-weight:600; font-size:11.5pt; color:var(--deep); }
-  .persona .row{ display:grid; grid-template-columns:40mm 1fr; gap:4mm; padding:1.5mm 5mm; border-top:1px solid #EFECFD; align-items:start; }
+  .persona{ border-radius:20px; overflow:hidden; border:1px solid var(--line); background:#fff; box-shadow:0 4px 14px rgba(60,40,160,.07); }
+  .persona .top{ display:flex; align-items:center; gap:3.5mm; padding:2.2mm 5mm; background:linear-gradient(90deg,var(--lav),#fff); border-bottom:1px solid var(--line); }
+  .ava{ flex:none; width:10.5mm; height:10.5mm; border-radius:50%; display:grid; place-items:center; background:var(--violet); color:#fff;
+        font-family:"Unbounded",sans-serif; font-weight:800; font-size:11pt; line-height:1; }
+  .who{ font-family:"Unbounded",sans-serif; font-weight:600; font-size:11.5pt; line-height:1.25; color:var(--deep); }
+  .who small{ display:block; font-family:"Manrope",sans-serif; font-weight:700; font-size:8.5pt; color:var(--muted); }
+  .persona .row{ padding:1.3mm 5mm; border-top:1px solid #EFECFD; break-inside:avoid; }
   .persona .row:first-of-type{ border-top:none; }
-  .persona .lab{ font-family:"Manrope",sans-serif; font-weight:800; font-size:7.8pt; letter-spacing:.05em; text-transform:uppercase; color:var(--violet);
-                 background:var(--lav); border-radius:9px; padding:1mm 2.4mm; margin-top:.3mm; }
-  .persona .txt{ line-height:1.3; font-size:12pt; }
+  .persona .lab{ display:inline; font-weight:bold; color:var(--violet); }
+  .persona .lab::after{ content:" — "; color:var(--muted); font-weight:normal; }
+  .persona .txt{ display:inline; }
+  .persona .row::before{ content:""; display:inline-block; width:2.2mm; height:2.2mm; border-radius:50%; background:var(--violet); margin-right:2.4mm; vertical-align:.4mm; }
+  .persona.y .row::before{ background:var(--amber); }
   .persona.y{ border-color:#F3DE8A; }
   .persona.y .top{ background:linear-gradient(90deg,var(--yellow-soft),#fff); border-bottom-color:#F3DE8A; }
   .persona.y .ava{ background:var(--yellow); color:var(--deep); }
   .persona.y .row{ border-top-color:#FBF1C6; }
-  .persona.y .lab{ background:var(--yellow-soft); color:#9A6A00; }
+  .persona.y .lab{ color:#8A5A00; }
+
+  /* ---------- формулировка ---------- */
+  .final{ border-radius:20px; padding:3.6mm 6mm; color:#fff; background:linear-gradient(125deg,#3A22B8,#5B4BE8 60%,#7B6CFF); break-inside:avoid;
+          box-shadow:0 6px 18px rgba(58,34,184,.25); }
+  .final p{ margin:0; font-weight:bold; }
+  .final .hl{ color:var(--yellow); }
+  .formula{ margin-top:1.8mm; font-family:"Manrope",sans-serif; font-weight:700; font-size:8.5pt; line-height:1.3; color:#DCD6FF; }
+  .callout{ border-radius:18px; padding:3mm 5mm 3mm 9mm; position:relative; background:linear-gradient(135deg,#FFF9DB,#FFF2B3); border:1px solid #F7DE7A; break-inside:avoid; }
+  .callout::before{ content:""; position:absolute; left:4mm; top:3.4mm; bottom:3.4mm; width:2mm; border-radius:3px; background:var(--amber); }
+  .callout p{ margin:0; }
 
   /* ---------- источники ---------- */
   .src-list{ margin:0; padding:0; list-style:none; counter-reset:s; }
-  .src-list li{ counter-increment:s; position:relative; padding-left:9mm; line-height:1.3; margin:0 0 1.6mm; font-size:12pt; }
-  .src-list li::before{ content:counter(s); position:absolute; left:0; top:.3mm; width:6mm; height:6mm; border-radius:7px; background:var(--lav-2);
-                        color:var(--violet); font-family:"Manrope",sans-serif; font-weight:800; font-size:8.5pt; display:grid; place-items:center; }
-  .src-list .url{ display:block; font-family:"Manrope",sans-serif; font-size:8.5pt; font-weight:500; color:var(--violet); overflow-wrap:anywhere; }
-  .note{ font-family:"Manrope",sans-serif; font-size:9pt; font-weight:700; color:var(--muted); margin-bottom:2.4mm; }
-  .page-break{ break-before:page; }
+  .src-list li{ counter-increment:s; position:relative; padding-left:8.5mm; break-inside:avoid; }
+  .src-list li::before{ content:counter(s); position:absolute; left:0; top:1.6mm; width:6mm; height:6mm; border-radius:7px; background:var(--lav-2);
+         color:var(--violet); font-family:"Manrope",sans-serif; font-weight:800; font-size:8.5pt; display:grid; place-items:center; }
+  .src-list .u{ color:var(--violet); overflow-wrap:anywhere; }
 </style>
 </head>
 <body>
 
-<!-- HERO -->
 <section class="hero">
-  <span class="eyebrow ui">Образовательный трек · бланк команды</span>
+  <span class="eyebrow">Образовательный трек · проектное задание №1</span>
   <h1>Карта проблемы</h1>
-  <div class="sub">Проектное задание №1 · Хакатон «Дроп.Нет»</div>
+  <div class="sub">Дропперство среди школьников · Большой Камень, Приморский край</div>
   <div class="logo"><img src="logo.png" alt="Дроп.Нет"></div>
 </section>
 
 <div class="meta">
   <div class="cell"><div class="k">Команда</div><div class="blank"></div></div>
   <div class="cell"><div class="k">Капитан</div><div class="blank"></div></div>
-  <div class="cell wide" style="display:grid;grid-template-columns:1fr auto;gap:6mm;align-items:end">
-    <div><div class="k">Регион / город / школа</div>
-      <div class="v">Приморский край, г. Большой Камень, МБОУ СОШ № 4 городского округа Большой Камень</div></div>
-    <div><div class="k">Дата</div><div class="v">25.09.2026</div></div>
-  </div>
+  <div class="cell"><div class="k">Дата</div>25.09.2026</div>
+  <div class="cell wide" style="grid-column:1 / -1"><div class="k">Регион / город / школа</div>
+    Приморский край, г. Большой Камень, МБОУ СОШ № 4 городского округа Большой Камень</div>
 </div>
 
-<!-- 01 -->
+<!-- 1. СИТУАЦИЯ -->
 <div class="sec">
-  <div class="sec-h"><div class="num">01</div><h2>Проблема в одном предложении</h2></div>
-  <div class="card callout"><p>
-    <b>Школьники 14–17 лет</b> Большого Камня в соцсетях и мессенджерах соглашаются на «лёгкую подработку»
-    с чужими переводами или своей картой, не понимая, что это мошенническая схема, <b>из-за чего</b>
-    попадают в базу дропперов Банка России и под уголовную ответственность.</p></div>
-</div>
-
-<!-- 02 -->
-<div class="sec">
-  <div class="sec-h"><div class="num">02</div><h2>Что происходит в нашем контексте</h2></div>
+  <div class="sec-h"><div class="num">01</div><h2>Ситуация и контекст</h2></div>
   <div class="card"><p>
-    Большой Камень — город у Владивостока (<b>≈ 42 тыс. жителей</b> <span class="chip">7</span>), где официальной
-    подработки для подростков мало, а общение и поиск денег ушли в Telegram, VK и игровые чаты. В Приморье
-    IT-преступления несовершеннолетних за 4 года <b>выросли на 85,6 %</b> <span class="chip">1</span>; полиция края
-    предупреждает школьников о схеме «ошибочного перевода» <span class="chip">2</span>. В базе ЦБ уже есть
-    <b>14-летние</b> <span class="chip">4</span>. Выводы подтверждают данные Банка России, МВД и полиции Приморья.</p></div>
-  <div class="stats">
-    <div class="stat hot"><div class="n">+85,6%</div><div class="l">IT-преступлений подростков в Приморье за 4 года</div></div>
-    <div class="stat"><div class="n">×48</div><div class="l">рост числа подростков-дропперов в РФ за 8 мес. 2026</div></div>
-    <div class="stat"><div class="n">1,2 млн</div><div class="l">человек в базе дропперов Банка России</div></div>
-    <div class="stat"><div class="n">14 лет</div><div class="l">возраст самых юных дропперов в базе ЦБ</div></div>
+    Большой Камень — город Приморского края (около 42 тыс. жителей <span class="ref">[7]</span>) рядом с Владивостоком.
+    Его школьники живут в той же цифровой среде, что и весь край: вербовщики выходят на подростков через
+    мессенджеры и соцсети, предлагая «лёгкий заработок» <span class="ref">[3, 4]</span>, а полиция Приморья
+    отдельно предупреждает школьников о схеме «ошибочного перевода» <span class="ref">[2]</span>.
+    Важно для школы: с 14 лет у подростка может быть своя карта <span class="ref">[5]</span>, а отвечать по закону он будет с 16 лет <span class="ref">[6]</span>.</p></div>
+</div>
+
+<div class="sec">
+  <div class="sec-h"><div class="num">02</div><h2>Факты, которые это подтверждают</h2></div>
+  <div class="facts">
+    <div class="fact hot"><div class="big">+85,6 %</div><div class="t">рост IT-преступлений несовершеннолетних в Приморье за 4 года; почти каждое третье преступление подростков связано с IT <span class="ref">[1]</span></div></div>
+    <div class="fact"><div class="big">×48</div><div class="t">МВД: число выявленных подростков-дропперов за 8 мес. 2026 г. выросло в 48 раз (более 720), в том числе из-за новых составов в УК <span class="ref">[3]</span></div></div>
+    <div class="fact"><div class="big">14 лет</div><div class="t">Банк России: в базе дропперов уже есть 14-летние, главный канал вовлечения — интернет <span class="ref">[4]</span></div></div>
+    <div class="fact"><div class="big">в 3 раза</div><div class="t">Банк России: во столько снизилось число подростков-дропов в 2026 г. после запрета открывать им счета без согласия родителей (с 01.08.2025) <span class="ref">[5]</span></div></div>
+    <div class="fact"><div class="big">до 6 лет</div><div class="t">лишения свободы по ст. 187 УК РФ (ред. 176-ФЗ, с 05.07.2025): до 3 лет — за передачу карты, до 6 лет — при отягчающих <span class="ref">[6]</span></div></div>
   </div>
 </div>
 
-<!-- 03 -->
+<!-- 2. ЖЕРТВА -->
 <div class="sec">
-  <div class="sec-h"><div class="num">03</div><h2>Факты и источники</h2></div>
-  <table class="facts">
-    <tr><th>Факт / наблюдение</th><th>Источник</th></tr>
-    <tr><td>IT-преступления подростков в Приморье за 4 года: +85,6 %; каждое третье преступление подростков совершается с помощью IT</td><td class="src"><span class="chip">1</span>PrimaMedia</td></tr>
-    <tr><td>Полиция Приморья предупреждает о схеме «ошибочного перевода» с просьбой вернуть или обналичить деньги</td><td class="src"><span class="chip">2</span>УМВД по Приморскому краю</td></tr>
-    <tr><td>Подростков-дропперов в РФ за 8 мес. 2026 г. стало в 48 раз больше — свыше 720</td><td class="src"><span class="chip">3</span>МВД России</td></tr>
-    <tr><td>База дропперов ЦБ — 1,2 млн человек, в ней есть подростки с 14 лет</td><td class="src"><span class="chip">4</span><span class="chip">5</span>Банк России</td></tr>
-    <tr><td>Передача карты — преступление по ст. 187 УК РФ: до 6 лет лишения свободы, ответственность с 16 лет</td><td class="src"><span class="chip">6</span>Федеральный закон № 176-ФЗ</td></tr>
-  </table>
-</div>
-
-<!-- ПОРТРЕТЫ -->
-<div class="part"><span class="tag">Портреты аудитории</span><h3>Кого касается проблема</h3></div>
-
-<div class="sec" style="margin-top:3mm">
-  <div class="sec-h"><div class="num">04</div><h2>Потенциальная жертва вовлечения</h2></div>
+  <div class="sec-h"><div class="num">03</div><h2>Портрет потенциальной жертвы</h2><span class="hint">собирательный образ</span></div>
   <div class="persona">
-    <div class="top"><div class="ava">14</div><div class="who"><b>Школьник 14–17 лет</b>обобщённый портрет, не реальный человек</div></div>
-    <div class="row"><div class="lab">Возраст / контекст</div><div class="txt">Школьник из небольшого города; есть своя карта, мало карманных денег.</div></div>
-    <div class="row"><div class="lab">Ситуация / потребность</div><div class="txt">Нужны деньги «прямо сейчас»; предложение пересылает «знакомый знакомого».</div></div>
-    <div class="row"><div class="lab">Цифровые привычки</div><div class="txt">Telegram-чаты подработки, VK, TikTok, игровые сообщества; доверяет сверстникам.</div></div>
-    <div class="row"><div class="lab">Что может не заметить</div><div class="txt">Плату «ни за что», просьбу <b>вернуть «ошибочный» перевод</b>, спешку и требование молчать.</div></div>
-    <div class="row"><div class="lab">Как объясняет решение</div><div class="txt">«Я ничего не краду», «это просто перевод», «мне ещё нет 16».</div></div>
+    <div class="top"><div class="ava">14</div><div class="who">Школьник 14–17 лет<small>ученик 8–11 класса, Большой Камень</small></div></div>
+    <div class="row"><div class="lab">Возраст и контекст</div><div class="txt">Учится в школе, живёт с родителями; есть своя карта, мало карманных денег.</div></div>
+    <div class="row"><div class="lab">Цифровые и финансовые привычки</div><div class="txt">Telegram, VK, TikTok, онлайн-игры; переводы по номеру телефона, покупки в приложениях.</div></div>
+    <div class="row"><div class="lab">Ситуация / потребность</div><div class="txt">Хочет свои деньги «прямо сейчас»; предложение пересылает «знакомый знакомого».</div></div>
+    <div class="row"><div class="lab">Что мешает распознать риск</div><div class="txt">Плата «ни за что», «ошибочный перевод», спешка и просьба молчать не кажутся опасными.</div></div>
+    <div class="row"><div class="lab">Как объясняет решение</div><div class="txt">«Это просто перевод», «это ненадолго», «мне ещё нет 16 — ничего не будет».</div></div>
     <div class="row"><div class="lab">Что важно понять раньше</div><div class="txt">Через карту идут <b>украденные деньги</b>; отказаться и рассказать взрослым можно всегда.</div></div>
   </div>
 </div>
 
+<!-- 3. ДРОППЕР -->
 <div class="sec">
-  <div class="sec-h"><div class="num y">05</div><h2>Потенциальный дроппер</h2></div>
+  <div class="sec-h"><div class="num y">04</div><h2>Портрет потенциального дроппера</h2><span class="hint">собирательный образ</span></div>
   <div class="persona y">
-    <div class="top"><div class="ava">16+</div><div class="who"><b>Молодой человек 16–25 лет</b>обобщённый портрет, не реальный человек</div></div>
-    <div class="row"><div class="lab">Контекст</div><div class="txt">Старшеклассник, студент колледжа, выпускник; нужны деньги или есть долги.</div></div>
-    <div class="row"><div class="lab">Мотив / выгода</div><div class="txt">Быстрый процент за перевод или плата за карту, оформленную на себя.</div></div>
-    <div class="row"><div class="lab">Что считает безопасным</div><div class="txt">Думает, что отвечает только отправитель, а карту можно просто заблокировать.</div></div>
+    <div class="top"><div class="ava">16+</div><div class="who">Молодой человек 16–25 лет<small>старшеклассник, студент колледжа, выпускник</small></div></div>
+    <div class="row"><div class="lab">Контекст решения</div><div class="txt">Нужны деньги на жизнь или долги; нет опыта работы и финансовой подушки.</div></div>
+    <div class="row"><div class="lab">Что делает предложение привлекательным</div><div class="txt">Быстрый процент за перевод или плата за карту, оформленную на себя.</div></div>
+    <div class="row"><div class="lab">Что считает безопасным</div><div class="txt">Отвечает только отправитель; карту можно просто заблокировать.</div></div>
     <div class="row"><div class="lab">Решающая ситуация</div><div class="txt">Первая лёгкая выплата и давление «куратора»: срочно, бонус или угрозы.</div></div>
-    <div class="row"><div class="lab">Что не понимает</div><div class="txt">Деньги украдены у реальных людей; <b>с 16 лет — ст. 187 УК РФ</b>; база ЦБ закрывает доступ к банку.</div></div>
+    <div class="row"><div class="lab">Что недооценивает</div><div class="txt">Деньги украдены у реальных людей; <b>с 16 лет — уголовное дело</b>; база ЦБ закрывает доступ к банку.</div></div>
   </div>
 </div>
 
-<!-- ВЫВОД -->
-<div class="part"><span class="tag">Вывод команды</span><h3>Что мы поняли</h3></div>
-
-<div class="sec" style="margin-top:3mm">
-  <div class="sec-h"><div class="num">06</div><h2>Главный вывод о проблеме</h2></div>
-  <div class="card"><p>
-    Проблема возникает <b>в онлайн-среде</b>, где подростки Большого Камня общаются и ищут подработку.
-    Наиболее уязвимы <b>школьники 14–17 лет</b> с банковской картой, но без финансового опыта и знаний о законе.
-    Вербовщики маскируют дропперство под «подработку» или «ошибочный перевод» и платят быстро.
-    Подросток не видит, что его карта служит мошенникам, и недооценивает последствия: базу ЦБ,
-    блокировку счетов, уголовное дело. Главный разрыв — <b>подросток не распознаёт сигналы опасности
-    в момент предложения</b>.</p></div>
+<!-- 4. ФОРМУЛИРОВКА -->
+<div class="sec" style="break-inside:avoid">
+  <div class="sec-h"><div class="num y">05</div><h2>Итоговая формулировка проблемы</h2></div>
+  <div class="final"><p>
+    <span class="hl">Школьники 14–17 лет Большого Камня</span> в мессенджерах, соцсетях и онлайн-играх сталкиваются
+    с вербовкой в дропперы под видом «лёгкой подработки» и не распознают её, из-за чего передают свои карты
+    или проводят чужие переводы и рискуют попасть в базу Банка России и под уголовную ответственность.</p>
+    <div class="formula">[Кто?] в [каком контексте?] сталкивается с [какой проблемой?], из-за чего [последствие]</div></div>
 </div>
 
 <div class="sec">
-  <div class="sec-h"><div class="num y">07</div><h2>Итоговая формулировка проблемы</h2></div>
-  <div class="card final"><p>
-    <b>Школьники 14–17 лет</b> Большого Камня не распознают вербовку в дропперы под видом лёгкой подработки
-    в соцсетях и поэтому передают свои карты мошенникам, рискуя попасть в базу ЦБ и под уголовную ответственность.</p></div>
+  <div class="sec-h"><div class="num">06</div><h2>Вывод: что требует изменения</h2></div>
+  <div class="callout"><p>
+    Запреты уже есть, но подросток <b>не распознаёт сигналы вербовки в момент предложения</b>:
+    плату «ни за что», просьбу вернуть «ошибочный» перевод или передать карту. Изменить нужно именно
+    этот момент — до того, как школьник согласится.</p></div>
 </div>
 
-<div class="sec page-break">
-  <div class="sec-h"><div class="num">08</div><h2>Список источников</h2></div>
-  <div class="note">Дата обращения ко всем источникам: 25.09.2026</div>
+<!-- ИСТОЧНИКИ -->
+<div class="sec">
+  <div class="sec-h"><div class="num">07</div><h2>Список источников</h2><span class="hint">дата обращения: 25.09.2026</span></div>
   <ol class="src-list">
-    <li>PrimaMedia. За четыре года киберпреступность среди подростков в Приморье выросла на 85,6 %. <span class="url">primamedia.ru/news/2501438/</span></li>
-    <li>Администрация Находкинского ГО. Как подросткам не стать дропперами, рассказали приморские полицейские. <span class="url">nakhodka-city.ru/events/news/item/?sid=20671</span></li>
-    <li>Коммерсантъ. МВД: число подростков-дропперов в России выросло в 48 раз. <span class="url">kommersant.ru/doc/8972652</span></li>
-    <li>Парламентская газета. ЦБ сообщил о снижении возраста дропперов до 14 лет. <span class="url">pnp.ru/economics/cb-soobshhil-o-snizhenii-vozrasta-dropperov-do-14-let.html</span></li>
-    <li>Ведомости. Банк России рассказал об 1,2 млн дропперов в России. <span class="url">vedomosti.ru/finance/news/2025/09/26/1142420-bank-rossii-rasskazal</span></li>
-    <li>ГАРАНТ.РУ. Уголовный кодекс дополнили нормами об ответственности для дропперов. <span class="url">garant.ru/news/1824569/</span></li>
-    <li>Росстат. Численность населения по муниципальным образованиям на 01.01.2025. <span class="url">ru.wikipedia.org/wiki/Большой_Камень</span></li>
+    <li>Прокуратура и УМВД по Приморскому краю — по публикации PrimaMedia «За четыре года киберпреступность среди подростков в Приморье выросла на 85,6 %». <span class="u">primamedia.ru/news/2501438</span></li>
+    <li>УМВД России по Приморскому краю — «Как подросткам не стать дропперами», сайт администрации Находкинского ГО. <span class="u">nakhodka-city.ru/events/news/item/?sid=20671</span></li>
+    <li>МВД России (С. Калинин, форум «Диалог о фейках 4.0») — по публикации «Коммерсантъ». <span class="u">kommersant.ru/doc/8972652</span></li>
+    <li>Банк России (В. Уваров, форум «Диалог о фейках 4.0», 22.09.2026) — по публикации «Парламентской газеты». <span class="u">pnp.ru/economics/cb-soobshhil-o-snizhenii-vozrasta-dropperov-do-14-let.html</span></li>
+    <li>Банк России — по публикации «Эксперт»: «В ЦБ сообщили о трёхкратном снижении числа дропперов среди подростков». <span class="u">expert.ru/news/v-tsb-soobschili-o-trekhkratnom-snizhenii-chisla-dropperov-sredi-podrostkov</span></li>
+    <li>Уголовный кодекс РФ, ст. 20 и 187 (ред. Федерального закона от 24.06.2025 № 176-ФЗ) — КонсультантПлюс. <span class="u">consultant.ru/law/hotdocs/89782.html</span></li>
+    <li>Росстат. Численность населения РФ по муниципальным образованиям на 1 января 2025 г. <span class="u">rosstat.gov.ru/compendium/document/13282</span></li>
   </ol>
 </div>
 </body>
