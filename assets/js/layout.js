@@ -35,7 +35,12 @@ function renderLayout() {
     footer.className = 'footer';
     footer.innerHTML = `
       <div class="container">
-        <span>© ${new Date().getFullYear()} ${SITE_NAME}</span>
+        <span><b class="logo" style="font-size:15px;color:#fff">${SITE_NAME}</b> &nbsp;© ${new Date().getFullYear()}</span>
+        <span class="footer-links">
+          <a href="${DISCORD_URL}">Поддержка</a>
+          <a href="buy.html">Купить лицензию</a>
+          <a href="cabinet.html">Личный кабинет</a>
+        </span>
         <a href="${DISCORD_URL}"><i class="fa-brands fa-discord"></i> Discord</a>
       </div>`;
   }
