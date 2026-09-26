@@ -1,6 +1,6 @@
-# ECLYPSE
+# Dexo
 
-Сайт трейнера: главная, вход через Discord, личный кабинет с ключом для лоадера, покупка лицензии (пока только Free) и админ-панель. Статика для GitHub Pages.
+Сайт Dexo Client: главная, вход через Discord, личный кабинет с ключом для лоадера, покупка лицензии (пока только Free) и админ-панель. Статика для GitHub Pages.
 
 ## Страницы
 
@@ -42,4 +42,4 @@
 3. Эндпоинт для лоадера с логикой как в `loaderAuth`; онлайн — по пингам лоадера.
 4. Настоящая авторизация админки по группе `Admin`.
 
-Название сайта меняется в `SITE_NAME` (`assets/js/layout.js`) и в `<title>` страниц. Font Awesome лежит локально в `assets/vendor/fontawesome`.
+Название меняется в `SITE_NAME` (`assets/js/layout.js`), в `<title>` страниц и в `assets/js/i18n.js`. Логотип — `assets/img/logo.png`, иконки вкладки — `favicon.png` и `apple-touch-icon.png`. Font Awesome лежит локально в `assets/vendor/fontawesome`.

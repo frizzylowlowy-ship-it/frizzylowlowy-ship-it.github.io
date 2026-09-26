@@ -1,4 +1,4 @@
-const SITE_NAME = 'ECLYPSE';
+const SITE_NAME = 'DEXO';
 const DISCORD_URL = '#';
 
 // Inline SVG flags: emoji flags render as plain letters on Windows.
@@ -19,7 +19,7 @@ function renderNav() {
   nav.className = 'nav';
   nav.innerHTML = `
     <div class="container">
-      <a href="index.html" class="logo">${SITE_NAME}</a>
+      <a href="index.html" class="logo"><img src="assets/img/logo.png" alt="" class="logo-mark" width="38" height="32"> ${SITE_NAME}</a>
       <span class="nav-sep"></span>
       <div class="lang">
         <button class="lang-btn" type="button" aria-haspopup="true" aria-expanded="false">
@@ -74,7 +74,7 @@ function renderFooter() {
   footer.innerHTML = `
     <div class="container">
       <div class="footer-brand">
-        <span class="logo">${SITE_NAME}</span>
+        <span class="logo"><img src="assets/img/logo.png" alt="" class="logo-mark" width="29" height="24"> ${SITE_NAME}</span>
         <span>© ${new Date().getFullYear()} ${SITE_NAME}. ${t('footer.rights')}</span>
       </div>
       <nav class="footer-links">
