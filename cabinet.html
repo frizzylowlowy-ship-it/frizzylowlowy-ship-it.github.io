@@ -4,46 +4,52 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Личный кабинет — ECLYPSE</title>
+  <meta name="theme-color" content="#131215">
+  <meta name="robots" content="noindex">
   <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
   <link rel="stylesheet" href="assets/vendor/fontawesome/css/all.min.css">
   <link rel="stylesheet" href="assets/css/style.css">
+  <script>document.documentElement.classList.add('js')</script>
 </head>
-<body class="has-bg dim">
+<body class="has-bg dim" data-title="meta.cabinet">
   <header id="nav"></header>
 
   <main class="page">
     <div class="container">
-      <h1 class="page-title">Личный кабинет</h1>
+      <h1 class="page-title" data-i18n="cab.title">Личный кабинет</h1>
       <div class="info" id="info"></div>
 
       <div class="actions">
-        <a href="buy.html" class="btn"><i class="fa-solid fa-bag-shopping"></i> Купить лицензию</a>
-        <a href="#" class="btn" data-download><i class="fa-solid fa-cloud-arrow-down"></i> Скачать лоадер</a>
-        <a href="admin.html" class="btn" id="adminLink" hidden><i class="fa-solid fa-shield-halved"></i> Админ-панель</a>
-        <button class="btn right" id="logoutBtn"><i class="fa-solid fa-right-from-bracket"></i> Выйти</button>
+        <a href="buy.html" class="btn"><i class="fa-solid fa-bag-shopping"></i> <span data-i18n="nav.buy">Купить лицензию</span></a>
+        <a href="#" class="btn" data-download><i class="fa-solid fa-cloud-arrow-down"></i> <span data-i18n="nav.download">Скачать лоадер</span></a>
+        <a href="admin.html" class="btn" id="adminLink" hidden><i class="fa-solid fa-shield-halved"></i> <span data-i18n="cab.admin">Админ-панель</span></a>
+        <button class="btn right" id="logoutBtn"><i class="fa-solid fa-right-from-bracket"></i> <span data-i18n="common.logout">Выйти</span></button>
       </div>
 
-      <p class="note">Ключ одноразовый: после входа через лоадер он автоматически меняется на новый. Демо: <a id="loaderTest">проверить вход через лоадер</a>.</p>
+      <p class="note"><span data-i18n="cab.note">Ключ одноразовый: после каждого входа через лоадер он автоматически меняется на новый.</span> <a id="loaderTest" role="button" tabindex="0" data-i18n="cab.test">Проверить вход через лоадер (демо)</a></p>
     </div>
   </main>
 
   <footer id="footer"></footer>
 
   <div class="modal-bg" id="loaderModal">
-    <div class="modal">
-      <h3>Вход через лоадер (демо)</h3>
-      <label for="loaderKey">Ключ</label>
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="loaderTitle">
+      <h3 id="loaderTitle" data-i18n="loader.title">Вход через лоадер (демо)</h3>
+      <label for="loaderKey" data-i18n="cab.key">Ключ</label>
       <input class="input mono" id="loaderKey" autocomplete="off" placeholder="XXXXX-XXXXX-XXXXX-XXXXX">
       <div class="error" id="loaderErr"></div>
       <div class="modal-actions">
-        <button class="btn btn-dark" id="loaderCancel">Отмена</button>
-        <button class="btn" id="loaderOk">Войти</button>
+        <button class="btn btn-dark" id="loaderCancel" data-i18n="common.cancel">Отмена</button>
+        <button class="btn" id="loaderOk" data-i18n="common.signin">Войти</button>
       </div>
     </div>
   </div>
 
   <script src="assets/js/store.js"></script>
+  <script src="assets/js/i18n.js"></script>
   <script src="assets/js/layout.js"></script>
   <script src="assets/js/cabinet.js"></script>
 </body>
