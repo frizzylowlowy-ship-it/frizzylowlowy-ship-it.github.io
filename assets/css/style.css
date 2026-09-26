@@ -70,7 +70,9 @@ body.has-bg.dim::before{ filter: blur(6px) brightness(.18); }
 }
 .nav.scrolled{ background: var(--nav-solid); border-color: rgba(255,255,255,.05); }
 .nav .container{ display: flex; align-items: center; height: 56px; gap: 18px; }
-.logo{ font-weight: 700; font-size: 20px; letter-spacing: .3px; text-transform: uppercase; }
+.logo{ display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 20px; letter-spacing: .5px; text-transform: uppercase; }
+.logo-mark{ height: 32px; width: auto; filter: drop-shadow(0 0 6px rgba(255,30,50,.35)); }
+.footer-brand .logo-mark{ height: 24px; }
 .nav-sep{ width: 1px; height: 24px; background: rgba(255,255,255,.12); }
 .flag{ width: 22px; height: 15px; border-radius: 2px; flex: none; }
 .lang{ position: relative; }
