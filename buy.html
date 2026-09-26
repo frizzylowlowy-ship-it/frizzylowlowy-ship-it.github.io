@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Купить лицензию — ECLYPSE</title>
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+  <link rel="stylesheet" href="assets/vendor/fontawesome/css/all.min.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body class="has-bg dim">
+  <header id="nav"></header>
+
+  <main class="page">
+    <div class="container">
+      <h1 class="page-title">Купить лицензию</h1>
+      <div class="products">
+        <div class="product">
+          <h3>Free</h3>
+          <div class="price">0 ₽</div>
+          <div class="period">Навсегда</div>
+          <ul>
+            <li><i class="fa-solid fa-check"></i> Доступ к трейнеру</li>
+            <li><i class="fa-solid fa-check"></i> Ключ для лоадера</li>
+            <li><i class="fa-solid fa-check"></i> Обновления</li>
+          </ul>
+          <button class="btn" id="getFree"><i class="fa-solid fa-bag-shopping"></i> Получить</button>
+        </div>
+        <div class="product soon">
+          <h3>Premium</h3>
+          <div class="price">—</div>
+          <div class="period">Скоро</div>
+          <ul>
+            <li><i class="fa-solid fa-check"></i> Всё из Free</li>
+            <li><i class="fa-solid fa-check"></i> Дополнительные функции</li>
+            <li><i class="fa-solid fa-check"></i> Приоритетная поддержка</li>
+          </ul>
+          <button class="btn" disabled>Скоро</button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer id="footer"></footer>
+
+  <script src="assets/js/store.js"></script>
+  <script src="assets/js/layout.js"></script>
+  <script>
+    document.getElementById('getFree').onclick = () => {
+      location.href = DB.me() ? 'cabinet.html' : 'login.html';
+    };
+  </script>
+</body>
+</html>

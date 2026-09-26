@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Личный кабинет — ECLYPSE</title>
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+  <link rel="stylesheet" href="assets/vendor/fontawesome/css/all.min.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body class="has-bg dim">
+  <header id="nav"></header>
+
+  <main class="page">
+    <div class="container">
+      <h1 class="page-title">Личный кабинет</h1>
+      <div class="info" id="info"></div>
+
+      <div class="actions">
+        <a href="buy.html" class="btn"><i class="fa-solid fa-bag-shopping"></i> Купить лицензию</a>
+        <a href="#" class="btn" data-download><i class="fa-solid fa-cloud-arrow-down"></i> Скачать лоадер</a>
+        <a href="admin.html" class="btn" id="adminLink" hidden><i class="fa-solid fa-shield-halved"></i> Админ-панель</a>
+        <button class="btn right" id="logoutBtn"><i class="fa-solid fa-right-from-bracket"></i> Выйти</button>
+      </div>
+
+      <p class="note">Ключ одноразовый: после входа через лоадер он автоматически меняется на новый. Демо: <a id="loaderTest">проверить вход через лоадер</a>.</p>
+    </div>
+  </main>
+
+  <footer id="footer"></footer>
+
+  <div class="modal-bg" id="loaderModal">
+    <div class="modal">
+      <h3>Вход через лоадер (демо)</h3>
+      <label for="loaderKey">Ключ</label>
+      <input class="input mono" id="loaderKey" autocomplete="off" placeholder="XXXXX-XXXXX-XXXXX-XXXXX">
+      <div class="error" id="loaderErr"></div>
+      <div class="modal-actions">
+        <button class="btn btn-dark" id="loaderCancel">Отмена</button>
+        <button class="btn" id="loaderOk">Войти</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="assets/js/store.js"></script>
+  <script src="assets/js/layout.js"></script>
+  <script src="assets/js/cabinet.js"></script>
+</body>
+</html>

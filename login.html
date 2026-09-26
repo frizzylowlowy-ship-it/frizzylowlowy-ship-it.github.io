@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Авторизация — ECLYPSE</title>
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+  <link rel="stylesheet" href="assets/vendor/fontawesome/css/all.min.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body class="has-bg dim">
+  <header id="nav"></header>
+
+  <main class="page">
+    <div class="container">
+      <div class="auth">
+        <h1 class="page-title">Авторизация</h1>
+        <p>Вход и регистрация только через Discord.</p>
+        <button class="btn" id="discordBtn"><i class="fa-brands fa-discord"></i> Войти через Discord</button>
+      </div>
+    </div>
+  </main>
+
+  <footer id="footer"></footer>
+
+  <!-- demo: stands in for the Discord OAuth redirect until there is a backend -->
+  <div class="modal-bg" id="demoModal">
+    <div class="modal">
+      <h3>Демо-вход</h3>
+      <label for="demoName">Ник в Discord</label>
+      <input class="input" id="demoName" maxlength="32" placeholder="например, fri213" autocomplete="off">
+      <div class="error" id="demoErr">Введите ник</div>
+      <div class="modal-actions">
+        <button class="btn btn-dark" id="demoCancel">Отмена</button>
+        <button class="btn" id="demoOk">Войти</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="assets/js/store.js"></script>
+  <script src="assets/js/layout.js"></script>
+  <script>
+    if (DB.me()) location.replace('cabinet.html');
+
+    const modal = document.getElementById('demoModal');
+    const name = document.getElementById('demoName');
+    document.getElementById('discordBtn').onclick = () => { modal.classList.add('show'); name.focus(); };
+    document.getElementById('demoCancel').onclick = () => modal.classList.remove('show');
+
+    function submit() {
+      const login = name.value.trim();
+      if (!login) return document.getElementById('demoErr').classList.add('show');
+      // Stable fake Discord id per nickname so re-login finds the same account.
+      let h = 0;
+      for (const c of login.toLowerCase()) h = (h * 31 + c.charCodeAt(0)) >>> 0;
+      DB.loginDiscord({ discordId: 'demo-' + h, login });
+      location.href = 'cabinet.html';
+    }
+    document.getElementById('demoOk').onclick = submit;
+    name.addEventListener('keydown', (e) => e.key === 'Enter' && submit());
+  </script>
+</body>
+</html>
