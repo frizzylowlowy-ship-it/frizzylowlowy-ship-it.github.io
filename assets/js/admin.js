@@ -10,8 +10,8 @@ function showPanel() {
 }
 
 function status(u) {
-  if (u.blocked) return '<span class="blocked">Заблокирован</span>';
-  return DB.isOnline(u) ? '<span class="online">● Онлайн</span>' : 'Оффлайн';
+  if (u.blocked) return `<span class="blocked">${t('cab.banned')}</span>`;
+  return DB.isOnline(u) ? `<span class="online">● ${t('admin.online')}</span>` : `<span class="muted">${t('admin.offline')}</span>`;
 }
 
 function render() {
@@ -36,17 +36,17 @@ function render() {
       <td>${esc(u.login)}</td>
       <td>${u.group}</td>
       <td>${status(u)}</td>
-      <td class="mono">${esc(u.hwid)}</td>
+      <td class="mono">${u.hwid === 'Unknown' ? '<span class="muted">—</span>' : esc(u.hwid)}</td>
       <td>${u.downloads}</td>
       <td>${u.launches}</td>
       <td>${fmtDate(u.lastLoginAt)}</td>
       <td>${fmtDate(u.registeredAt).slice(0, 10)}</td>
       <td>
-        <button class="btn btn-dark" data-act="edit" title="Редактировать"><i class="fa-solid fa-pen"></i></button>
-        <button class="btn btn-dark" data-act="block" title="${u.blocked ? 'Разблокировать' : 'Заблокировать'}"><i class="fa-solid ${u.blocked ? 'fa-lock-open' : 'fa-ban'}"></i></button>
-        <button class="btn" data-act="delete" title="Удалить"><i class="fa-solid fa-trash"></i></button>
+        <button class="btn btn-dark" data-act="edit" title="${t('admin.edit')}" aria-label="${t('admin.edit')}"><i class="fa-solid fa-pen"></i></button>
+        <button class="btn btn-dark" data-act="block" title="${t(u.blocked ? 'admin.unban' : 'admin.ban')}" aria-label="${t(u.blocked ? 'admin.unban' : 'admin.ban')}"><i class="fa-solid ${u.blocked ? 'fa-lock-open' : 'fa-ban'}"></i></button>
+        <button class="btn" data-act="delete" title="${t('common.delete')}" aria-label="${t('common.delete')}"><i class="fa-solid fa-trash"></i></button>
       </td>
-    </tr>`).join('') : '<tr class="empty"><td colspan="10">Никого не найдено</td></tr>';
+    </tr>`).join('') : `<tr class="empty"><td colspan="10">${t('admin.empty')}</td></tr>`;
 }
 
 $('rows').addEventListener('click', (e) => {
@@ -56,7 +56,7 @@ $('rows').addEventListener('click', (e) => {
   if (!u) return;
   if (btn.dataset.act === 'block') {
     DB.update(u.uid, { blocked: !u.blocked });
-    toast(u.blocked ? `${u.login} разблокирован` : `${u.login} заблокирован`);
+    toast(t(u.blocked ? 'admin.unbannedToast' : 'admin.bannedToast', { name: u.login }));
     render();
   } else if (btn.dataset.act === 'edit') {
     editing = u.uid;
@@ -64,15 +64,15 @@ $('rows').addEventListener('click', (e) => {
     $('eGroup').value = u.group;
     $('eSub').value = u.sub;
     $('eHwid').value = u.hwid;
-    $('editModal').classList.add('show');
+    openModal('editModal');
   } else {
     deleting = u.uid;
-    $('delName').textContent = u.login;
-    $('delModal').classList.add('show');
+    $('delTitle').textContent = t('admin.delQ', { name: u.login });
+    openModal('delModal');
   }
 });
 
-$('eCancel').onclick = () => $('editModal').classList.remove('show');
+$('eCancel').onclick = () => closeModal('editModal');
 $('eSave').onclick = () => {
   DB.update(editing, {
     login: $('eLogin').value.trim() || DB.byUid(editing).login,
@@ -80,16 +80,16 @@ $('eSave').onclick = () => {
     sub: $('eSub').value,
     hwid: $('eHwid').value.trim() || 'Unknown',
   });
-  $('editModal').classList.remove('show');
-  toast('Сохранено');
+  closeModal('editModal');
+  toast(t('admin.saved'));
   render();
 };
 
-$('dCancel').onclick = () => $('delModal').classList.remove('show');
+$('dCancel').onclick = () => closeModal('delModal');
 $('dOk').onclick = () => {
   DB.remove(deleting);
-  $('delModal').classList.remove('show');
-  toast('Пользователь удалён');
+  closeModal('delModal');
+  toast(t('admin.deleted'));
   render();
 };
 

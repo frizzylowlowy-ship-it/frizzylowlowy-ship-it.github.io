@@ -4,39 +4,45 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Купить лицензию — ECLYPSE</title>
+  <meta name="theme-color" content="#131215">
   <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
   <link rel="stylesheet" href="assets/vendor/fontawesome/css/all.min.css">
   <link rel="stylesheet" href="assets/css/style.css">
+  <script>document.documentElement.classList.add('js')</script>
 </head>
-<body class="has-bg dim">
+<body class="has-bg dim" data-title="meta.buy">
   <header id="nav"></header>
 
   <main class="page">
     <div class="container">
-      <h1 class="page-title">Купить лицензию</h1>
-      <div class="products">
-        <div class="product">
+      <h1 class="page-title" data-i18n="buy.title">Купить лицензию</h1>
+      <p class="page-sub" data-i18n="pricing.sub">Сейчас доступна бесплатная подписка.</p>
+      <div class="products center">
+        <div class="product reveal">
+          <span class="tag" data-i18n="plan.current">Доступно сейчас</span>
           <h3>Free</h3>
           <div class="price">0 ₽</div>
-          <div class="period">Навсегда</div>
+          <div class="period" data-i18n="plan.forever">Навсегда</div>
           <ul>
-            <li><i class="fa-solid fa-check"></i> Доступ к трейнеру</li>
-            <li><i class="fa-solid fa-check"></i> Ключ для лоадера</li>
-            <li><i class="fa-solid fa-check"></i> Обновления</li>
+            <li><i class="fa-solid fa-check"></i> <span data-i18n="plan.f1">Доступ к трейнеру</span></li>
+            <li><i class="fa-solid fa-check"></i> <span data-i18n="plan.f2">Ключ для лоадера</span></li>
+            <li><i class="fa-solid fa-check"></i> <span data-i18n="plan.f3">Обновления</span></li>
           </ul>
-          <button class="btn" id="getFree"><i class="fa-solid fa-bag-shopping"></i> Получить</button>
+          <button class="btn" id="getFree"><i class="fa-solid fa-bag-shopping"></i> <span data-i18n="hero.get">Получить</span></button>
         </div>
-        <div class="product soon">
+        <div class="product soon reveal" style="--d:1">
           <h3>Premium</h3>
           <div class="price">—</div>
-          <div class="period">Скоро</div>
+          <div class="period" data-i18n="plan.soon">Скоро</div>
           <ul>
-            <li><i class="fa-solid fa-check"></i> Всё из Free</li>
-            <li><i class="fa-solid fa-check"></i> Дополнительные функции</li>
-            <li><i class="fa-solid fa-check"></i> Приоритетная поддержка</li>
+            <li><i class="fa-solid fa-check"></i> <span data-i18n="plan.p1">Всё из Free</span></li>
+            <li><i class="fa-solid fa-check"></i> <span data-i18n="plan.p2">Дополнительные функции</span></li>
+            <li><i class="fa-solid fa-check"></i> <span data-i18n="plan.p3">Приоритетная поддержка</span></li>
           </ul>
-          <button class="btn" disabled>Скоро</button>
+          <button class="btn" disabled data-i18n="plan.soon">Скоро</button>
         </div>
       </div>
     </div>
@@ -45,6 +51,7 @@
   <footer id="footer"></footer>
 
   <script src="assets/js/store.js"></script>
+  <script src="assets/js/i18n.js"></script>
   <script src="assets/js/layout.js"></script>
   <script>
     document.getElementById('getFree').onclick = () => {

@@ -4,48 +4,61 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Админ-панель — ECLYPSE</title>
+  <meta name="theme-color" content="#131215">
+  <meta name="robots" content="noindex">
   <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
   <link rel="stylesheet" href="assets/vendor/fontawesome/css/all.min.css">
   <link rel="stylesheet" href="assets/css/style.css">
+  <script>document.documentElement.classList.add('js')</script>
 </head>
-<body>
+<body data-title="meta.admin">
   <header id="nav"></header>
 
-  <main class="page" style="padding-top:80px">
-    <div class="container">
-      <h1 class="page-title">Админ-панель</h1>
+  <main class="page" style="padding-top:110px">
+    <div class="container wide">
+      <h1 class="page-title" data-i18n="admin.title">Админ-панель</h1>
 
       <div class="auth" id="gate" hidden>
-        <input class="input" type="password" id="pass" placeholder="Пароль" style="margin-bottom:14px">
-        <div class="error" id="passErr">Неверный пароль</div>
-        <button class="btn" id="passOk"><i class="fa-solid fa-lock-open"></i> Войти</button>
+        <input class="input" type="password" id="pass" data-i18n-ph="admin.pass" placeholder="Пароль" style="margin-bottom:14px" autocomplete="current-password">
+        <div class="error" id="passErr" data-i18n="admin.wrong">Неверный пароль</div>
+        <button class="btn" id="passOk"><i class="fa-solid fa-lock-open"></i> <span data-i18n="common.signin">Войти</span></button>
       </div>
 
       <div id="panel" hidden>
         <div class="stats">
-          <div class="stat"><div class="info-label"><i class="fa-solid fa-users"></i> Пользователей</div><div class="info-value" id="sUsers">0</div></div>
-          <div class="stat"><div class="info-label"><i class="fa-solid fa-circle"></i> Сейчас онлайн</div><div class="info-value" id="sOnline">0</div></div>
-          <div class="stat"><div class="info-label"><i class="fa-solid fa-download"></i> Скачиваний</div><div class="info-value" id="sDownloads">0</div></div>
-          <div class="stat"><div class="info-label"><i class="fa-solid fa-play"></i> Запусков</div><div class="info-value" id="sLaunches">0</div></div>
+          <div class="stat"><div class="info-label"><i class="fa-solid fa-users"></i> <span data-i18n="admin.users">Пользователей</span></div><div class="info-value" id="sUsers">0</div></div>
+          <div class="stat"><div class="info-label"><i class="fa-solid fa-signal"></i> <span data-i18n="admin.onlineNow">Сейчас онлайн</span></div><div class="info-value" id="sOnline">0</div></div>
+          <div class="stat"><div class="info-label"><i class="fa-solid fa-download"></i> <span data-i18n="admin.downloads">Скачиваний</span></div><div class="info-value" id="sDownloads">0</div></div>
+          <div class="stat"><div class="info-label"><i class="fa-solid fa-play"></i> <span data-i18n="admin.launches">Запусков</span></div><div class="info-value" id="sLaunches">0</div></div>
         </div>
 
         <div class="toolbar">
-          <input class="input" id="search" placeholder="Поиск: логин, UID, HWID">
-          <select class="input" id="filter" style="max-width:190px">
-            <option value="all">Все</option>
-            <option value="online">Онлайн</option>
-            <option value="blocked">Заблокированные</option>
+          <input class="input" id="search" data-i18n-ph="admin.search" placeholder="Поиск: логин, UID, HWID">
+          <select class="input" id="filter" style="max-width:200px">
+            <option value="all" data-i18n="admin.all">Все</option>
+            <option value="online" data-i18n="admin.online">Онлайн</option>
+            <option value="blocked" data-i18n="admin.bannedF">Заблокированные</option>
           </select>
-          <button class="btn btn-dark" id="adminLogout" style="margin-left:auto"><i class="fa-solid fa-right-from-bracket"></i> Выйти</button>
+          <button class="btn btn-dark" id="adminLogout" style="margin-left:auto"><i class="fa-solid fa-right-from-bracket"></i> <span data-i18n="common.logout">Выйти</span></button>
         </div>
 
         <div class="table-wrap">
           <table>
             <thead>
               <tr>
-                <th>UID</th><th>Логин</th><th>Группа</th><th>Статус</th><th>HWID</th>
-                <th>Скачал</th><th>Запусков</th><th>Последний вход</th><th>Регистрация</th><th></th>
+                <th>UID</th>
+                <th data-i18n="admin.th.login">Логин</th>
+                <th data-i18n="admin.th.group">Группа</th>
+                <th data-i18n="admin.th.status">Статус</th>
+                <th>HWID</th>
+                <th data-i18n="admin.th.dl">Скачал</th>
+                <th data-i18n="admin.th.launch">Запусков</th>
+                <th data-i18n="admin.th.last">Последний вход</th>
+                <th data-i18n="admin.th.reg">Регистрация</th>
+                <th></th>
               </tr>
             </thead>
             <tbody id="rows"></tbody>
@@ -58,39 +71,40 @@
   <footer id="footer"></footer>
 
   <div class="modal-bg" id="editModal">
-    <div class="modal">
-      <h3>Редактировать пользователя</h3>
-      <label for="eLogin">Логин</label>
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="editTitle">
+      <h3 id="editTitle" data-i18n="admin.editTitle">Редактировать пользователя</h3>
+      <label for="eLogin" data-i18n="cab.login">Логин</label>
       <input class="input" id="eLogin" maxlength="32">
-      <label for="eGroup">Группа</label>
+      <label for="eGroup" data-i18n="cab.group">Группа</label>
       <select class="input" id="eGroup">
         <option>User</option>
         <option>Admin</option>
       </select>
-      <label for="eSub">Подписка</label>
+      <label for="eSub" data-i18n="cab.sub">Подписка</label>
       <select class="input" id="eSub">
         <option>Free</option>
       </select>
       <label for="eHwid">HWID</label>
       <input class="input mono" id="eHwid">
       <div class="modal-actions">
-        <button class="btn btn-dark" id="eCancel">Отмена</button>
-        <button class="btn" id="eSave">Сохранить</button>
+        <button class="btn btn-dark" id="eCancel" data-i18n="common.cancel">Отмена</button>
+        <button class="btn" id="eSave" data-i18n="common.save">Сохранить</button>
       </div>
     </div>
   </div>
 
   <div class="modal-bg" id="delModal">
-    <div class="modal">
-      <h3>Удалить пользователя <span id="delName"></span>?</h3>
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="delTitle">
+      <h3 id="delTitle"></h3>
       <div class="modal-actions">
-        <button class="btn btn-dark" id="dCancel">Отмена</button>
-        <button class="btn" id="dOk">Удалить</button>
+        <button class="btn btn-dark" id="dCancel" data-i18n="common.cancel">Отмена</button>
+        <button class="btn" id="dOk" data-i18n="common.delete">Удалить</button>
       </div>
     </div>
   </div>
 
   <script src="assets/js/store.js"></script>
+  <script src="assets/js/i18n.js"></script>
   <script src="assets/js/layout.js"></script>
   <script src="assets/js/admin.js"></script>
 </body>
