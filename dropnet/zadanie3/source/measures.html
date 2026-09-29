@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Профилактические меры — «Бетонный файрвол»</title>
+<link rel="stylesheet" href="fonts.css">
+<style>
+:root{
+  --violet:#5B4BE8; --violet-2:#7B6CFF; --deep:#2A1880; --ink:#1F1838; --muted:#6B6488;
+  --lav:#F3F1FF; --lav-2:#E7E3FF; --line:#DDD8FA;
+  --yellow:#FFD21A; --yellow-soft:#FFF7D1; --amber:#F4A614;
+  --red:#F0445A; --red-soft:#FFE9EC; --teal:#10B6A0; --teal-soft:#E1FAF6; --green:#22B573;
+  --kid:#5B4BE8; --par:#F4A614; --tch:#10B6A0;
+}
+@page{ size:338.67mm 190.5mm; margin:0; }
+*{ box-sizing:border-box; }
+html,body{ margin:0; background:#fff; }
+body{ font-family:"Manrope","Liberation Sans",sans-serif; color:var(--ink); -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+b{ color:var(--deep); font-weight:800; }
+.slide{ position:relative; width:338.67mm; height:190.5mm; overflow:hidden; page-break-after:always; background:#fff; padding:10mm 12mm 9mm; }
+.slide:last-child{ page-break-after:auto; }
+.blob{ position:absolute; border-radius:50%; filter:blur(34px); z-index:0; }
+.blob.a{ width:150mm; height:110mm; top:-72mm; right:-52mm; background:radial-gradient(circle at 30% 60%,#FFC94A 0%,#8C5CF0 55%,transparent 72%); opacity:.42; }
+.blob.b{ width:130mm; height:130mm; bottom:-90mm; left:-72mm; background:radial-gradient(circle at 62% 30%,#FFB938 0%,#5B4BE8 55%,transparent 73%); opacity:.38; }
+.content{ position:relative; z-index:1; height:100%; display:flex; flex-direction:column; }
+.top{ display:flex; align-items:center; gap:3mm; margin-bottom:3mm; }
+.eyebrow{ background:var(--yellow); color:var(--deep); font-weight:800; font-size:8.5pt; letter-spacing:.08em; text-transform:uppercase; padding:1.3mm 3.4mm; border-radius:999px; }
+.aud{ font-weight:800; font-size:8.5pt; letter-spacing:.06em; text-transform:uppercase; padding:1.3mm 3.4mm; border-radius:999px; color:#fff; }
+.aud.k{ background:var(--kid);} .aud.p{ background:var(--par); color:var(--deep);} .aud.t{ background:var(--tch);}
+.pg{ margin-left:auto; font-weight:800; font-size:8.5pt; color:var(--muted); letter-spacing:.06em; }
+h1{ font-family:"Unbounded",sans-serif; font-weight:800; color:var(--deep); font-size:22pt; line-height:1.08; margin:0 0 1mm; }
+h1 .v{ color:var(--violet); }
+.sub{ font-size:11pt; color:var(--muted); font-weight:600; margin:0 0 3mm; line-height:1.4; }
+.foot{ position:absolute; left:0; right:0; bottom:-4.5mm; display:flex; justify-content:space-between; font-size:7pt; color:#9A93B8; font-weight:700; letter-spacing:.04em; }
+.ref{ display:inline-block; font-weight:800; font-size:7pt; color:var(--violet); background:var(--lav-2); border-radius:6px; padding:.1mm 1.4mm; margin-left:.8mm; vertical-align:1px; white-space:nowrap; }
+.code{ display:inline-block; font-family:"Unbounded"; font-weight:800; font-size:7.6pt; border-radius:6px; padding:.4mm 1.5mm; color:#fff; background:var(--violet); margin-right:1mm; vertical-align:1px; }
+.code.s{ background:var(--amber); color:var(--deep);} .code.d{ background:var(--teal);}
+.card{ background:#fff; border:1px solid var(--line); border-radius:18px; box-shadow:0 5px 16px rgba(60,40,160,.07); }
+
+/* ---- measure card ---- */
+.mgrid{ display:grid; grid-template-columns:1fr 1fr; gap:4mm; flex:1; min-height:0; }
+.m{ display:flex; flex-direction:column; border-radius:20px; overflow:hidden; border:1px solid var(--line); background:#fff; box-shadow:0 6px 18px rgba(60,40,160,.08); }
+.mh{ display:flex; align-items:center; gap:3mm; padding:3mm 4.5mm; color:#fff; }
+.mh.k{ background:linear-gradient(120deg,#4A38D8,#7B6CFF); } .mh.p{ background:linear-gradient(120deg,#F4A614,#FFCB45); color:var(--deep);} .mh.t{ background:linear-gradient(120deg,#0C9C89,#27C9B2);}
+.mid{ font-family:"Unbounded"; font-weight:800; font-size:10pt; background:rgba(255,255,255,.22); border-radius:10px; padding:1.2mm 2.4mm; }
+.mh.p .mid{ background:rgba(42,24,128,.12); }
+.mt{ font-family:"Unbounded"; font-weight:800; font-size:12.5pt; line-height:1.15; }
+.mt small{ display:block; font-family:"Manrope"; font-weight:700; font-size:8.5pt; opacity:.9; margin-top:.6mm; }
+.mb{ padding:3.4mm 4.8mm; display:grid; grid-template-columns:24mm 1fr; column-gap:3mm; row-gap:2.9mm; font-size:10.3pt; line-height:1.4; flex:1; align-content:space-evenly; }
+.mb .l{ font-weight:800; font-size:7.8pt; letter-spacing:.06em; text-transform:uppercase; color:var(--muted); padding-top:.6mm; }
+.mb ul{ margin:0; padding-left:3.6mm; } .mb li{ margin:0 0 .6mm; }
+.mb li::marker{ color:var(--violet); }
+.why{ background:var(--lav); border-radius:10px; padding:1.8mm 2.8mm; font-size:9.6pt; }
+.kpi{ background:var(--teal-soft); border-radius:10px; padding:1.8mm 2.8mm; font-size:9.8pt; color:#08594F; font-weight:700; }
+.fac{ font-size:9.8pt; }
+.dots{ display:inline-flex; gap:1.2mm; vertical-align:-1px; margin-right:1.6mm; }
+.dots i{ width:3mm; height:3mm; border-radius:50%; background:var(--lav-2); display:inline-block; }
+.dots i.on{ background:var(--violet); }
+.diff{ font-size:9.8pt; }
+
+/* misc */
+.pill{ display:inline-block; border-radius:999px; padding:1mm 3mm; font-weight:800; font-size:8.5pt; }
+table{ border-collapse:separate; border-spacing:0; width:100%; }
+.mh small{ color:inherit !important; opacity:.92; font-size:8.8pt !important; }
+</style>
+</head>
+<body>
+
+<!-- ============ 1. ОБЛОЖКА ============ -->
+<section class="slide">
+  <div class="blob a"></div><div class="blob b"></div>
+  <div class="content" style="display:grid;grid-template-columns:1.2fr 1fr;gap:8mm">
+    <div style="position:relative;border-radius:26px;padding:10mm 11mm;color:#fff;overflow:hidden;background:linear-gradient(125deg,#3A22B8 0%,#5B4BE8 52%,#8A6BFF 100%);display:flex;flex-direction:column">
+      <div style="position:absolute;right:-25mm;top:-30mm;width:95mm;height:95mm;border-radius:50%;background:radial-gradient(circle,#FFD21A 0%,rgba(255,210,26,0) 65%);opacity:.5"></div>
+      <div style="position:absolute;right:9mm;top:9mm;width:34mm;background:#fff;border-radius:16px;padding:2.2mm 2.8mm"><img src="logo_hq.png" style="width:100%;display:block"></div>
+      <span class="eyebrow" style="align-self:flex-start">Проектное задание №3 · Дроп.Нет</span>
+      <div style="font-family:Unbounded;font-weight:800;font-size:25pt;line-height:1.1;margin-top:7mm">Система<br>«Бетонный<br>файрвол»:<br><span style="color:#FFD21A">3 контура защиты</span></div>
+      <div style="font-size:12pt;line-height:1.45;font-weight:700;margin-top:4mm;max-width:150mm;opacity:.95">10 профилактических мер против вовлечения школьников в дропперство — для школьников, родителей и учителей МБОУ СОШ № 4 г. Большой Камень</div>
+      <div style="margin-top:auto;display:flex;gap:2.6mm">
+        <div style="background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.25);border-radius:12px;padding:2mm 3.6mm;font-size:10pt;font-weight:700"><small style="display:block;font-size:7pt;letter-spacing:.1em;opacity:.75;font-weight:800">КОМАНДА</small>«Бетонный файрвол»</div>
+        <div style="background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.25);border-radius:12px;padding:2mm 3.6mm;font-size:10pt;font-weight:700"><small style="display:block;font-size:7pt;letter-spacing:.1em;opacity:.75;font-weight:800">КАПИТАН</small>Крюков Артем</div>
+        <div style="background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.25);border-radius:12px;padding:2mm 3.6mm;font-size:10pt;font-weight:700"><small style="display:block;font-size:7pt;letter-spacing:.1em;opacity:.75;font-weight:800">РЕГИОН</small>Приморский край</div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:3.4mm;justify-content:center">
+      <div class="card" style="padding:4.5mm 5mm">
+        <div style="font-family:Unbounded;font-weight:800;font-size:11pt;color:var(--deep);margin-bottom:2.4mm">Формула работы</div>
+        <div style="display:flex;align-items:center;gap:1.6mm;flex-wrap:wrap;font-weight:800;font-size:9.5pt">
+          <span class="pill" style="background:#FFE9EC;color:#C21F37">Фактор риска</span><span style="color:#B9B1EE">→</span>
+          <span class="pill" style="background:var(--lav-2);color:var(--violet)">Мера</span><span style="color:#B9B1EE">→</span>
+          <span class="pill" style="background:var(--teal-soft);color:#08594F">Эффект + KPI</span><span style="color:#B9B1EE">→</span>
+          <span class="pill" style="background:#1F1838;color:#fff">Сложность</span></div>
+      </div>
+      <div class="card" style="padding:4.5mm 5mm">
+        <div style="font-family:Unbounded;font-weight:800;font-size:11pt;color:var(--deep);margin-bottom:2mm">Каждая мера — это</div>
+        <div style="font-size:10pt;line-height:1.5">✓ конкретное действие: <b>кто, когда, сколько минут</b><br>✓ связь с фактором из задания №2 (коды <span class="code">П</span><span class="code s">С</span><span class="code d">Д</span>)<br>✓ измеримый результат и способ проверки<br>✓ честная оценка сложности и ресурсов<br>✓ научное или практическое обоснование</div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:2.6mm">
+        <div class="card" style="padding:3.4mm;text-align:center"><div style="font-family:Unbounded;font-weight:800;font-size:19pt;color:var(--kid)">4</div><div style="font-size:8.6pt;font-weight:800;color:var(--muted)">меры для<br>школьников</div></div>
+        <div class="card" style="padding:3.4mm;text-align:center"><div style="font-family:Unbounded;font-weight:800;font-size:19pt;color:var(--par)">3</div><div style="font-size:8.6pt;font-weight:800;color:var(--muted)">меры для<br>родителей</div></div>
+        <div class="card" style="padding:3.4mm;text-align:center"><div style="font-family:Unbounded;font-weight:800;font-size:19pt;color:var(--tch)">3</div><div style="font-size:8.6pt;font-weight:800;color:var(--muted)">меры для<br>учителей</div></div>
+      </div>
+    </div>
+    <div class="foot"><span>ДРОП.НЕТ · ЗАДАНИЕ №3 · «БЕТОННЫЙ ФАЙРВОЛ» · МБОУ СОШ № 4 г. БОЛЬШОЙ КАМЕНЬ</span><span>1 / 12</span></div>
+  </div>
+</section>
+
+<!-- ============ 2. ОТ РИСКОВ К МЕРАМ ============ -->
+<section class="slide">
+  <div class="blob a"></div><div class="blob b"></div>
+  <div class="content">
+    <div class="top"><span class="eyebrow">Отправная точка</span><span class="pg">ОПИРАЕМСЯ НА ЗАДАНИЯ №1 И №2</span></div>
+    <h1>От рисков <span class="v">к мерам</span></h1>
+    <p class="sub">В задании №2 мы нашли, где школьник уязвим. Каждая мера ниже целится в конкретный фактор — а не «повышает грамотность вообще».</p>
+    <div style="display:grid;grid-template-columns:1.25fr 1fr;gap:5mm;flex:1;min-height:0">
+      <div class="card" style="padding:4mm 5mm">
+        <div style="font-family:Unbounded;font-weight:800;font-size:10.5pt;color:var(--deep);margin-bottom:2.4mm">Факторы риска из задания №2</div>
+        <table style="font-size:10.4pt;line-height:1.35">
+          <tr><td style="padding:1.55mm 0;width:12mm"><span class="code">П1</span></td><td>Решение «на бегу», без паузы</td><td style="width:22mm;text-align:right"><span class="pill" style="background:#FFD21A;color:var(--deep);font-size:7.5pt">приоритет 1</span></td></tr>
+          <tr><td style="padding:1.55mm 0"><span class="code">П2</span></td><td>«Это просто подработка» — не видит связи с кражей</td><td style="text-align:right"><span class="pill" style="background:var(--lav-2);color:var(--violet);font-size:7.5pt">приоритет 3</span></td></tr>
+          <tr><td style="padding:1.55mm 0"><span class="code">П3</span></td><td>Желание быстрых «своих» денег</td><td></td></tr>
+          <tr><td style="padding:1.55mm 0"><span class="code">П4</span></td><td>«Синдром пионера» — готовность помочь «полиции»</td><td></td></tr>
+          <tr><td style="padding:1.55mm 0"><span class="code s">С1</span></td><td>Доверие «знакомому знакомого»</td><td style="text-align:right"><span class="pill" style="background:var(--lav-2);color:var(--violet);font-size:7.5pt">приоритет 2</span></td></tr>
+          <tr><td style="padding:1.55mm 0"><span class="code s">С2</span></td><td>Пример сверстников: «все так делают»</td><td style="text-align:right"><span class="pill" style="background:var(--lav-2);color:var(--violet);font-size:7.5pt">приоритет 2</span></td></tr>
+          <tr><td style="padding:1.55mm 0"><span class="code s">С3</span></td><td>«Онлайн-друг», который неделями входит в доверие</td><td></td></tr>
+          <tr><td style="padding:1.55mm 0"><span class="code s">С4</span></td><td>Рядом нет взрослого для совета</td><td style="text-align:right"><span class="pill" style="background:var(--lav-2);color:var(--violet);font-size:7.5pt">приоритет 4</span></td></tr>
+          <tr><td style="padding:1.55mm 0"><span class="code d">Д1</span></td><td>Своя карта с 14 лет</td><td></td></tr>
+          <tr><td style="padding:1.55mm 0"><span class="code d">Д2</span></td><td>Главный вход — игровые чаты и соцсети</td><td></td></tr>
+          <tr><td style="padding:1.55mm 0"><span class="code d">Д3</span></td><td>Вербовка и офлайн — у школ и во дворах</td><td></td></tr>
+        </table>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:3.4mm">
+        <div class="card" style="padding:4mm 5mm">
+          <div style="font-family:Unbounded;font-weight:800;font-size:10.5pt;color:var(--deep);margin-bottom:2mm">Как мы отбирали меры</div>
+          <div style="font-size:10.2pt;line-height:1.5">
+            <b>1. Точность.</b> Мера бьёт в фактор или красный флаг, а не «в тему вообще».<br>
+            <b>2. Реалистичность.</b> Школа может начать в этом учебном году без бюджета — на уроках, классных часах и собраниях, которые уже есть.<br>
+            <b>3. Измеримость.</b> У каждой меры есть KPI и способ проверки анонимным опросом.<br>
+            <b>4. Доказательность.</b> Подход опирается на исследования или официальные рекомендации.</div>
+        </div>
+        <div style="border-radius:18px;padding:4mm 5mm;color:#fff;background:linear-gradient(125deg,#3A22B8,#5B4BE8 60%,#7B6CFF)">
+          <div style="font-family:Unbounded;font-weight:800;font-size:10.5pt;color:#FFD21A;margin-bottom:1.6mm">Контекст региона</div>
+          <div style="font-size:10.2pt;line-height:1.45">Приморский край — <b style="color:#fff">«Столица финансовой культуры 2026»</b> по итогам конкурса Минфина России и Банка России<span class="ref" style="background:rgba(255,255,255,.2);color:#fff">10</span>. Это даёт школе доступ к экспертам Дальневосточного ГУ Банка России и регионального Минфина — мы используем это в мерах Ш3 и У3.</div>
+        </div>
+      </div>
+    </div>
+    <div class="foot"><span>ДРОП.НЕТ · ЗАДАНИЕ №3 · «БЕТОННЫЙ ФАЙРВОЛ»</span><span>2 / 12</span></div>
+  </div>
+</section>
+
+<!-- ============ 3. СИСТЕМА ============ -->
+<section class="slide">
+  <div class="blob a"></div><div class="blob b"></div>
+  <div class="content">
+    <div class="top"><span class="eyebrow">Архитектура</span><span class="pg">ОДИН ПОДРОСТОК — ТРИ СЛОЯ ЗАЩИТЫ</span></div>
+    <h1>3 контура — <span class="v">10 мер</span></h1>
+    <p class="sub">Как файрвол в сети: если вербовщик прошёл один слой, его останавливает следующий.</p>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:4mm;flex:1;min-height:0">
+      <div style="border-radius:22px;padding:4mm 4.5mm;background:linear-gradient(180deg,#EEEBFF,#FBFAFF);border:1px solid var(--line);display:flex;flex-direction:column;gap:2.4mm">
+        <div style="display:flex;align-items:center;gap:2.6mm"><div style="width:11mm;height:11mm;border-radius:12px;background:var(--kid);display:grid;place-items:center;font-size:15pt">🧑‍🎓</div><div><div style="font-family:Unbounded;font-weight:800;font-size:12pt;color:var(--deep)">Контур 1 · Навык</div><div style="font-size:8.6pt;font-weight:700;color:var(--muted)">ШКОЛЬНИКИ 8–11 КЛАССОВ</div></div></div>
+        <div class="card" style="padding:2.6mm 3.6mm;font-size:10.4pt;line-height:1.3"><b>Ш1</b> «Правило 15 минут» + стоп-карточка<small style="display:block;font-size:8.4pt;color:#6B6488;font-weight:700;margin-top:.4mm">классный час 40 мин · сентябрь–октябрь</small></div>
+        <div class="card" style="padding:2.6mm 3.6mm;font-size:10.4pt;line-height:1.3"><b>Ш2</b> Практикум «Найди флаг»<small style="display:block;font-size:8.4pt;color:#6B6488;font-weight:700;margin-top:.4mm">20 мин раз в четверть · 12 кейсов</small></div>
+        <div class="card" style="padding:2.6mm 3.6mm;font-size:10.4pt;line-height:1.3"><b>Ш3</b> Онлайн-урок Банка России<small style="display:block;font-size:8.4pt;color:#6B6488;font-weight:700;margin-top:.4mm">бесплатный вебинар dni-fg.ru · 45 мин</small></div>
+        <div class="card" style="padding:2.6mm 3.6mm;font-size:10.4pt;line-height:1.3"><b>Ш4</b> «Равный — равному»<small style="display:block;font-size:8.4pt;color:#6B6488;font-weight:700;margin-top:.4mm">6–8 амбассадоров из 10–11 кл.</small></div>
+        <div style="margin-top:auto;font-size:9.6pt;line-height:1.45;color:#3D3658"><b>Кто делает:</b> классные руководители, учителя информатики и обществознания, амбассадоры<br><b>Цель:</b> школьник сам замечает флаг и берёт паузу.</div>
+      </div>
+      <div style="border-radius:22px;padding:4mm 4.5mm;background:linear-gradient(180deg,#FFF3CC,#FFFCF0);border:1px solid #F3DE8A;display:flex;flex-direction:column;gap:2.4mm">
+        <div style="display:flex;align-items:center;gap:2.6mm"><div style="width:11mm;height:11mm;border-radius:12px;background:var(--par);display:grid;place-items:center;font-size:15pt">👨‍👩‍👦</div><div><div style="font-family:Unbounded;font-weight:800;font-size:12pt;color:var(--deep)">Контур 2 · Опора</div><div style="font-size:8.6pt;font-weight:700;color:var(--muted)">РОДИТЕЛИ</div></div></div>
+        <div class="card" style="padding:2.6mm 3.6mm;font-size:10.4pt;line-height:1.3"><b>Р1</b> «5 минут на собрании»<small style="display:block;font-size:8.4pt;color:#6B6488;font-weight:700;margin-top:.4mm">осеннее собрание 8–11 кл.</small></div>
+        <div class="card" style="padding:2.6mm 3.6mm;font-size:10.4pt;line-height:1.3"><b>Р2</b> Памятка «3 настройки + 1 разговор»<small style="display:block;font-size:8.4pt;color:#6B6488;font-weight:700;margin-top:.4mm">1 сообщение в родительский чат</small></div>
+        <div class="card" style="padding:2.6mm 3.6mm;font-size:10.4pt;line-height:1.3"><b>Р3</b> Сценарий «Если деньги уже пришли»<small style="display:block;font-size:8.4pt;color:#6B6488;font-weight:700;margin-top:.4mm">5 шагов для семьи</small></div>
+        <div style="margin-top:auto;font-size:9.6pt;line-height:1.45;color:#3D3658"><b>Кто делает:</b> классные руководители, родительский комитет, наша команда (памятки)<br><b>Цель:</b> родитель видит риск рано и реагирует без крика.</div>
+      </div>
+      <div style="border-radius:22px;padding:4mm 4.5mm;background:linear-gradient(180deg,#DDF8F3,#F7FEFC);border:1px solid #BDEDE4;display:flex;flex-direction:column;gap:2.4mm">
+        <div style="display:flex;align-items:center;gap:2.6mm"><div style="width:11mm;height:11mm;border-radius:12px;background:var(--tch);display:grid;place-items:center;font-size:15pt">🧑‍🏫</div><div><div style="font-family:Unbounded;font-weight:800;font-size:12pt;color:var(--deep)">Контур 3 · Среда</div><div style="font-size:8.6pt;font-weight:700;color:var(--muted)">УЧИТЕЛЯ И ШКОЛА</div></div></div>
+        <div class="card" style="padding:2.6mm 3.6mm;font-size:10.4pt;line-height:1.3"><b>У1</b> Педсовет-брифинг + алгоритм<small style="display:block;font-size:8.4pt;color:#6B6488;font-weight:700;margin-top:.4mm">30 мин · 5 шагов реагирования</small></div>
+        <div class="card" style="padding:2.6mm 3.6mm;font-size:10.4pt;line-height:1.3"><b>У2</b> «Взрослый рядом»<small style="display:block;font-size:8.4pt;color:#6B6488;font-weight:700;margin-top:.4mm">соцпедагог + анонимная QR-форма</small></div>
+        <div class="card" style="padding:2.6mm 3.6mm;font-size:10.4pt;line-height:1.3"><b>У3</b> «Как НЕ работает полиция»<small style="display:block;font-size:8.4pt;color:#6B6488;font-weight:700;margin-top:.4mm">ПДН + эксперт Банка России · 2 раза в год</small></div>
+        <div style="margin-top:auto;font-size:9.6pt;line-height:1.45;color:#3D3658"><b>Кто делает:</b> администрация, соцпедагог, советник по воспитанию, партнёры (ПДН, Банк России)<br><b>Цель:</b> у ученика есть безопасный взрослый, а у учителя — готовый алгоритм.</div>
+      </div>
+    </div>
+    <div class="foot"><span>ДРОП.НЕТ · ЗАДАНИЕ №3 · «БЕТОННЫЙ ФАЙРВОЛ»</span><span>3 / 12</span></div>
+  </div>
+</section>
+
+<!-- ============ 4. Ш1 Ш2 ============ -->
+<section class="slide">
+  <div class="blob a"></div><div class="blob b"></div>
+  <div class="content">
+    <div class="top"><span class="aud k">Контур 1 · Школьники</span><span class="pg">НАВЫК ЗАМЕТИТЬ И ОСТАНОВИТЬСЯ</span></div>
+    <h1>Меры для <span class="v">школьников</span> · 1/2</h1>
+    <div class="mgrid" style="margin-top:2mm">
+      <div class="m">
+        <div class="mh k"><span class="mid">Ш1</span><div class="mt">«Правило 15 минут»<small style="display:block;font-size:8.4pt;color:#6B6488;font-weight:700;margin-top:.4mm">план «если — то» + стоп-карточка</small></div></div>
+        <div class="mb">
+          <div class="l">Что делаем</div><div><ul>
+            <li><b>Сентябрь–октябрь:</b> классный час 40 мин для 8–11 кл. Каждый ученик пишет свой план: «Если мне предлагают деньги за перевод или карту — я беру 15 минут и задаю 3 вопроса».</li>
+            <li>3 вопроса: <b>почему платят «ни за что»? почему торопят? что будет через год?</b> + фраза отказа «Карту и переводы не даю».</li>
+            <li>Стоп-карточка — наклейка на обложку дневника / чехол телефона. <b>Январь:</b> 5-минутный повтор.</li></ul></div>
+          <div class="l">Фактор</div><div class="fac"><span class="code">П1</span>решение без паузы · <span class="code">П3</span>быстрые деньги · флаг «спешка»</div>
+          <div class="l">Почему сработает</div><div class="why">Планы «если — то» переводят решение в автоматизм: метаанализ 94 исследований — эффект d = 0,65<span class="ref">11</span></div>
+          <div class="l">Эффект · KPI</div><div class="kpi">≥ 80 % учеников 8–11 кл. называют 3 вопроса; ≥ 70 % в кейс-тесте выбирают «пауза» (декабрь)</div>
+          <div class="l">Сложность</div><div class="diff"><span class="dots"><i class="on"></i><i></i><i></i></span><b>Низкая.</b> 1 классный час + печать карточек. Ведут классные руководители.</div>
+        </div>
+      </div>
+      <div class="m">
+        <div class="mh k"><span class="mid">Ш2</span><div class="mt">Практикум «Найди флаг»<small style="display:block;font-size:8.4pt;color:#6B6488;font-weight:700;margin-top:.4mm">психологическая «прививка» (пребанкинг)</small></div></div>
+        <div class="mb">
+          <div class="l">Что делаем</div><div><ul>
+            <li><b>Раз в четверть, 20 мин</b> на информатике или обществознании.</li>
+            <li>Набор из 12 собирательных карточек-объявлений: 8 с красными флагами (в т. ч. легенда «помоги полиции») и 4 честные вакансии для контраста.</li>
+            <li>Пары маркируют флаги и объясняют почему; финал — онлайн-квиз «Флаг / не флаг» на 6 вопросов.</li></ul></div>
+          <div class="l">Фактор</div><div class="fac"><span class="code">П2</span>«просто подработка» · <span class="code">П4</span>«синдром пионера» · <span class="code d">Д2</span>игровые чаты</div>
+          <div class="l">Почему сработает</div><div class="why">«Слабая доза» манипуляции тренирует устойчивость к настоящей: после игры-прививки Bad News участники оценивали фейки как менее надёжные<span class="ref">12</span></div>
+          <div class="l">Эффект · KPI</div><div class="kpi">Доля верных ответов в квизе «до / после» растёт на ≥ 30 п. п.; каждый 8–11 класс прошёл ≥ 3 практикума за год</div>
+          <div class="l">Сложность</div><div class="diff"><span class="dots"><i class="on"></i><i></i><i></i></span><b>Низкая.</b> Карточки готовит наша команда; 20 мин урока.</div>
+        </div>
+      </div>
+    </div>
+    <div class="foot"><span>ДРОП.НЕТ · ЗАДАНИЕ №3 · «БЕТОННЫЙ ФАЙРВОЛ» · все KPI — целевые показатели команды</span><span>4 / 12</span></div>
+  </div>
+</section>
+
+<!-- ============ 5. Ш3 Ш4 ============ -->
+<section class="slide">
+  <div class="blob a"></div><div class="blob b"></div>
+  <div class="content">
+    <div class="top"><span class="aud k">Контур 1 · Школьники</span><span class="pg">ЗНАНИЕ ИЗ ПЕРВОИСТОЧНИКА И НОРМА СРЕДИ СВОИХ</span></div>
+    <h1>Меры для <span class="v">школьников</span> · 2/2</h1>
+    <div class="mgrid" style="margin-top:2mm">
+      <div class="m">
+        <div class="mh k"><span class="mid">Ш3</span><div class="mt">Онлайн-урок Банка России<small style="display:block;font-size:8.4pt;color:#6B6488;font-weight:700;margin-top:.4mm">«Дропы. Кто это и почему это опасно» на dni-fg.ru</small></div></div>
+        <div class="mb">
+          <div class="l">Что делаем</div><div><ul>
+            <li>Классный руководитель записывает класс на бесплатный вебинар Банка России на <b>dni-fg.ru</b> (проект для 5–11 кл.)<span class="ref">5</span>.</li>
+            <li>Смотрим всем классом (45 мин), затем <b>10 мин разбора</b>: связываем урок с «Правилом 15 минут».</li>
+            <li>Просим эксперта Дальневосточного ГУ Банка России прийти очно — Приморье в 2026 г. «Столица финансовой культуры»<span class="ref">10</span>.</li></ul></div>
+          <div class="l">Фактор</div><div class="fac"><span class="code">П2</span>«это не преступление» · <span class="code d">Д1</span>своя карта: не знает последствий</div>
+          <div class="l">Почему сработает</div><div class="why">Информация от регулятора, а не «от учителя» — выше доверие; закрепляет: с 16 лет — ст. 187 УК РФ<span class="ref">4</span></div>
+          <div class="l">Эффект · KPI</div><div class="kpi">100 % классов 8–11 прошли урок; ≥ 85 % знают про ответственность с 16 лет (опрос)</div>
+          <div class="l">Сложность</div><div class="diff"><span class="dots"><i class="on"></i><i></i><i></i></span><b>Низкая.</b> Бесплатно; нужны проектор и интернет.</div>
+        </div>
+      </div>
+      <div class="m">
+        <div class="mh k"><span class="mid">Ш4</span><div class="mt">«Равный — равному»<small style="display:block;font-size:8.4pt;color:#6B6488;font-weight:700;margin-top:.4mm">амбассадоры из 10–11 классов</small></div></div>
+        <div class="mb">
+          <div class="l">Что делаем</div><div><ul>
+            <li>Отбираем <b>6–8 старшеклассников</b> (школьный медиацентр, актив «Движения первых»); 2 тренинга по 45 мин с командой и соцпедагогом.</li>
+            <li>Амбассадоры проводят <b>15-минутные разборы</b> в 8–9 классах и выпускают 1 короткое видео в месяц в школьном канале: «мне писали — я отказался».</li>
+            <li>Отдельный формат для игр: памятка «флаги в игровом чате».</li></ul></div>
+          <div class="l">Фактор</div><div class="fac"><span class="code s">С1</span>доверие своим · <span class="code s">С2</span>пример сверстников · <span class="code s">С3</span>«онлайн-друг»</div>
+          <div class="l">Почему сработает</div><div class="why">Вербовка идёт через знакомых и сверстников<span class="ref">8</span> — значит и защита должна идти через них: отказ становится нормой группы</div>
+          <div class="l">Эффект · KPI</div><div class="kpi">В каждом 8–9 классе ≥ 1 разбор за полугодие; доля ответивших «расскажу другу или взрослому» растёт</div>
+          <div class="l">Сложность</div><div class="diff"><span class="dots"><i class="on"></i><i class="on"></i><i></i></span><b>Средняя.</b> Нужны мотивированные ребята и куратор.</div>
+        </div>
+      </div>
+    </div>
+    <div class="foot"><span>ДРОП.НЕТ · ЗАДАНИЕ №3 · «БЕТОННЫЙ ФАЙРВОЛ» · все KPI — целевые показатели команды</span><span>5 / 12</span></div>
+  </div>
+</section>
+
+<!-- ============ 6. РОДИТЕЛИ ============ -->
+<section class="slide">
+  <div class="blob a"></div><div class="blob b"></div>
+  <div class="content">
+    <div class="top"><span class="aud p">Контур 2 · Родители</span><span class="pg">ВИДЕТЬ РАНО И РЕАГИРОВАТЬ БЕЗ КРИКА</span></div>
+    <h1>Меры для <span class="v">родителей</span></h1>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:3.6mm;flex:1;min-height:0;margin-top:2mm">
+      <div class="m">
+        <div class="mh p"><span class="mid">Р1</span><div class="mt">«5 минут на собрании»</div></div>
+        <div class="mb" style="grid-template-columns:1fr;font-size:10.2pt">
+          <div><div class="l">Что делаем</div>На осеннем собрании 8–11 кл. — блок на 5 минут: что такое дроп, 4 главных флага, ответственность с 16 лет. Показываем 1 слайд и раздаём QR на памятку Р2.</div>
+          <div><div class="l">Фактор</div><span class="code s">С4</span>нет взрослого для совета · <span class="code d">Д1</span>своя карта</div>
+          <div class="kpi">≥ 70 % родителей 8–11 кл. услышали блок (явка на собрания)</div>
+          <div class="diff"><span class="dots"><i class="on"></i><i></i><i></i></span><b>Низкая.</b> Собрание уже есть в плане.</div>
+        </div>
+      </div>
+      <div class="m">
+        <div class="mh p"><span class="mid">Р2</span><div class="mt">«3 настройки + 1 разговор»</div></div>
+        <div class="mb" style="grid-template-columns:1fr;font-size:10.2pt">
+          <div><div class="l">Памятка в родительских чатах</div>
+            <b>1.</b> Узнать, есть ли у ребёнка карта: с 01.08.2025 банк откроет её только с письменного согласия родителя<span class="ref">3</span>.<br>
+            <b>2.</b> Включить уведомления об операциях; Банк России рекомендует банкам сообщать родителям о картах детей<span class="ref">2</span>.<br>
+            <b>3.</b> Договориться дома о «Правиле 15 минут».<br>
+            <b>+1.</b> Спокойный разговор по 3 вопросам — без запугивания.</div>
+          <div><div class="l">Фактор</div><span class="code d">Д1</span>карта без контроля · <span class="code s">С4</span></div>
+          <div class="kpi">≥ 50 % родителей в опросе подтверждают: настроили уведомления или поговорили</div>
+          <div class="diff"><span class="dots"><i class="on"></i><i></i><i></i></span><b>Низкая.</b> 1 сообщение в чат.</div>
+        </div>
+      </div>
+      <div class="m">
+        <div class="mh p"><span class="mid">Р3</span><div class="mt">«Если деньги уже пришли»</div></div>
+        <div class="mb" style="grid-template-columns:1fr;font-size:10.2pt">
+          <div><div class="l">Сценарий для семьи</div>
+            <b>1.</b> Ничего не переводить и не снимать — «вернуть на другие реквизиты» и есть схема<span class="ref">8</span>.<br>
+            <b>2.</b> Позвонить в свой банк по номеру на карте или из приложения.<br>
+            <b>3.</b> Не общаться с «отправителем», сохранить переписку.<br>
+            <b>4.</b> При давлении и угрозах — полиция 102.<br>
+            <b>5.</b> Не ругать ребёнка: он пришёл вовремя.</div>
+          <div><div class="l">Фактор / флаг</div>флаг «ошибочный перевод» · <span class="code s">С4</span></div>
+          <div class="kpi">Каждая семья 8–11 кл. получила сценарий; 0 самостоятельных «возвратов»</div>
+          <div class="diff"><span class="dots"><i class="on"></i><i></i><i></i></span><b>Низкая.</b> Часть памятки Р2.</div>
+        </div>
+      </div>
+    </div>
+    <div class="foot"><span>ДРОП.НЕТ · ЗАДАНИЕ №3 · «БЕТОННЫЙ ФАЙРВОЛ» · все KPI — целевые показатели команды</span><span>6 / 12</span></div>
+  </div>
+</section>
+
+<!-- ============ 7. УЧИТЕЛЯ: У1 алгоритм ============ -->
+<section class="slide">
+  <div class="blob a"></div><div class="blob b"></div>
+  <div class="content">
+    <div class="top"><span class="aud t">Контур 3 · Учителя и школа</span><span class="pg">ГОТОВЫЙ АЛГОРИТМ ВМЕСТО РАСТЕРЯННОСТИ</span></div>
+    <h1>У1 · Педсовет-брифинг <span class="v">и алгоритм реагирования</span></h1>
+    <div style="display:grid;grid-template-columns:.9fr 1.35fr;gap:4.5mm;flex:1;min-height:0;margin-top:2mm">
+      <div class="m">
+        <div class="mh t"><span class="mid">У1</span><div class="mt">30 минут для педагогов<small style="display:block;font-size:8.4pt;color:#6B6488;font-weight:700;margin-top:.4mm">классные руководители 8–11, информатика, обществознание, ОБЗР</small></div></div>
+        <div class="mb" style="grid-template-columns:1fr;font-size:10.2pt">
+          <div><div class="l">Что делаем</div><ul>
+            <li>На осеннем педсовете: 8 красных флагов, как вести практикум Ш2 (методичка на 2 страницы).</li>
+            <li>Раздаём алгоритм справа — распечатка в кабинет и в учительскую.</li>
+            <li>Дежурные учителя и охрана знают: вербовщики бывают и у школы<span class="ref">8</span>.</li></ul></div>
+          <div><div class="l">Фактор</div><span class="code s">С4</span>нет взрослого · <span class="code d">Д3</span>вербовка у школы</div>
+          <div class="kpi">100 % классных руководителей 8–11 знают алгоритм; реакция на обращение — в тот же день</div>
+          <div class="diff"><span class="dots"><i class="on"></i><i></i><i></i></span><b>Низкая.</b> 30 минут педсовета.</div>
+        </div>
+      </div>
+      <div class="card" style="padding:4mm 5mm;display:flex;flex-direction:column">
+        <div style="font-family:Unbounded;font-weight:800;font-size:11pt;color:var(--deep);margin-bottom:3mm">Если ученик рассказал о предложении</div>
+        <div style="display:flex;flex-direction:column;gap:2.2mm;flex:1">
+          <div style="display:grid;grid-template-columns:9mm 1fr;gap:3mm;align-items:center"><div style="width:9mm;height:9mm;border-radius:10px;background:var(--tch);color:#fff;display:grid;place-items:center;font-family:Unbounded;font-weight:800">1</div><div style="background:var(--teal-soft);border-radius:12px;padding:2.2mm 3.4mm;font-size:9.8pt"><b>Выслушать без осуждения.</b> Похвалить, что пришёл: «Ты сделал правильно».</div></div>
+          <div style="display:grid;grid-template-columns:9mm 1fr;gap:3mm;align-items:center"><div style="width:9mm;height:9mm;border-radius:10px;background:var(--tch);color:#fff;display:grid;place-items:center;font-family:Unbounded;font-weight:800">2</div><div style="background:var(--teal-soft);border-radius:12px;padding:2.2mm 3.4mm;font-size:9.8pt"><b>Остановить действия:</b> ничего не переводить, карту и коды не передавать, переписку сохранить.</div></div>
+          <div style="display:grid;grid-template-columns:9mm 1fr;gap:3mm;align-items:center"><div style="width:9mm;height:9mm;border-radius:10px;background:var(--tch);color:#fff;display:grid;place-items:center;font-family:Unbounded;font-weight:800">3</div><div style="background:var(--teal-soft);border-radius:12px;padding:2.2mm 3.4mm;font-size:9.8pt"><b>Сообщить соцпедагогу</b> (контакт У2) в тот же день.</div></div>
+          <div style="display:grid;grid-template-columns:9mm 1fr;gap:3mm;align-items:center"><div style="width:9mm;height:9mm;border-radius:10px;background:var(--tch);color:#fff;display:grid;place-items:center;font-family:Unbounded;font-weight:800">4</div><div style="background:var(--teal-soft);border-radius:12px;padding:2.2mm 3.4mm;font-size:9.8pt"><b>Связаться с родителями</b> и передать им сценарий Р3.</div></div>
+          <div style="display:grid;grid-template-columns:9mm 1fr;gap:3mm;align-items:center"><div style="width:9mm;height:9mm;border-radius:10px;background:var(--tch);color:#fff;display:grid;place-items:center;font-family:Unbounded;font-weight:800">5</div><div style="background:var(--teal-soft);border-radius:12px;padding:2.2mm 3.4mm;font-size:9.8pt"><b>Если деньги уже пришли</b> — вместе с семьёй обратиться в банк; при угрозах — полиция <b>102</b>, инспектор ПДН.</div></div>
+        </div>
+        <div style="margin-top:2.6mm;font-size:8.8pt;color:var(--muted);font-weight:700">Горячие линии: Банк России — 300 · Детский телефон доверия — 8-800-2000-122 (бесплатно, анонимно)<span class="ref">9</span></div>
+      </div>
+    </div>
+    <div class="foot"><span>ДРОП.НЕТ · ЗАДАНИЕ №3 · «БЕТОННЫЙ ФАЙРВОЛ»</span><span>7 / 12</span></div>
+  </div>
+</section>
+
+<!-- ============ 8. У2 У3 ============ -->
+<section class="slide">
+  <div class="blob a"></div><div class="blob b"></div>
+  <div class="content">
+    <div class="top"><span class="aud t">Контур 3 · Учителя и школа</span><span class="pg">БЕЗОПАСНЫЙ ВЗРОСЛЫЙ И РАЗБОР ЛЕГЕНД</span></div>
+    <h1>Меры для <span class="v">учителей и школы</span></h1>
+    <div class="mgrid" style="margin-top:2mm">
+      <div class="m">
+        <div class="mh t"><span class="mid">У2</span><div class="mt">«Взрослый рядом»<small style="display:block;font-size:8.4pt;color:#6B6488;font-weight:700;margin-top:.4mm">точка входа без страха наказания</small></div></div>
+        <div class="mb">
+          <div class="l">Что делаем</div><div><ul>
+            <li>Приказом назначаем контакт — <b>соцпедагог или советник директора по воспитанию</b>.</li>
+            <li>Стенд в холле + плакат в кабинетах 8–11: QR на <b>анонимную форму</b> «Мне предложили…», телефон доверия 8-800-2000-122, Банк России 300, полиция 102.</li>
+            <li>Правило школы: <b>кто сообщил — не наказывается</b>. Ответ — в течение дня.</li></ul></div>
+          <div class="l">Фактор</div><div class="fac"><span class="code s">С4</span>нет взрослого для совета · <span class="code s">С1</span>давление «своих»</div>
+          <div class="l">Почему сработает</div><div class="why">МВД и Роскачество называют внимание взрослых ключевой защитой<span class="ref">14</span><span class="ref">15</span>; анонимность снимает страх</div>
+          <div class="l">Эффект · KPI</div><div class="kpi">Подросток приходит ДО перевода; каждое обращение разобрано в тот же день; доля знающих «к кому идти» ≥ 80 %</div>
+          <div class="l">Сложность</div><div class="diff"><span class="dots"><i class="on"></i><i class="on"></i><i></i></span><b>Средняя.</b> Нужно решение администрации и дежурство по форме.</div>
+        </div>
+      </div>
+      <div class="m">
+        <div class="mh t"><span class="mid">У3</span><div class="mt">«Как НЕ работает полиция»<small style="display:block;font-size:8.4pt;color:#6B6488;font-weight:700;margin-top:.4mm">встреча с инспектором ПДН и экспертом Банка России</small></div></div>
+        <div class="mb">
+          <div class="l">Что делаем</div><div><ul>
+            <li><b>Раз в полугодие, 40 мин</b> для параллелей 8–11: инспектор ПДН и эксперт Дальневосточного ГУ Банка России.</li>
+            <li>Разбор легенд: «помоги поймать мошенников», «спецоперация», «прими деньги на карту».</li>
+            <li>Итоговая фраза: <b>настоящая полиция не просит принимать деньги на твою карту</b>.</li></ul></div>
+          <div class="l">Фактор</div><div class="fac"><span class="code">П4</span>«синдром пионера» · флаг «мы из полиции»</div>
+          <div class="l">Почему сработает</div><div class="why">В группе риска — и благополучные активные школьники 14–17 лет, готовые «помочь государству»<span class="ref">14</span>; им нужен голос настоящей полиции</div>
+          <div class="l">Эффект · KPI</div><div class="kpi">≥ 80 % учеников отвечают верно на вопрос «может ли полиция попросить принять деньги на карту?»</div>
+          <div class="l">Сложность</div><div class="diff"><span class="dots"><i class="on"></i><i class="on"></i><i></i></span><b>Средняя.</b> Нужно договориться с ОМВД и Банком России.</div>
+        </div>
+      </div>
+    </div>
+    <div class="foot"><span>ДРОП.НЕТ · ЗАДАНИЕ №3 · «БЕТОННЫЙ ФАЙРВОЛ» · все KPI — целевые показатели команды</span><span>8 / 12</span></div>
+  </div>
+</section>
+
+<!-- ============ 9. МАТРИЦА ============ -->
+<section class="slide">
+  <div class="blob a"></div><div class="blob b"></div>
+  <div class="content">
+    <div class="top"><span class="eyebrow">Приоритизация</span><span class="pg">С ЧЕГО НАЧИНАТЬ</span></div>
+    <h1>Эффект × сложность <span class="v">и покрытие рисков</span></h1>
+    <div style="display:grid;grid-template-columns:1fr 1.1fr;gap:5mm;flex:1;min-height:0;margin-top:2mm">
+      <div class="card" style="padding:4mm 5mm;position:relative">
+        <div style="position:relative;height:118mm;margin:2mm 0 0 8mm">
+          <div style="position:absolute;inset:0;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:2mm">
+            <div style="background:#E9FBF6;border-radius:14px;padding:2mm 3mm;font-weight:800;font-size:8.5pt;color:#08594F">БЫСТРЫЕ ПОБЕДЫ · старт в октябре</div>
+            <div style="background:#F3F1FF;border-radius:14px;padding:2mm 3mm;font-weight:800;font-size:8.5pt;color:var(--violet)">СТРАТЕГИЧЕСКИЕ · к зиме</div>
+            <div style="background:#FAFAFC;border-radius:14px;padding:2mm 3mm;font-weight:800;font-size:8.5pt;color:var(--muted);align-self:stretch;display:flex;align-items:flex-end">ПОДДЕРЖИВАЮЩИЕ</div>
+            <div style="background:#FAFAFC;border-radius:14px;padding:2mm 3mm;font-weight:800;font-size:8.5pt;color:var(--muted);display:flex;align-items:flex-end">ТРЕБУЮТ ПАРТНЁРОВ</div>
+          </div>
+          <!-- bubbles: left = % from left (difficulty), top = % from top (effect high at top) -->
+          <div style="position:absolute;left:10%;top:16%" class="bub k">Ш1</div>
+          <div style="position:absolute;left:26%;top:24%" class="bub k">Ш2</div>
+          <div style="position:absolute;left:14%;top:38%" class="bub p">Р2</div>
+          <div style="position:absolute;left:33%;top:40%" class="bub k">Ш3</div>
+          <div style="position:absolute;left:62%;top:18%" class="bub t">У2</div>
+          <div style="position:absolute;left:74%;top:30%" class="bub k">Ш4</div>
+          <div style="position:absolute;left:10%;top:62%" class="bub p">Р1</div>
+          <div style="position:absolute;left:28%;top:66%" class="bub p">Р3</div>
+          <div style="position:absolute;left:20%;top:78%" class="bub t">У1</div>
+          <div style="position:absolute;left:70%;top:62%" class="bub t">У3</div>
+          <div style="position:absolute;left:-9mm;top:0;bottom:0;width:6mm;display:flex;align-items:center;justify-content:center"><div style="transform:rotate(-90deg);white-space:nowrap;font-weight:800;font-size:8.5pt;color:var(--muted);letter-spacing:.08em">ЭФФЕКТ ↑</div></div>
+        </div>
+        <div style="margin:2mm 0 0 8mm;display:flex;justify-content:space-between;font-weight:800;font-size:8.5pt;color:var(--muted);letter-spacing:.08em"><span>ПРОЩЕ</span><span>СЛОЖНОСТЬ →</span><span>СЛОЖНЕЕ</span></div>
+        <style>.bub{ width:12mm;height:12mm;border-radius:50%;display:grid;place-items:center;font-family:Unbounded;font-weight:800;font-size:8.5pt;color:#fff;box-shadow:0 4px 10px rgba(40,20,120,.2);} .bub.k{background:var(--kid);} .bub.p{background:var(--par);color:var(--deep);} .bub.t{background:var(--tch);}</style>
+      </div>
+      <div class="card" style="padding:4mm 4.5mm">
+        <div style="font-family:Unbounded;font-weight:800;font-size:10.5pt;color:var(--deep);margin-bottom:2mm">Какая мера закрывает какой фактор</div>
+        <table style="font-size:8.4pt;text-align:center">
+          <tr style="font-weight:800;color:var(--muted)"><td style="text-align:left"></td>
+            <td>Ш1</td><td>Ш2</td><td>Ш3</td><td>Ш4</td><td>Р1</td><td>Р2</td><td>Р3</td><td>У1</td><td>У2</td><td>У3</td></tr>
+          <tbody id="cov"></tbody>
+        </table>
+        <div style="margin-top:2.4mm;font-size:8.8pt;line-height:1.4;color:#3D3658">● — мера напрямую снижает фактор. <b>Все 11 факторов из задания №2 закрыты минимум одной мерой</b>, а 4 приоритетных — двумя и более.</div>
+      </div>
+    </div>
+    <div class="foot"><span>ДРОП.НЕТ · ЗАДАНИЕ №3 · «БЕТОННЫЙ ФАЙРВОЛ» · положение на матрице — экспертная оценка команды</span><span>9 / 12</span></div>
+  </div>
+</section>
+
+<!-- ============ 10. ДОРОЖНАЯ КАРТА + ИЗМЕРЕНИЕ ============ -->
+<section class="slide">
+  <div class="blob a"></div><div class="blob b"></div>
+  <div class="content">
+    <div class="top"><span class="eyebrow">Внедрение</span><span class="pg">ПЛАН НА 2026/27 УЧЕБНЫЙ ГОД</span></div>
+    <h1>Дорожная карта <span class="v">и как мы измерим результат</span></h1>
+    <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:3mm;margin-top:3mm">
+      <div class="card" style="padding:3mm 3.6mm;border-top:4px solid var(--violet)"><div style="font-family:Unbounded;font-weight:800;font-size:10.5pt;color:var(--deep)">Октябрь</div><div style="font-size:9.8pt;line-height:1.5;margin-top:1.6mm">📊 стартовый опрос<br>У1 педсовет · Ш1 классные часы<br>Р1 собрания · Р2+Р3 в чаты</div></div>
+      <div class="card" style="padding:3mm 3.6mm;border-top:4px solid var(--amber)"><div style="font-family:Unbounded;font-weight:800;font-size:10.5pt;color:var(--deep)">Ноябрь</div><div style="font-size:9.8pt;line-height:1.5;margin-top:1.6mm">Ш3 онлайн-урок ЦБ<br>Ш2 практикум №1<br>У2 стенд и QR-форма</div></div>
+      <div class="card" style="padding:3mm 3.6mm;border-top:4px solid var(--violet)"><div style="font-family:Unbounded;font-weight:800;font-size:10.5pt;color:var(--deep)">Декабрь</div><div style="font-size:9.8pt;line-height:1.5;margin-top:1.6mm">📊 промежуточный замер<br>Ш4 отбор и обучение амбассадоров<br>У3 встреча №1</div></div>
+      <div class="card" style="padding:3mm 3.6mm;border-top:4px solid var(--amber)"><div style="font-family:Unbounded;font-weight:800;font-size:10.5pt;color:var(--deep)">Январь–март</div><div style="font-size:9.8pt;line-height:1.5;margin-top:1.6mm">Ш1 повтор · Ш2 практикумы №2–3<br>Ш4 разборы в 8–9 кл. и видео<br>Р2 напоминание в чатах</div></div>
+      <div class="card" style="padding:3mm 3.6mm;border-top:4px solid var(--teal)"><div style="font-family:Unbounded;font-weight:800;font-size:10.5pt;color:var(--deep)">Апрель–май</div><div style="font-size:9.8pt;line-height:1.5;margin-top:1.6mm">У3 встреча №2<br>📊 итоговый опрос и отчёт<br>передаём материалы другим школам города</div></div>
+    </div>
+    <div style="display:grid;grid-template-columns:1.3fr 1fr;gap:4mm;flex:1;min-height:0;margin-top:3.4mm">
+      <div class="card" style="padding:3.6mm 4.5mm">
+        <div style="font-family:Unbounded;font-weight:800;font-size:10.5pt;color:var(--deep);margin-bottom:2mm">Анонимный опрос 8–11 кл.: октябрь → декабрь → май</div>
+        <table style="font-size:10pt;line-height:1.45">
+          <tr style="font-weight:800;color:var(--muted);font-size:7.5pt;letter-spacing:.06em"><td style="padding-bottom:1.2mm">ИНДИКАТОР</td><td>КАК МЕРИМ</td><td style="text-align:right">ЦЕЛЬ К МАЮ</td></tr>
+          <tr><td style="padding:1mm 0">Знают 3 вопроса паузы</td><td>открытый вопрос</td><td style="text-align:right"><b>≥ 80 %</b></td></tr>
+          <tr><td style="padding:1mm 0">Распознают флаги</td><td>6 кейсов «флаг / не флаг»</td><td style="text-align:right"><b>+30 п. п.</b></td></tr>
+          <tr><td style="padding:1mm 0">Знают об ответственности с 16 лет</td><td>да / нет</td><td style="text-align:right"><b>≥ 85 %</b></td></tr>
+          <tr><td style="padding:1mm 0">Знают, к кому идти в школе</td><td>выбор из списка</td><td style="text-align:right"><b>≥ 80 %</b></td></tr>
+          <tr><td style="padding:1mm 0">Получали предложения «подработки с картой»</td><td>да / нет / не уверен</td><td style="text-align:right">наблюдаем динамику</td></tr>
+        </table>
+        <div style="margin-top:1.6mm;font-size:8.2pt;color:var(--muted);font-weight:700">Без ФИО и контактов — только класс и возраст. Стартовый опрос одновременно подтверждает факторы из задания №2 данными по нашей школе.</div>
+      </div>
+      <div style="border-radius:18px;padding:4mm 5mm;color:#fff;background:linear-gradient(125deg,#3A22B8,#5B4BE8 60%,#7B6CFF);display:flex;flex-direction:column">
+        <div style="font-family:Unbounded;font-weight:800;font-size:10.5pt;color:#FFD21A;margin-bottom:2mm">Ресурсы</div>
+        <div style="font-size:10.4pt;line-height:1.65">💰 <b style="color:#fff">Бюджет:</b> только печать карточек, плакатов и памяток<br>⏱ <b style="color:#fff">Время:</b> встраиваемся в классные часы, уроки, собрания, педсоветы<br>👥 <b style="color:#fff">Люди:</b> команда, классные руководители, соцпедагог, амбассадоры<br>🤝 <b style="color:#fff">Партнёры:</b> Дальневосточное ГУ Банка России, ОМВД (ПДН), Минфин Приморья</div>
+      </div>
+    </div>
+    <div class="foot"><span>ДРОП.НЕТ · ЗАДАНИЕ №3 · «БЕТОННЫЙ ФАЙРВОЛ»</span><span>10 / 12</span></div>
+  </div>
+</section>
+
+<!-- ============ 11. ПОЧЕМУ СРАБОТАЕТ + РИСКИ ============ -->
+<section class="slide">
+  <div class="blob a"></div><div class="blob b"></div>
+  <div class="content">
+    <div class="top"><span class="eyebrow">Обоснование</span><span class="pg">НАУКА · МИРОВАЯ ПРАКТИКА · РИСКИ ВНЕДРЕНИЯ</span></div>
+    <h1>Почему это сработает <span class="v">и что может помешать</span></h1>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:3.4mm;margin-top:2mm">
+      <div class="card" style="padding:3.6mm 4.2mm"><div style="font-size:18pt">🧠</div><div style="font-family:Unbounded;font-weight:800;font-size:10pt;color:var(--deep);margin:1mm 0">Планы «если — то»</div><div style="font-size:9.8pt;line-height:1.45">Метаанализ 94 исследований (8 000+ участников): заранее сформулированный план «если X — делаю Y» заметно повышает шанс поступить правильно, d = 0,65<span class="ref">11</span>. Основа «Правила 15 минут».</div></div>
+      <div class="card" style="padding:3.6mm 4.2mm"><div style="font-size:18pt">💉</div><div style="font-family:Unbounded;font-weight:800;font-size:10pt;color:var(--deep);margin:1mm 0">Психологическая «прививка»</div><div style="font-size:9.8pt;line-height:1.45">Если заранее показать приёмы манипуляции в «ослабленной дозе», человек лучше им противостоит. Игра Bad News прошла проверку в исследовании и сыграна 1 млн+ раз<span class="ref">12</span>. Основа практикума Ш2.</div></div>
+      <div class="card" style="padding:3.6mm 4.2mm"><div style="font-size:18pt">🇬🇧</div><div style="font-family:Unbounded;font-weight:800;font-size:10pt;color:var(--deep);margin:1mm 0">Мировая практика</div><div style="font-size:9.8pt;line-height:1.45">В Великобритании программа «Don't Be Fooled» (UK Finance и Cifas) даёт школам бесплатные уроки против «денежных мулов», а полиция через школы предупреждает родителей<span class="ref">13</span>. Наши Ш2, Р1–Р2 — та же логика.</div></div>
+    </div>
+    <div class="card" style="padding:3.6mm 4.5mm;margin-top:3.4mm;flex:1">
+      <div style="font-family:Unbounded;font-weight:800;font-size:10.5pt;color:var(--deep);margin-bottom:2mm">Риски внедрения и как мы их снижаем</div>
+      <table style="font-size:10.2pt;line-height:1.45">
+        <tr style="font-weight:800;color:var(--muted);font-size:7.5pt;letter-spacing:.06em"><td style="width:34%;padding-bottom:1mm">РИСК</td><td>ЧТО ДЕЛАЕМ</td></tr>
+        <tr><td style="padding:1.7mm 0">«Опять лекция» — школьникам скучно</td><td>Практика вместо лекций: кейсы, квизы, разборы от сверстников, короткие видео</td></tr>
+        <tr><td style="padding:1.7mm 0">Нет времени в расписании</td><td>Встраиваемся в то, что уже есть: классные часы, уроки, собрания; формат 5–20 минут</td></tr>
+        <tr><td style="padding:1.7mm 0">Подростки боятся признаться</td><td>Анонимная форма и правило «кто сообщил — не наказывается» (У2)</td></tr>
+        <tr><td style="padding:1.7mm 0">Эффект забывается за год</td><td>Повторы: практикум раз в четверть, повтор правила в январе, видео амбассадоров каждый месяц</td></tr>
+        <tr><td style="padding:1.7mm 0">Схемы вербовки меняются</td><td>Карточки Ш2 обновляем по свежим предупреждениям Банка России и МВД перед каждой четвертью</td></tr>
+      </table>
+    </div>
+    <div class="foot"><span>ДРОП.НЕТ · ЗАДАНИЕ №3 · «БЕТОННЫЙ ФАЙРВОЛ»</span><span>11 / 12</span></div>
+  </div>
+</section>
+
+<!-- ============ 12. ИТОГ + ИСТОЧНИКИ ============ -->
+<section class="slide">
+  <div class="blob a"></div><div class="blob b"></div>
+  <div class="content">
+    <div class="top"><span class="eyebrow">Итог</span><span class="pg">ОСНОВА ДЛЯ ПРОЕКТНОГО РЕШЕНИЯ</span></div>
+    <h1>Главное <span class="v">в одном слайде</span></h1>
+    <div style="display:grid;grid-template-columns:1.05fr 1fr;gap:5mm;flex:1;min-height:0;margin-top:2mm">
+      <div style="display:flex;flex-direction:column;gap:3.4mm">
+        <div style="border-radius:20px;padding:5mm 6mm;color:#fff;background:linear-gradient(125deg,#3A22B8,#5B4BE8 60%,#7B6CFF);box-shadow:0 8px 22px rgba(58,34,184,.25)">
+          <div style="font-family:Unbounded;font-weight:800;font-size:11.5pt;color:#FFD21A;margin-bottom:2mm">Вывод</div>
+          <div style="font-size:10.2pt;line-height:1.5">Вербовщик выигрывает скоростью и доверием. Поэтому наши меры бьют в <b style="color:#fff">момент первых минут</b> (Ш1, Ш2), в <b style="color:#fff">доверие к «своим»</b> (Ш4) и в <b style="color:#fff">одиночество подростка</b> (Р1–Р3, У1–У2). Все 10 мер конкретны, почти бесплатны, встраиваются в обычную школьную жизнь и измеряются одним анонимным опросом.</div>
+        </div>
+        <div class="card" style="padding:4mm 5mm">
+          <div style="font-family:Unbounded;font-weight:800;font-size:10.5pt;color:var(--deep);margin-bottom:2mm">Старт за 30 дней — 4 быстрые победы</div>
+          <div style="font-size:9.6pt;line-height:1.55"><b>1.</b> Ш1 «Правило 15 минут» на классных часах<br><b>2.</b> Р2+Р3 памятка в родительских чатах<br><b>3.</b> У1 алгоритм реагирования на педсовете<br><b>4.</b> Ш3 запись классов на онлайн-урок Банка России</div>
+        </div>
+        <div style="background:var(--yellow);border-radius:18px;padding:3.4mm 5mm;font-family:Unbounded;font-weight:800;font-size:11pt;color:var(--deep);line-height:1.3">Не «просто перевод». 15 минут, которые решают твоё будущее.</div>
+      </div>
+      <div class="card" style="padding:3.6mm 4.5mm">
+        <div style="font-family:Unbounded;font-weight:800;font-size:9.5pt;color:var(--deep);margin-bottom:1.6mm">Источники (дата обращения: 29.09.2026)</div>
+        <ol style="margin:0;padding-left:4.6mm;font-size:6.9pt;line-height:1.36;color:#3D3658">
+          <li>Задания №1 и №2 команды «Бетонный файрвол».</li>
+          <li>Информация Банка России от 19.09.2025 «Как оградить подростков от вовлечения в операции по отмыванию доходов и дропперство: рекомендации» — garant.ru/products/ipo/prime/doc/412605209</li>
+          <li>ФЗ от 24.06.2025 № 178-ФЗ (счета и карты 14–18 лет — с согласия родителей) — garant.ru/news/1843488</li>
+          <li>УК РФ, ст. 20, 187 (ред. ФЗ № 176-ФЗ) — consultant.ru/law/hotdocs/89782.html</li>
+          <li>Банк России. Онлайн-уроки финансовой грамотности — dni-fg.ru</li>
+          <li>Банк России. «Недетские игры: молодых людей всё чаще вовлекают в преступные схемы» — cbr.ru/press/regevent/?id=44626</li>
+          <li>Банк России. Кибермошенничество и дропперы: предупреждения — cbr.ru/beware</li>
+          <li>Банк России, «Финансовая культура». Кто такие дропперы и как не стать соучастником — fincult.info</li>
+          <li>Детский телефон доверия 8-800-2000-122 — telefon-doveria.ru</li>
+          <li>Банк России. Приморский край — столица финансовой культуры 2026 — cbr.ru/press/event/?id=28380</li>
+          <li>Gollwitzer P., Sheeran P. Implementation intentions and goal achievement: a meta-analysis // Advances in Experimental Social Psychology. 2006. Vol. 38.</li>
+          <li>Roozenbeek J., van der Linden S. Fake news game confers psychological resistance against online misinformation // Palgrave Communications. 2019. Vol. 5.</li>
+          <li>UK Finance, Cifas. Don't Be Fooled — lessons for schools — ukfinance.org.uk, cifas.org.uk</li>
+          <li>МВД России о «синдроме пионера» — «Коммерсантъ»: kommersant.ru/doc/8737419</li>
+          <li>Роскачество. Как подростков вовлекают в мошенничество с картами — rskrf.ru/tips/eksperty-obyasnyayut/drop</li>
+        </ol>
+      </div>
+    </div>
+    <div class="foot"><span>ДРОП.НЕТ · ЗАДАНИЕ №3 · «БЕТОННЫЙ ФАЙРВОЛ»</span><span>12 / 12</span></div>
+  </div>
+</section>
+
+<script>
+// матрица покрытия
+const cols=['Ш1','Ш2','Ш3','Ш4','Р1','Р2','Р3','У1','У2','У3'];
+const rows=[
+ ['П1','Решение без паузы',['Ш1','Ш2'],'p'],
+ ['П2','«Просто подработка»',['Ш2','Ш3'],'p'],
+ ['П3','Быстрые деньги',['Ш1'],'p'],
+ ['П4','«Синдром пионера»',['Ш2','У3'],'p'],
+ ['С1','Доверие «своим»',['Ш4','У2'],'s'],
+ ['С2','Пример сверстников',['Ш4'],'s'],
+ ['С3','«Онлайн-друг»',['Ш4','Ш2'],'s'],
+ ['С4','Нет взрослого',['Р1','Р2','Р3','У1','У2'],'s'],
+ ['Д1','Своя карта',['Ш3','Р1','Р2'],'d'],
+ ['Д2','Игровые чаты',['Ш2','Ш4'],'d'],
+ ['Д3','Вербовка у школы',['У1'],'d'],
+];
+document.getElementById('cov').innerHTML=rows.map(r=>`<tr><td style="text-align:left;padding:.9mm 0;white-space:nowrap"><span class="code ${r[3]==='p'?'':r[3]}">${r[0]}</span>${r[1]}</td>`+
+  cols.map(c=>`<td>${r[2].includes(c)?`<span style="display:inline-block;width:3.6mm;height:3.6mm;border-radius:50%;background:${c[0]==='Ш'?'#5B4BE8':c[0]==='Р'?'#F4A614':'#10B6A0'}"></span>`:'<span style="color:#DDD8FA">·</span>'}</td>`).join('')+'</tr>').join('');
+</script>
+</body>
+</html>
