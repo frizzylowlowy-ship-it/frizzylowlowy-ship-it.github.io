@@ -87,11 +87,11 @@ h1 .v{ color:var(--violet); }
 
 /* ---------- 3. красные флаги ---------- */
 .flags{ display:grid; grid-template-columns:repeat(4,1fr); gap:3.4mm; flex:1; margin-top:1mm; }
-.flag{ position:relative; border-radius:20px; background:#fff; border:1px solid #F7C9D0; padding:3.6mm 4mm 3.4mm; box-shadow:0 6px 16px rgba(240,68,90,.08); display:flex; flex-direction:column; }
-.flag::before{ content:""; position:absolute; left:0; top:0; right:0; height:2.2mm; border-radius:20px 20px 0 0; background:linear-gradient(90deg,#F0445A,#FF8A5B); }
+.flag{ position:relative; border-radius:20px; background:linear-gradient(180deg,#FFF8F9 0%,#fff 38%); border:1px solid #F5D3D9; padding:3.6mm 4mm 3.4mm; box-shadow:0 6px 16px rgba(240,68,90,.08); display:flex; flex-direction:column; }
+
 .flag .fh{ display:flex; align-items:center; gap:2mm; margin-top:.8mm; }
-.flag .fi{ width:9mm; height:9mm; border-radius:10px; background:var(--red-soft); display:grid; place-items:center; font-size:13pt; flex:none; }
-.flag .fn{ font-family:"Unbounded"; font-weight:800; font-size:8pt; color:#C21F37; letter-spacing:.04em; }
+.flag .fi{ width:9mm; height:9mm; border-radius:11px; background:#fff; border:1.5px solid #F7C9D0; box-shadow:0 3px 8px rgba(240,68,90,.15); display:grid; place-items:center; font-size:13pt; flex:none; }
+.flag .fn{ font-family:"Unbounded"; font-weight:800; font-size:7.5pt; color:#C21F37; letter-spacing:.04em; background:var(--red-soft); border-radius:999px; padding:.8mm 2.4mm; }
 .flag .ft{ font-weight:800; font-size:12pt; color:var(--ink); line-height:1.25; margin-top:1.6mm; }
 .flag .quote{ margin-top:2.4mm; background:#FFF6F7; border-radius:12px; padding:2.4mm 3mm; font-size:10.6pt; font-style:italic; color:#8E1E30; line-height:1.3; }
 .flag .why{ margin-top:auto; padding-top:2mm; font-size:9.8pt; line-height:1.35; color:var(--muted); font-weight:600; }
