@@ -1,3 +1,6 @@
-Звук в видео:
-- Музыка: «Funky Robot» — Anttis Instrumentals (бесплатно для любого использования; из ресурсов библиотеки Python Arcade)
-- Звуковые эффекты: uisfx (CC0 1.0) и Kenney.nl (CC0 1.0)
+Звук в видео (всё можно использовать свободно):
+- Музыка: Kevin MacLeod — «City Sunshine» и «Adding the Sun», FreePD.com (Public Domain / CC0), из коллекции github.com/SoundSafari/CC0-1.0-Music
+- Whoosh, whip, клик, перелистывание: Remotion SFX (CC0) — github.com/danielnguyenfinhub/use-sound
+- Поп-звуки, rising pops, fanfare: use-sound (Josh W. Comeau, MIT) — github.com/joshwcomeau/use-sound
+- Уведомления, glitch, sonar: akx/Notifications (CC0) — github.com/akx/Notifications
+- Удары: CC0-Public-Domain-Sounds — github.com/lavenderdotpet/CC0-Public-Domain-Sounds

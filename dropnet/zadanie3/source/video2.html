@@ -77,7 +77,7 @@ function slideX(el,t,t0,d=.7,dx=200){ const k=eout5(P(t,t0,d)); el.style.opacity
 function fadeOut(el,t,t0,d=.4){ const k=P(t,t0,d); if(k>0) el.style.opacity=Math.min(parseFloat(el.style.opacity||1),1-k); }
 // kinetic text: wraps words, reveals from bottom with stagger
 function kt(text,cls=''){ return text.split(' ').map(w=>`<span class="word ${cls}"><span>${w}</span></span>`).join(' '); }
-function ktAnim(root,t,t0,stag=.07,d=.55){ $$(root,'.word>span').forEach((s,i)=>{ const k=eout5(P(t,t0+i*stag,d)); s.style.transform=`translateY(${(1-k)*110}%) rotate(${(1-k)*6}deg)`; }); }
+function ktAnim(root,t,t0,stag=.07,d=.55){ $$(root,'.word>span').forEach((s,i)=>{ const k=eout5(P(t,t0+i*stag,d)); s.style.transform=`translateY(${(1-k)*110}%)`; }); }
 function glitch(el,t,t0,d=.45){ const k=P(t,t0,d); if(k>0&&k<1){ const j=(Math.sin(t*97)+Math.sin(t*61))*6*(1-k); el.style.textShadow=`${j}px 0 rgba(0,220,255,.8), ${-j}px 0 rgba(255,0,80,.8)`; tf(el,`translate(${j*.6}px,${Math.sin(t*83)*3*(1-k)}px)`);} else { el.style.textShadow='none'; } }
 function count(el,t,t0,d,from,to,fmt=(v)=>Math.round(v)){ const k=eout(P(t,t0,d)); el.textContent=fmt(lerp(from,to,k)); }
 function draw(path,t,t0,d){ const L=path.getTotalLength(); path.style.strokeDasharray=L; path.style.strokeDashoffset=L*(1-eio(P(t,t0,d))); }
@@ -144,7 +144,7 @@ function scene(o){ const el=document.createElement('div'); el.className='scene '
   const sc={...o, el, cam:el.firstElementChild, start:acc}; S.push(sc); (o.cues||[]).forEach(c=>CUES.push({t:acc+c[0],s:c[1],v:c[2]??1})); acc+=o.dur; return sc; }
 const T_IN=.7;
 /* ---------- 0. COLD OPEN ---------- */
-scene({dur:7.5,bg:'bg-dark',enter:'none',html:`
+scene({dur:8.5,bg:'bg-dark',enter:'none',html:`
   <div class="abs" id="c-ring" style="left:960px;top:520px;width:10px;height:10px;margin:-5px;border-radius:50%;border:6px solid rgba(123,108,255,.8)"></div>
   <div class="abs" id="c-note" style="left:560px;top:380px;width:800px;background:#fff;border-radius:34px;padding:28px 34px;display:flex;gap:22px;align-items:center;box-shadow:0 40px 90px rgba(0,0,0,.45)">
     <div class="ava" style="width:84px;height:84px">${RECRUITER.replace('width="40" height="40"','width="60" height="60"')}</div>
@@ -155,7 +155,7 @@ update(r,t){ const ring=$(r,'#c-ring'); const k=P(t,.3,1.4); ring.style.opacity=
   const n=$(r,'#c-note'); const kk=pope(n,t,.35,.9); n.style.transform+=` rotate(${Math.sin(t*30)*(t>1.8&&t<2.3?2:0)}deg)`;
   glitch($(r,'#c-txt'),t,3.1,.6); ktAnim($(r,'#c-q'),t,3.8); }});
 /* ---------- 1. TITLE ---------- */
-scene({dur:6,bg:'bg-violet',enter:'circle',html:`
+scene({dur:7,bg:'bg-violet',enter:'circle',html:`
   <div class="blob" style="width:900px;height:900px;right:-300px;top:-420px;background:radial-gradient(circle,#FFD21A 0%,transparent 65%);opacity:.45"></div>
   <div class="abs" id="t-logo" style="left:50%;top:150px;width:300px;margin-left:-150px;background:#fff;border-radius:40px;padding:22px 28px;box-shadow:0 30px 60px rgba(10,5,60,.35)"><img src="logo.png" style="width:100%;display:block"></div>
   <div class="abs U" id="t-1" style="left:0;right:0;top:470px;text-align:center;font-size:120px;color:#fff;line-height:1.02">${kt('Бетонный файрвол')}</div>
@@ -164,7 +164,7 @@ scene({dur:6,bg:'bg-violet',enter:'circle',html:`
 `,cues:[[0,'whoosh'],[.5,'impact'],[1.0,'pop'],[2.3,'sparkle']],
 update(r,t){ pope($(r,'#t-logo'),t,.4,1); $(r,'#t-logo').style.transform+=` rotate(${Math.sin(t*2)*3}deg)`; ktAnim($(r,'#t-1'),t,.9,.1,.6); ktAnim($(r,'#t-2'),t,1.6,.06); fadeUp($(r,'#t-3'),t,2.4); }});
 /* ---------- 2. PROBLEM ---------- */
-scene({dur:13,bg:'bg-light',enter:'slide',html:`
+scene({dur:15.5,bg:'bg-light',enter:'slide',html:`
   <div class="abs" id="p-kid" style="left:240px;top:270px">${person({style:'short',phone:true,w:520})}</div>
   <div class="phone" id="p-phone" style="left:1080px;top:120px"><div class="screen">
     <div class="chathead"><div class="ava">${RECRUITER}</div><div><b>Подработка 💸</b><small>онлайн</small></div></div>
@@ -190,7 +190,7 @@ update(r,t){ const kid=C($(r,'#p-kid')); kid.idle(t,0); kid.arm('R',-8+Math.sin(
 /* ---------- 3. WALL CONCEPT ---------- */
 const WROWS=[['Навык · школьники','#5B4BE8'],['Опора · родители','#F4A614'],['Среда · учителя','#10B6A0']];
 let wallBricks=''; WROWS.forEach((w,ri)=>{ for(let i=0;i<5;i++){ const off=ri%2?88:0; wallBricks+=`<div class="brick b-${ri}-${i}" style="left:${560+i*184+off-44}px;top:${720-ri*78}px;background:${w[1]}">${i===2?w[0].split(' · ')[0]:''}</div>`; } });
-scene({dur:10,bg:'bg-light',enter:'zoom',html:`
+scene({dur:12.5,bg:'bg-light',enter:'zoom',html:`
   <div class="abs U" id="w-t" style="left:0;right:0;top:80px;text-align:center;font-size:74px;color:#2A1880">${kt('Наш ответ —')} <span style="color:#5B4BE8">${kt('3 контура защиты')}</span></div>
   <div class="abs" id="w-kid" style="left:160px;top:440px">${person({style:'short',phone:true,w:330})}</div>
   ${wallBricks}
@@ -205,7 +205,7 @@ update(r,t){ ktAnim($(r,'#w-t'),t,.2,.07); const kid=C($(r,'#w-kid')); kid.idle(
     const x=k<1? lerp(0,-(1700-1500),eio(k)) : lerp(-200,-40,eout(kb)); const y=k<1?0:-Math.sin(kb*Math.PI)*120+kb*200; e.style.transform=`translate(${x}px,${y}px) rotate(${k<1?0:kb*260}deg)`; });
   $$(r,'.chip').forEach((c,i)=>fadeUp(c,t,6.9+i*.4,.5)); }});
 /* ---------- contour wipe card ---------- */
-function contour(n,title,sub,bg,emoji,cue){ return scene({dur:3.2,bg,enter:'circle',html:`
+function contour(n,title,sub,bg,emoji,cue){ return scene({dur:3.8,bg,enter:'circle',html:`
   <div class="abs" style="left:0;right:0;top:300px;text-align:center"><div class="cic" style="display:inline-grid;place-items:center;width:170px;height:170px;border-radius:50px;background:#fff;font-size:92px;box-shadow:0 30px 60px rgba(0,0,0,.2)">${emoji}</div></div>
   <div class="abs U ct" style="left:0;right:0;top:520px;text-align:center;font-size:40px;color:rgba(255,255,255,.85);letter-spacing:.14em">${kt('КОНТУР '+n)}</div>
   <div class="abs U cs" style="left:0;right:0;top:590px;text-align:center;font-size:110px;color:${bg==='bg-amber'?'#2A1880':'#fff'}">${kt(title)}</div>
@@ -215,7 +215,7 @@ function contour(n,title,sub,bg,emoji,cue){ return scene({dur:3.2,bg,enter:'circ
 /* ---------- 4. КОНТУР 1 ---------- */
 contour(1,'Школьники','навык заметить флаг и взять паузу','bg-violet','🧑‍🎓');
 /* Ш1 */
-scene({dur:11,bg:'bg-light',enter:'slide',html:mtag(1,'Ш1 · ШКОЛЬНИКИ','«Правило 15 минут»','#5B4BE8','#E7E3FF')+`
+scene({dur:16,bg:'bg-light',enter:'slide',html:mtag(1,'Ш1 · ШКОЛЬНИКИ','«Правило 15 минут»','#5B4BE8','#E7E3FF')+`
   <div class="abs" id="s1-kid" style="left:250px;top:300px">${person({style:'short',phone:true,w:400})}</div>
   <div class="abs" id="s1-glass" style="left:120px;top:460px;font-size:120px">⏳</div>
   <div class="thought q1" style="left:720px;top:260px"><span style="color:#5B4BE8">1 </span>Почему платят «ни за что»?</div>
@@ -231,7 +231,7 @@ update(r,t){ ktAnim($(r,'.mtitle'),t,.1,.08); fadeUp($(r,'.mnum'),t,0,.4); const
   const c=$(r,'#s1-card'); const kc=P(t,3.3,.5); c.style.opacity=kc>0?1:0; c.style.transform=`scale(${kc>0?lerp(1.8,1,bounce(kc)):.01}) rotate(${lerp(-12,-3,kc)}deg)`;
   stripAnim(r,t,5.2); }});
 /* Ш2 */
-scene({dur:11,bg:'bg-light',enter:'slide',html:mtag(2,'Ш2 · ШКОЛЬНИКИ','Практикум «Найди флаг»','#5B4BE8','#E7E3FF')+`
+scene({dur:16,bg:'bg-light',enter:'slide',html:mtag(2,'Ш2 · ШКОЛЬНИКИ','Практикум «Найди флаг»','#5B4BE8','#E7E3FF')+`
   <div class="abs" id="s2-board" style="left:110px;top:240px;width:760px;height:480px;border-radius:32px;background:#2A1880;padding:30px;box-shadow:0 24px 60px rgba(42,24,128,.35)">
     <div style="color:#FFD21A;font-weight:800;font-size:22px;letter-spacing:.08em;margin-bottom:16px">РАЗБОР ОБЪЯВЛЕНИЙ · 20 МИНУТ</div>
     ${['«Работа с телефона, 5000 ₽ в день»','«Нужна только твоя карта»','«Мы из полиции, помоги поймать мошенников»','«Ищем курьера в пекарню, оформление по ТК»'].map((x,i)=>`<div class="ad a${i}" style="background:#fff;border-radius:16px;padding:14px 20px;font-size:24px;font-weight:700;margin-bottom:12px;position:relative">${x}<span class="st st${i}" style="position:absolute;right:14px;top:50%;margin-top:-24px;font-size:34px;font-weight:900;border-radius:12px;padding:0 12px;border:4px solid ${i<3?'#F0445A':'#22B573'};color:${i<3?'#F0445A':'#22B573'};line-height:40px">${i<3?'ФЛАГ':'ОК'}</span></div>`).join('')}</div>
@@ -247,7 +247,7 @@ update(r,t){ ktAnim($(r,'.mtitle'),t,.1,.08); fadeUp($(r,'.mnum'),t,0,.4); slide
   slideX($(r,'#s2-chart'),t,.5,.7,200); $(r,'#bar1').style.height=eout(P(t,3.4,.8))*110+'px'; $(r,'#bar2').style.height=eout(P(t,3.8,1))*180+'px'; $(r,'#bl').style.opacity=P(t,4.6,.3);
   stripAnim(r,t,5.2); }});
 /* Ш3 + Ш4 */
-scene({dur:11,bg:'bg-light',enter:'slide',html:mtag(3,'Ш3 + Ш4 · ШКОЛЬНИКИ','Урок Банка России и «Равный — равному»','#5B4BE8','#E7E3FF').replace('font-size:64px','font-size:46px')+`
+scene({dur:16,bg:'bg-light',enter:'slide',html:mtag(3,'Ш3 + Ш4 · ШКОЛЬНИКИ','Урок Банка России и «Равный — равному»','#5B4BE8','#E7E3FF').replace('font-size:64px','font-size:46px')+`
   <div class="abs" id="s3-lap" style="left:110px;top:270px;width:700px;height:430px">
     <div style="position:absolute;left:40px;right:40px;top:0;height:370px;background:#1F1838;border-radius:26px;padding:18px"><div style="width:100%;height:100%;border-radius:14px;background:linear-gradient(135deg,#F3F1FF,#fff);position:relative;overflow:hidden">
       <div style="position:absolute;left:24px;top:22px;background:#F0445A;color:#fff;font-weight:800;font-size:18px;border-radius:999px;padding:6px 14px" id="live">● ОНЛАЙН</div>
@@ -270,7 +270,7 @@ update(r,t){ ktAnim($(r,'.mtitle'),t,.1,.06); fadeUp($(r,'.mnum'),t,0,.4); pope(
   stripAnim(r,t,5.2); }});
 /* ---------- 5. КОНТУР 2 ---------- */
 contour(2,'Родители','видеть риск рано и реагировать без крика','bg-amber','👨‍👩‍👦');
-scene({dur:12,bg:'bg-light',enter:'slide',html:mtag(4,'Р1–Р3 · РОДИТЕЛИ','«3 настройки + 1 разговор»','#8A5A00','#FFF7D1')+`
+scene({dur:17,bg:'bg-light',enter:'slide',html:mtag(4,'Р1–Р3 · РОДИТЕЛИ','«3 настройки + 1 разговор»','#8A5A00','#FFF7D1')+`
   <div class="abs" id="r-par" style="left:170px;top:360px">${person({style:'long',hair:'#5A3422',top:'#F4A614',topD:'#D98E0A',w:360})}</div>
   <div class="abs" id="r-kid" style="left:540px;top:500px">${person({style:'short',w:260})}</div>
   <div class="abs" id="r-note" style="left:110px;top:230px;width:600px;background:#fff;border-radius:26px;padding:18px 22px;display:flex;gap:16px;align-items:center;box-shadow:0 20px 50px rgba(60,40,160,.22);border:1px solid #DDD8FA">
@@ -289,7 +289,7 @@ update(r,t){ ktAnim($(r,'.mtitle'),t,.1,.08); fadeUp($(r,'.mnum'),t,0,.4);
   stripAnim(r,t,5.4); }});
 /* ---------- 6. КОНТУР 3 ---------- */
 contour(3,'Учителя','у ученика — безопасный взрослый, у школы — алгоритм','bg-teal','🧑‍🏫');
-scene({dur:12,bg:'bg-light',enter:'slide',html:mtag(5,'У1–У3 · УЧИТЕЛЯ И ШКОЛА','«Взрослый рядом» + алгоритм','#08594F','#E1FAF6')+`
+scene({dur:17,bg:'bg-light',enter:'slide',html:mtag(5,'У1–У3 · УЧИТЕЛЯ И ШКОЛА','«Взрослый рядом» + алгоритм','#08594F','#E1FAF6')+`
   <div class="abs" id="u-stand" style="left:110px;top:250px;width:320px;height:470px;border-radius:30px;background:linear-gradient(160deg,#0C9C89,#27C9B2);padding:26px;color:#fff;box-shadow:0 20px 50px rgba(16,182,160,.35)">
     <div style="font-weight:800;font-size:27px;line-height:1.25">Получил странное предложение?</div>
     <div style="margin:18px auto 12px;width:200px;height:200px;border-radius:24px;background:#fff;padding:18px;position:relative;overflow:hidden">
@@ -307,13 +307,13 @@ scene({dur:12,bg:'bg-light',enter:'slide',html:mtag(5,'У1–У3 · УЧИТЕЛ
 update(r,t){ ktAnim($(r,'.mtitle'),t,.1,.08); fadeUp($(r,'.mnum'),t,0,.4); fadeUp($(r,'#u-stand'),t,.2,.6);
   $(r,'#scan').style.top=(Math.sin(P(t,.9,1)*Math.PI*2-Math.PI/2)*.5+.5)*190+'px'; $(r,'#scan').style.opacity=t>.9&&t<1.9?1:0;
   const k=C($(r,'#u-kid')); k.idle(t,6); k.arm('R',-eout(P(t,.6,.4))*(1-eout(P(t,1.9,.4)))*60); k.mood(t<1.9?'neutral':'smile');
-  const p=C($(r,'#u-ped')); p.idle(t,7); p.arm('L',t>1.9?Math.sin(t*6)*25-40:0); p.talk(t,t>2&&t<4); if(t>=4)p.mood('smile');
+  const p=C($(r,'#u-ped')); p.idle(t,7); p.arm('L',t>1.9?Math.sin(t*6)*18+45:0); p.talk(t,t>2&&t<4); if(t>=4)p.mood('smile');
   pop($(r,'#u-sp'),t,2,.6); draw($(r,'#u-line'),t,2.5,2.2);
   [0,1,2,3,4].forEach(i=>slideX($(r,'.stp'+i),t,2.6+i*.4,.5,120));
   stripAnim(r,t,6.0); }});
 /* ---------- 7. MATRIX ---------- */
 const BUB=[['Ш1',10,14,'#5B4BE8'],['Ш2',24,22,'#5B4BE8'],['Р2',14,36,'#F4A614'],['Ш3',31,38,'#5B4BE8'],['У2',62,16,'#10B6A0'],['Ш4',74,28,'#5B4BE8'],['Р1',10,62,'#F4A614'],['Р3',27,66,'#F4A614'],['У1',19,78,'#10B6A0'],['У3',70,62,'#10B6A0']];
-scene({dur:9,bg:'bg-light',enter:'zoom',html:`
+scene({dur:13.5,bg:'bg-light',enter:'zoom',html:`
   <div class="abs U" id="x-t" style="left:90px;top:70px;font-size:66px;color:#2A1880">${kt('10 мер:')} <span style="color:#5B4BE8">${kt('с чего начинать')}</span></div>
   <div class="abs" id="x-m" style="left:130px;top:220px;width:1000px;height:720px">
     <div style="position:absolute;inset:0;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:14px">
@@ -335,7 +335,7 @@ update(r,t){ ktAnim($(r,'#x-t'),t,.1,.07); $$(r,'.q').forEach((q,i)=>fadeUp(q,t,
   [0,1,2,3].forEach(i=>slideX($(r,'.w'+i),t,4.0+i*.4,.5,150)); pope($(r,'#x-cov'),t,5.7,.8); count($(r,'#x-n'),t,5.8,1.2,0,11); }});
 /* ---------- 8. ROADMAP ---------- */
 const RM=[['Октябрь','стартовый опрос · классные часы · собрания'],['Ноябрь','урок Банка России · практикум №1 · стенд'],['Декабрь','замер · амбассадоры · встреча с ПДН'],['Январь–март','повтор · практикумы · видео'],['Апрель–май','итоговый опрос · отчёт · другим школам']];
-scene({dur:9,bg:'bg-light',enter:'slide',html:`
+scene({dur:13.5,bg:'bg-light',enter:'slide',html:`
   <div class="abs U" id="m-t" style="left:90px;top:70px;font-size:66px;color:#2A1880">${kt('Дорожная карта')} <span style="color:#5B4BE8">${kt('на учебный год')}</span></div>
   <svg class="abs" width="1740" height="40" style="left:90px;top:330px"><path id="m-line" d="M20 20 L1720 20" stroke="#E7E3FF" stroke-width="12" stroke-linecap="round" fill="none"/><path id="m-line2" d="M20 20 L1720 20" stroke="#5B4BE8" stroke-width="12" stroke-linecap="round" fill="none"/></svg>
   ${RM.map((m,i)=>`<div class="abs ms ms${i}" style="left:${110+i*345}px;top:300px;width:320px"><div style="width:64px;height:64px;margin-bottom:22px;border-radius:50%;background:${i%2?'#FFD21A':'#5B4BE8'};border:8px solid #fff;box-shadow:0 8px 20px rgba(40,20,120,.25)"></div><div class="U" style="font-size:30px;color:#2A1880">${m[0]}</div><div style="font-size:23px;font-weight:700;color:#6B6488;margin-top:8px;line-height:1.35;padding-right:20px">${m[1]}</div></div>`).join('')}
@@ -347,7 +347,7 @@ update(r,t){ ktAnim($(r,'#m-t'),t,.1,.07); draw($(r,'#m-line2'),t,.6,2.2);
   RM.forEach((m,i)=>fadeUp($(r,'.ms'+i),t,.9+i*.4,.6,40));
   [80,30,85,80].forEach((v,i)=>{ const e=$(r,'.kp'+i); pope(e,t,3.7+i*.3,.8); count($(e,'.kn'),t,3.8+i*.3,1.2,0,v); }); }});
 /* ---------- 9. OUTRO ---------- */
-scene({dur:9,bg:'bg-violet',enter:'circle',html:`
+scene({dur:10.5,bg:'bg-violet',enter:'circle',html:`
   <div class="blob" style="width:900px;height:900px;left:-300px;bottom:-500px;background:radial-gradient(circle,#FFD21A 0%,transparent 65%);opacity:.4"></div>
   <div class="abs" id="o-kid" style="left:150px;top:420px">${person({style:'short',phone:true,w:420})}</div>
   <div class="abs U" id="o-t" style="left:620px;right:80px;top:240px;font-size:78px;color:#fff;line-height:1.1">${kt('Не «просто перевод».')}<br><span style="color:#FFD21A">${kt('15 минут, которые решают твоё будущее')}</span></div>
@@ -355,7 +355,7 @@ scene({dur:9,bg:'bg-violet',enter:'circle',html:`
   <div class="abs" id="o-team" style="left:910px;top:745px;font-size:28px;font-weight:800;color:#fff;line-height:1.45">Команда «Бетонный файрвол»<br><span style="opacity:.8">МБОУ СОШ № 4 · г. Большой Камень</span></div>
   ${[...Array(18)].map((_,i)=>`<div class="abs cf cf${i}" style="left:${200+((i*137)%1500)}px;top:-60px;width:${14+i%3*6}px;height:${22+i%4*6}px;border-radius:5px;background:${['#FFD21A','#fff','#FF8FA3','#7FD3FF'][i%4]}"></div>`).join('')}
 `,cues:[[0,'whoosh'],[.4,'impact'],[2.6,'sparkle'],[4.2,'pop'],[4.8,'chime']],
-update(r,t){ const k=C($(r,'#o-kid')); k.idle(t,11); k.mood('grin'); k.arm('L',-150+Math.sin(t*5)*15); fadeUp($(r,'#o-kid'),t,.2,.7,80); k.jump(t,2.6);
+update(r,t){ const k=C($(r,'#o-kid')); k.idle(t,11); k.mood('grin'); k.arm('L',125+Math.sin(t*5)*14); fadeUp($(r,'#o-kid'),t,.2,.7,80); k.jump(t,2.6);
   ktAnim($(r,'#o-t'),t,.6,.08,.6); pope($(r,'#o-logo'),t,4.2,.9); fadeUp($(r,'#o-team'),t,4.6,.6);
   for(let i=0;i<18;i++){ const e=$(r,'.cf'+i); const k2=P(t,2.6+(i%6)*.12,3.2); e.style.opacity=k2>0&&k2<1?1:0; e.style.transform=`translate(${Math.sin(k2*8+i)*60}px,${k2*1200}px) rotate(${k2*720*(i%2?1:-1)}deg)`; } }});
 
@@ -379,7 +379,7 @@ window.render=function(T){
     // exit: previous scene gets pushed/dimmed while next enters
     if(next){ const kx=clamp((lt-(s.dur-T_IN))/T_IN); if(kx>0){ const e=eio(kx); if(next.enter==='slide') s.el.style.transform=`translateX(${-e*30}%)`; if(next.enter==='zoom'){ s.el.style.transform=`scale(${1-e*.08})`; } } }
     // camera push-in
-    const cz=1+.035*clamp(lt/s.dur); s.cam.style.transform=`scale(${cz})`;
+    s.cam.style.transform='none';
     s.update(s.el,Math.max(0,lt));
     if(s.enter==='circle' && lt>=0 && lt<.25) fl=Math.max(fl,(1-lt/.25)*.35);
   });
