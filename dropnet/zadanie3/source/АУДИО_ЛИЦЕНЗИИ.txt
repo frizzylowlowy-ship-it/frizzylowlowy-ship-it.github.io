@@ -1,0 +1,3 @@
+Звук в видео:
+- Музыка: «Funky Robot» — Anttis Instrumentals (бесплатно для любого использования; из ресурсов библиотеки Python Arcade)
+- Звуковые эффекты: uisfx (CC0 1.0) и Kenney.nl (CC0 1.0)

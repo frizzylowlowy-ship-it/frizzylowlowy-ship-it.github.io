@@ -54,9 +54,9 @@ h1 .v{ color:var(--violet); }
 .card h3{ margin:0 0 1.6mm; font-family:"Unbounded",sans-serif; font-weight:600; font-size:11pt; color:var(--deep); display:flex; align-items:center; gap:2.4mm; }
 .card p{ margin:0; font-size:10.5pt; line-height:1.45; }
 .n{ flex:none; width:7.5mm; height:7.5mm; border-radius:8px; display:grid; place-items:center; font-family:"Unbounded",sans-serif; font-size:8.5pt; font-weight:800; color:#fff; background:linear-gradient(135deg,var(--violet),var(--violet-2)); }
-.stats{ display:grid; grid-template-columns:1fr 1fr; gap:3mm; }
-.stat{ border-radius:18px; padding:4.2mm 4.4mm; background:var(--lav); border:1px solid var(--line); }
-.stat .big{ font-family:"Unbounded",sans-serif; font-weight:800; font-size:20pt; line-height:1.05; color:var(--violet); }
+.stats{ display:grid; grid-template-columns:1fr 1fr 1fr; gap:2.6mm; }
+.stat{ border-radius:16px; padding:3mm 3.4mm; background:var(--lav); border:1px solid var(--line); }
+.stat .big{ font-family:"Unbounded",sans-serif; font-weight:800; font-size:15.5pt; line-height:1.05; color:var(--violet); }
 .stat .l{ font-size:9pt; line-height:1.35; color:var(--muted); font-weight:700; margin-top:1.2mm; }
 .stat.hot{ background:linear-gradient(135deg,var(--violet),var(--violet-2)); border:none; }
 .stat.hot .big{ color:var(--yellow); } .stat.hot .l{ color:#ECE8FF; }
@@ -112,7 +112,7 @@ h1 .v{ color:var(--violet); }
 
 /* ---------- 5. приоритет ---------- */
 .final{ display:grid; grid-template-columns:1.12fr 1fr; gap:6mm; flex:1; }
-.prio{ display:flex; flex-direction:column; gap:2.6mm; }
+.prio{ display:flex; flex-direction:column; gap:2mm; padding-bottom:3mm; }
 .pr{ display:grid; grid-template-columns:12mm 1fr; gap:3mm; align-items:center; background:#fff; border:1px solid var(--line); border-radius:18px; padding:2.6mm 3.6mm; box-shadow:0 4px 12px rgba(60,40,160,.07); }
 .pr .k{ width:12mm; height:12mm; border-radius:14px; display:grid; place-items:center; font-family:"Unbounded"; font-weight:800; font-size:14pt; color:#fff; background:linear-gradient(135deg,var(--violet),var(--violet-2)); }
 .pr:first-child .k{ background:linear-gradient(135deg,#FFC21A,#FFD84D); color:var(--deep); }
@@ -124,7 +124,7 @@ h1 .v{ color:var(--violet); }
 .concl p b{ color:#fff; background:rgba(255,210,26,.22); border-radius:4px; padding:0 1mm; }
 .src{ margin-top:3mm; background:#fff; border:1px solid var(--line); border-radius:18px; padding:3mm 4mm; }
 .src h4{ margin:0 0 1.4mm; font-family:"Unbounded"; font-weight:600; font-size:9pt; color:var(--deep); }
-.src ol{ margin:0; padding-left:4.6mm; font-size:7.3pt; line-height:1.36; color:#3D3658; columns:1; }
+.src ol{ margin:0; padding-left:4.6mm; font-size:6.7pt; line-height:1.3; color:#3D3658; columns:1; }
 .src li::marker{ color:var(--violet); font-weight:800; }
 .src .u{ color:var(--violet); }
 
@@ -139,7 +139,11 @@ h1 .v{ color:var(--violet); }
 .change{ display:grid; grid-template-columns:repeat(3,1fr); gap:2.6mm; }
 .ch{ border-radius:16px; padding:2.6mm 3.2mm; border:1px solid var(--line); background:linear-gradient(180deg,#F6F4FF,#fff); }
 .ch .h{ font-family:"Unbounded"; font-weight:800; font-size:9pt; color:var(--violet); text-transform:uppercase; letter-spacing:.04em; }
-.ch .x{ font-size:9.3pt; line-height:1.35; margin-top:1mm; color:#3D3658; }
+.ch .x{ font-size:8.9pt; line-height:1.3; margin-top:1mm; color:#3D3658; }
+.port{ display:flex; align-items:center; gap:1.4mm; font-size:9pt; font-weight:700; margin-top:1.4mm; flex-wrap:nowrap; }
+.port span{ background:var(--lav); border-radius:8px; padding:.8mm 2mm; white-space:nowrap; }
+.port i{ font-style:normal; color:#A79CF5; font-weight:800; }
+.port b{ background:var(--red-soft); color:#B71C33; border-radius:8px; padding:.8mm 2mm; white-space:nowrap; }
 </style>
 </head>
 <body>
@@ -178,10 +182,14 @@ h1 .v{ color:var(--violet); }
           <div class="stat"><div class="big">50–70 %</div><div class="l">дропов — молодёжь до 25 лет<span class="ref">4</span></div></div>
           <div class="stat"><div class="big">70 %</div><div class="l">молодых 14–35 лет сталкиваются с предложениями «быстрого заработка»<span class="ref">5</span></div></div>
           <div class="stat"><div class="big">½</div><div class="l">молодёжи не знает, что такое «дропперство»<span class="ref">5</span></div></div>
+          <div class="stat"><div class="big">+85,6 %</div><div class="l">IT-преступлений подростков в Приморье за 4 года<span class="ref">13</span></div></div>
+          <div class="stat"><div class="big">×48</div><div class="l">рост выявленных подростков-дропперов в РФ за 8 мес. 2026 г.<span class="ref">14</span></div></div>
         </div>
         <div class="card" style="padding:3.2mm 4.5mm">
-          <h3 style="font-size:9.5pt;margin-bottom:2mm">Как читать эту карту рисков</h3>
-          <div class="chain-legend"><span class="pill p-f">Фактор риска</span><span class="arr">→</span><span class="pill p-s">Ситуация</span><span class="arr">→</span><span class="pill p-r">Красный флаг</span><span class="arr">→</span><span class="pill p-c">Последствие</span></div>
+          <h3 style="font-size:9.8pt;margin-bottom:1.6mm">Как факторы ложатся на наш портрет<span class="ref">1</span></h3>
+          <div class="port"><span>Своя карта с 14 лет</span><i>+</i><span>переводы по номеру</span><i>=</i><b>схема технически проста</b></div>
+          <div class="port"><span>Мало карманных денег</span><i>+</i><span>«нужно сейчас»</span><i>=</i><b>мотив согласиться</b></div>
+          <div class="port"><span>«Знакомый знакомого»</span><i>+</i><span>небольшой город</span><i>=</i><b>сложно отказать</b></div>
         </div>
       </div>
     </div>
@@ -202,7 +210,7 @@ h1 .v{ color:var(--violet); }
           <div class="d">Отвечает «ок» за минуты; вербовщики используют давление и внезапные обещания выгоды.<span class="ref">2</span><span class="ref obs">наблюдение команды</span></div></div>
         <div class="f"><div class="t"><i>П2</i>Схема кажется «безобидной подработкой»</div>
           <div class="d">Не видит связи «перевод → украденные деньги»; половина молодёжи не знает самого термина.<span class="ref">5</span></div></div>
-        <div class="f"><div class="t"><i>П3</i>Желание быстрых «своих» денег</div>
+        <div class="f"><div class="t"><i>П3</i>Желание своих денег</div>
           <div class="d">Подростки охотнее верят привлекательным предложениям, особенно в игровой форме.<span class="ref">2</span><span class="ref">9</span></div></div>
         <div class="f"><div class="t"><i>П4</i>«Синдром пионера»</div>
           <div class="d">Готовность сразу помочь «полиции» или «спецслужбам» выключает критическое мышление; в риске и благополучные школьники.<span class="ref">7</span></div></div>
@@ -219,13 +227,15 @@ h1 .v{ color:var(--violet); }
           <div class="d">МВД и Роскачество подчёркивают роль родителей и учителей — без них подросток решает один.<span class="ref">7</span><span class="ref">8</span></div></div>
       </div>
       <div class="group oth">
-        <div class="gh"><div class="gi">📱</div><h2>Цифровые и ситуативные</h2></div>
+        <div class="gh"><div class="gi">📱</div><h2>Цифровые, ситуативные, правовые</h2></div>
         <div class="f"><div class="t"><i>Д1</i>Своя карта с 14 лет</div>
           <div class="d">Карту выпускают с 14 лет с согласия родителей — она уже в телефоне.<span class="ref">2</span></div></div>
         <div class="f"><div class="t"><i>Д2</i>Всё происходит в телефоне</div>
           <div class="d">Главный вход в схему — игровые онлайн-чаты и соцсети.<span class="ref">2</span><span class="ref">9</span></div></div>
         <div class="f"><div class="t"><i>Д3</i>Вербовка рядом со школой</div>
           <div class="d">Вербовщики ищут людей и офлайн — у школ, во дворах, на площадках.<span class="ref">3</span><span class="ref">8</span></div></div>
+        <div class="f"><div class="t"><i>Д4</i>«Мне нет 16 — ничего не будет»</div>
+          <div class="d">Карта — с 14 лет, уголовная ответственность — с 16. Но уже 14-летние попадают в базу дропперов ЦБ, а с 16 — ст. 187 УК РФ. Ложная установка снижает осторожность.<span class="ref">8</span><span class="ref">12</span></div></div>
       </div>
     </div>
     <div class="note"><span class="ic">!</span>Фактор риска — это не ярлык и не доказательство, что человек станет дроппером. Он лишь повышает вероятность не распознать опасность.</div>
@@ -328,15 +338,15 @@ h1 .v{ color:var(--violet); }
         <div class="pr"><div class="k">4</div><div><div class="tt">Рядом нет взрослого для совета (С4)</div><div class="dd">МВД и Роскачество называют внимание родителей и учителей ключевой защитой.</div></div></div>
         <div class="k" style="font-family:Unbounded;font-weight:800;font-size:9pt;color:var(--muted);letter-spacing:.06em;margin-top:auto">НА ЧТО ВОЗДЕЙСТВОВАТЬ ПРОЕКТУ</div>
         <div class="change">
-          <div class="ch"><div class="h">Привычку</div><div class="x">Делать паузу, когда предлагают деньги за перевод или карту.</div></div>
-          <div class="ch"><div class="h">Знание</div><div class="x">Узнавать 8 красных флагов и понимать, что с 16 лет — уголовное дело.</div></div>
-          <div class="ch"><div class="h">Среду</div><div class="x">Взрослый, к которому можно прийти без страха наказания.</div></div>
+          <div class="ch"><div class="h">Привычку</div><div class="x">«Правило 15 минут»: пауза и 3 вопроса перед любым «лёгким заработком».</div></div>
+          <div class="ch"><div class="h">Знание</div><div class="x">8 флагов со слайда 3 и правда: «с 14 — база ЦБ, с 16 — уголовное дело».</div></div>
+          <div class="ch"><div class="h">Среду</div><div class="x">Классный руководитель, соцпедагог, психолог, родитель — прийти без страха.</div></div>
         </div>
       </div>
       <div>
         <div class="concl">
           <h3>Главный вывод</h3>
-          <p>Школьников 14–17 лет делает уязвимыми не «незнание закона» само по себе, а сочетание спешки, доверия к своим и восприятия схемы как безобидной подработки. Вербовщик усиливает это давлением времени, обещаниями, что «всё законно», и легендами про «работу» или «полицию». Самые важные красные флаги — <b>деньги за перевод или карту</b>, <b>«ошибочный» перевод</b>, <b>спешка</b> и <b>«всё легально»</b>. Будущий проект должен воздействовать на <b>момент первых минут</b>: научить замечать эти сигналы и делать паузу, а также снять барьер «не с кем посоветоваться».</p>
+          <p>Школьников 14–17 лет делает уязвимыми не «незнание закона» само по себе, а сочетание спешки, доверия к своим и восприятия схемы как безобидной подработки. Вербовщик усиливает это давлением времени, обещаниями, что «всё законно», и легендами про «работу» или «полицию». Запреты работают — после запрета счетов без согласия родителей подростков-дропов стало в 3 раза меньше<span class="ref">15</span>, — но не срабатывают в момент предложения. Самые важные красные флаги — <b>деньги за перевод или карту</b>, <b>«ошибочный» перевод</b>, <b>спешка</b> и <b>«всё легально»</b>. Будущий проект должен воздействовать на <b>момент первых минут</b>: научить замечать эти сигналы и делать паузу, а также снять барьер «не с кем посоветоваться».</p>
         </div>
         <div class="src">
           <h4>Источники (дата обращения: 29.09.2026)</h4>
@@ -353,6 +363,9 @@ h1 .v{ color:var(--violet); }
             <li>УМВД России по Приморскому краю: <span class="u">nakhodka-city.ru/events/news/item/?sid=20671</span></li>
             <li>Уральское ГУ Банка России — схемы вербовки («Фонтанка»): <span class="u">fontanka.ru/2025/04/20/75344936</span></li>
             <li>УК РФ, ст. 20, 187 (ред. 176-ФЗ) — КонсультантПлюс: <span class="u">consultant.ru/law/hotdocs/89782.html</span></li>
+            <li>PrimaMedia. Киберпреступность среди подростков в Приморье выросла на 85,6 %: <span class="u">primamedia.ru/news/2501438</span></li>
+            <li>МВД России (С. Калинин) — «Коммерсантъ»: <span class="u">kommersant.ru/doc/8972652</span></li>
+            <li>Банк России — «Эксперт»: трёхкратное снижение числа подростков-дропов: <span class="u">expert.ru/news/v-tsb-soobschili-o-trekhkratnom-snizhenii-chisla-dropperov-sredi-podrostkov</span></li>
           </ol>
         </div>
       </div>
