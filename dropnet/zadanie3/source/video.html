@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Дроп.Нет — 5 мер</title>
+<link rel="stylesheet" href="fonts.css">
+<style>
+:root{
+  --violet:#5B4BE8; --violet2:#7B6CFF; --deep:#2A1880; --ink:#1F1838; --muted:#6B6488;
+  --lav:#F3F1FF; --lav2:#E7E3FF; --line:#DDD8FA; --yellow:#FFD21A; --amber:#F4A614;
+  --red:#F0445A; --redsoft:#FFE9EC; --teal:#10B6A0; --green:#22B573;
+}
+*{ box-sizing:border-box; margin:0; padding:0; }
+html,body{ width:1920px; height:1080px; overflow:hidden; background:#fff; }
+body{ font-family:"Manrope",sans-serif; color:var(--ink); }
+#stage{ position:relative; width:1920px; height:1080px; overflow:hidden; background:#FBFAFF; }
+.bgblob{ position:absolute; border-radius:50%; filter:blur(60px); opacity:.55; }
+.scene{ position:absolute; inset:0; opacity:0; }
+.abs{ position:absolute; }
+.display{ font-family:"Unbounded",sans-serif; font-weight:800; }
+.pill{ display:inline-block; font-weight:800; border-radius:999px; }
+.eyebrow{ background:var(--yellow); color:var(--deep); font-size:22px; letter-spacing:.08em; text-transform:uppercase; padding:10px 24px; }
+
+/* phone */
+.phone{ position:absolute; width:430px; height:820px; border-radius:60px; background:#1F1838; padding:18px; box-shadow:0 30px 80px rgba(40,20,120,.35); }
+.screen{ width:100%; height:100%; border-radius:44px; background:linear-gradient(180deg,#F4F2FF,#FFFFFF); overflow:hidden; position:relative; }
+.chathead{ display:flex; align-items:center; gap:14px; padding:26px 22px 16px; border-bottom:1px solid var(--line); background:#fff; }
+.ava{ width:58px; height:58px; border-radius:50%; background:#2A1880; display:grid; place-items:center; flex:none; }
+.chathead b{ font-size:22px; color:var(--ink); display:block; }
+.chathead small{ font-size:16px; color:var(--green); font-weight:700; }
+.msgs{ padding:22px 18px; display:flex; flex-direction:column; gap:16px; }
+.bub{ position:relative; max-width:330px; background:#fff; border:1px solid var(--line); border-radius:24px 24px 24px 6px; padding:16px 20px; font-size:22px; font-weight:600; line-height:1.3; box-shadow:0 6px 16px rgba(40,20,120,.08); transform-origin:0 100%; }
+.bub.me{ align-self:flex-end; background:var(--yellow); border:none; color:var(--deep); border-radius:24px 24px 6px 24px; transform-origin:100% 100%; }
+.flagtag{ position:absolute; right:-14px; top:-18px; background:var(--red); color:#fff; font-size:15px; font-weight:800; letter-spacing:.04em; border-radius:999px; padding:5px 12px; white-space:nowrap; box-shadow:0 6px 14px rgba(240,68,90,.4); }
+
+/* info card */
+.card{ position:absolute; right:90px; top:250px; width:720px; background:#fff; border-radius:40px; padding:40px 44px; box-shadow:0 30px 80px rgba(60,40,160,.16); border:1px solid var(--line); }
+.row{ margin-bottom:24px; }
+.row:last-child{ margin-bottom:0; }
+.lab{ font-size:17px; font-weight:800; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); margin-bottom:8px; display:flex; align-items:center; gap:10px; }
+.lab i{ font-style:normal; width:30px; height:30px; border-radius:10px; display:grid; place-items:center; font-size:17px; }
+.val{ font-size:28px; line-height:1.3; font-weight:700; color:var(--ink); }
+.val.f{ display:inline-block; background:var(--redsoft); color:#B71C33; border-radius:16px; padding:8px 16px; font-size:26px; }
+.val.e{ color:var(--deep); }
+.dots{ display:flex; gap:10px; align-items:center; font-size:24px; font-weight:800; color:var(--deep); }
+.dots span{ width:26px; height:26px; border-radius:50%; background:var(--lav2); }
+.dots span.on{ background:linear-gradient(135deg,var(--violet),var(--violet2)); }
+.mhead{ position:absolute; left:90px; top:70px; }
+.mnum{ display:inline-flex; align-items:center; gap:14px; background:var(--lav2); color:var(--violet); font-size:22px; font-weight:800; padding:10px 22px; border-radius:999px; letter-spacing:.06em; }
+.mtitle{ font-family:"Unbounded"; font-weight:800; font-size:62px; color:var(--deep); margin-top:18px; line-height:1.05; }
+.progress{ position:absolute; left:50%; bottom:40px; transform:translateX(-50%); display:flex; gap:14px; }
+.progress span{ width:60px; height:10px; border-radius:6px; background:var(--lav2); }
+.progress span.on{ background:var(--violet); }
+.caption{ position:absolute; left:50%; bottom:90px; transform:translateX(-50%); background:rgba(31,24,56,.92); color:#fff; font-size:32px; font-weight:700; padding:18px 34px; border-radius:22px; white-space:nowrap; }
+.caption b{ color:var(--yellow); }
+.thought{ position:absolute; background:#fff; border:3px solid var(--violet); border-radius:30px; padding:16px 24px; font-size:27px; font-weight:800; color:var(--deep); box-shadow:0 12px 28px rgba(60,40,160,.18); white-space:nowrap; }
+.thought .q{ color:var(--violet); margin-right:8px; }
+.speech{ position:absolute; background:#fff; border-radius:30px; padding:20px 26px; font-size:28px; font-weight:700; line-height:1.3; box-shadow:0 12px 30px rgba(60,40,160,.18); border:1px solid var(--line); }
+.speech::after{ content:""; position:absolute; bottom:-18px; left:60px; border:18px solid transparent; border-top-color:#fff; border-bottom:0; }
+</style>
+</head>
+<body>
+<div id="stage">
+  <div class="bgblob" id="blobA" style="width:900px;height:700px;right:-300px;top:-380px;background:radial-gradient(circle at 30% 60%,#FFC94A 0%,#8C5CF0 55%,transparent 72%)"></div>
+  <div class="bgblob" id="blobB" style="width:800px;height:800px;left:-420px;bottom:-520px;background:radial-gradient(circle at 62% 30%,#FFB938 0%,#5B4BE8 55%,transparent 73%)"></div>
+  <div id="scenes"></div>
+</div>
+
+<script>
+/* ================= helpers ================= */
+const clamp=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const ease=t=>t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2;
+const eout=t=>1-Math.pow(1-t,3);
+const back=t=>{const c1=1.70158,c3=c1+1;return 1+c3*Math.pow(t-1,3)+c1*Math.pow(t-1,2);};
+const P=(t,t0,d)=>clamp((t-t0)/d);
+const $=(root,sel)=>root.querySelector(sel);
+const $$=(root,sel)=>[...root.querySelectorAll(sel)];
+function pop(el,t,t0,d=.5){ const k=P(t,t0,d); el.style.opacity=k>0?1:0; el.style.transform=(el.dataset.base||'')+` scale(${k>0?back(k):0.001})`; }
+function fadeUp(el,t,t0,d=.6,dist=40){ const k=eout(P(t,t0,d)); el.style.opacity=k; el.style.transform=(el.dataset.base||'')+` translateY(${(1-k)*dist}px)`; }
+function slideIn(el,t,t0,d=.7,dx=120){ const k=eout(P(t,t0,d)); el.style.opacity=k; el.style.transform=(el.dataset.base||'')+` translateX(${(1-k)*dx}px)`; }
+function show(el,on){ el.style.opacity=on?1:0; }
+
+/* ================= characters ================= */
+const MOUTH={ neutral:"M106 168 Q120 174 134 168", smile:"M103 163 Q120 186 137 163", worried:"M107 176 Q120 164 133 176", open:"M108 164 Q120 186 132 164 Q120 170 108 164 Z", o:"M114 170 Q120 160 126 170 Q120 180 114 170 Z" };
+function person(o){
+  const skin=o.skin||'#FFD3B6', skinD=o.skinD||'#F2B899', hair=o.hair||'#2B2140', top=o.top||'#5B4BE8', topD=o.topD||'#4637C8';
+  let hairP='';
+  if(o.style==='short') hairP=`<path d="M60 132 C54 70 92 50 124 52 C164 52 190 82 182 130 C172 104 150 94 122 96 C96 97 74 108 60 132 Z" fill="${hair}"/>`;
+  if(o.style==='curly') hairP=`<g fill="${hair}"><circle cx="75" cy="95" r="26"/><circle cx="105" cy="72" r="28"/><circle cx="140" cy="72" r="28"/><circle cx="168" cy="96" r="26"/><circle cx="62" cy="122" r="16"/><circle cx="180" cy="122" r="16"/></g>`;
+  if(o.style==='long') hairP=`<path d="M58 140 C50 66 94 50 124 52 C160 52 194 78 184 140 L190 225 C170 232 168 205 170 150 C160 110 140 100 120 100 C98 100 80 112 72 150 C74 205 70 232 52 225 Z" fill="${hair}"/>`;
+  if(o.style==='bun') hairP=`<circle cx="122" cy="50" r="24" fill="${hair}"/><path d="M60 132 C56 72 92 56 122 56 C156 56 188 76 182 132 C176 108 152 96 122 96 C94 96 70 108 60 132 Z" fill="${hair}"/>`;
+  if(o.style==='cap') hairP=`<path d="M62 118 C62 72 92 56 122 56 C156 56 182 74 182 118 Z" fill="${o.cap||'#FFD21A'}"/><path d="M150 112 L214 118 Q214 128 182 126 Z" fill="${o.cap||'#FFD21A'}"/>`;
+  const glasses=o.glasses?`<g fill="none" stroke="#2A1880" stroke-width="4"><circle cx="98" cy="138" r="16"/><circle cx="142" cy="138" r="16"/><path d="M114 138 L126 138"/></g>`:'';
+  const badge=o.badge?`<g><circle cx="165" cy="262" r="17" fill="#FFD21A"/><path d="M165 251 L168 259 L177 259 L170 264 L172 273 L165 268 L158 273 L160 264 L153 259 L162 259 Z" fill="#2A1880"/></g>`:'';
+  const phone=o.phone?`<g class="phoneInHand"><rect x="150" y="238" width="34" height="58" rx="7" fill="#1F1838"/><rect x="154" y="244" width="26" height="44" rx="4" fill="#9D8FFF"/></g>`:'';
+  return `<svg class="person" viewBox="0 0 240 330" width="${o.w||360}" height="${(o.w||360)*330/240}" style="overflow:visible">
+  <g class="body">
+    <path d="M24 330 C24 246 58 214 120 212 C182 214 216 246 216 330 Z" fill="${top}"/>
+    <path d="M96 214 Q120 246 144 214" fill="none" stroke="${topD}" stroke-width="6" stroke-linecap="round"/>
+    <path d="M120 240 L120 330" stroke="${topD}" stroke-width="4" opacity=".5"/>
+    ${badge}
+    <g class="armL" style="transform-origin:62px 246px"><path d="M62 246 Q40 290 64 318" fill="none" stroke="${topD}" stroke-width="30" stroke-linecap="round"/><circle cx="66" cy="318" r="15" fill="${skin}"/></g>
+    <g class="armR" style="transform-origin:178px 246px"><path d="M178 246 Q206 282 170 300" fill="none" stroke="${topD}" stroke-width="30" stroke-linecap="round"/><circle cx="168" cy="300" r="15" fill="${skin}"/>${phone}</g>
+    <g class="head" style="transform-origin:120px 205px">
+      <rect x="104" y="170" width="32" height="46" rx="12" fill="${skinD}"/>
+      <circle cx="62" cy="142" r="12" fill="${skinD}"/><circle cx="178" cy="142" r="12" fill="${skinD}"/>
+      <circle cx="120" cy="134" r="60" fill="${skin}"/>
+      ${hairP}
+      <circle cx="88" cy="160" r="10" fill="#FF8FA3" opacity=".35"/><circle cx="152" cy="160" r="10" fill="#FF8FA3" opacity=".35"/>
+      <path class="browL" d="M86 114 Q98 108 110 114" fill="none" stroke="${hair}" stroke-width="5" stroke-linecap="round" style="transform-origin:98px 112px"/>
+      <path class="browR" d="M130 114 Q142 108 154 114" fill="none" stroke="${hair}" stroke-width="5" stroke-linecap="round" style="transform-origin:142px 112px"/>
+      <g class="eyes"><g class="eye" style="transform-origin:98px 138px"><ellipse cx="98" cy="138" rx="7" ry="9" fill="#1F1838"/><circle cx="100" cy="135" r="2.4" fill="#fff"/></g>
+      <g class="eye" style="transform-origin:142px 138px"><ellipse cx="142" cy="138" rx="7" ry="9" fill="#1F1838"/><circle cx="144" cy="135" r="2.4" fill="#fff"/></g></g>
+      ${glasses}
+      <path class="mouth" d="${MOUTH.neutral}" fill="none" stroke="#8E2A3A" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+      <path class="sweat" d="M188 104 Q196 118 188 124 Q180 118 188 104 Z" fill="#7FD3FF" opacity="0"/>
+    </g>
+  </g></svg>`;
+}
+function charCtl(root){
+  return {
+    root, body:$(root,'.body'), head:$(root,'.head'), eyes:$$(root,'.eye'), mouth:$(root,'.mouth'),
+    armL:$(root,'.armL'), armR:$(root,'.armR'), browL:$(root,'.browL'), browR:$(root,'.browR'), sweat:$(root,'.sweat'),
+    idle(t,seed=0,amp=1){ this.body.style.transform=`translateY(${Math.sin(t*2.2+seed)*4*amp}px)`;
+      this.head.style.transform=`rotate(${Math.sin(t*1.3+seed)*3*amp}deg)`;
+      const ph=(t+seed*0.37)%3.2; const s=ph<0.14?0.1:1; this.eyes.forEach(e=>e.style.transform=`scaleY(${s})`); },
+    look(deg){ this.head.style.transform+=` rotate(${deg}deg)`; },
+    mood(m){ this.mouth.setAttribute('d',MOUTH[m]); const fill=(m==='open'||m==='o')?'#8E2A3A':'none'; this.mouth.setAttribute('fill',fill);
+      const w=m==='worried'; this.browL.style.transform=w?'rotate(-12deg) translateY(-3px)':''; this.browR.style.transform=w?'rotate(12deg) translateY(-3px)':''; },
+    talk(t,on){ if(!on){return;} this.mood(Math.floor(t*7)%2?'open':'neutral'); },
+    arm(which,deg){ (which==='L'?this.armL:this.armR).style.transform=`rotate(${deg}deg)`; },
+    sweatOn(k){ this.sweat.setAttribute('opacity',k); }
+  };
+}
+const RECRUITER=`<svg viewBox="0 0 60 60" width="40" height="40"><circle cx="30" cy="30" r="30" fill="#2A1880"/><path d="M12 30 Q30 14 48 30 Q30 40 12 30Z" fill="#fff"/><path d="M18 29 L27 32 M42 29 L33 32" stroke="#2A1880" stroke-width="4" stroke-linecap="round"/></svg>`;
+
+/* ================= info card ================= */
+function card(o){
+  const dots=[1,2,3].map(i=>`<span class="${i<=o.diff?'on':''}"></span>`).join('');
+  return `<div class="card">
+    <div class="row r1"><div class="lab"><i style="background:#FFE9EC">⚠️</i>Фактор риска</div><div class="val f">${o.factor}</div></div>
+    <div class="row r2"><div class="lab"><i style="background:#E7E3FF">🛠️</i>Что делаем</div><div class="val">${o.what}</div></div>
+    <div class="row r3"><div class="lab"><i style="background:#E1FAF6">🎯</i>Ожидаемый эффект</div><div class="val e">${o.effect}</div></div>
+    <div class="row r4"><div class="lab"><i style="background:#FFF7D1">⚙️</i>Сложность</div><div class="dots">${dots}<em style="font-style:normal;margin-left:10px">${o.diffT}</em></div></div>
+  </div>`;
+}
+function cardAnim(root,t,t0){ ['.r1','.r2','.r3','.r4'].forEach((s,i)=>{ const el=$(root,s); if(el) fadeUp(el,t,t0+0.35*i,.6,30); }); slideIn($(root,'.card'),t,t0-0.3,.8,160); }
+function mhead(n,title){ return `<div class="mhead"><div class="mnum">МЕРА ${n} / 5</div><div class="mtitle">${title}</div></div>
+  <div class="progress">${[1,2,3,4,5].map(i=>`<span class="${i<=n?'on':''}"></span>`).join('')}</div>`; }
+
+/* ================= scenes ================= */
+const S=[];
+function scene(dur,html,update){ const el=document.createElement('div'); el.className='scene'; el.innerHTML=html; document.getElementById('scenes').appendChild(el); S.push({dur,el,update,init:false}); return el; }
+
+/* 0. INTRO */
+scene(6,`
+  <div class="abs" id="i-logo" style="left:50%;top:120px;width:300px;margin-left:-150px"><img src="logo.png" style="width:100%"></div>
+  <div class="abs display" id="i-t1" style="left:0;right:0;top:460px;text-align:center;font-size:92px;color:#2A1880;line-height:1.05">5 мер против<br><span style="color:#5B4BE8">вербовки в дропперы</span></div>
+  <div class="abs" id="i-tag" style="left:0;right:0;top:720px;text-align:center"><span class="pill eyebrow">Задание №3 · «Бетонный файрвол» · СОШ № 4, Большой Камень</span></div>
+  <div class="abs" id="i-f" style="left:0;right:0;top:810px;text-align:center;font-size:30px;font-weight:700;color:#6B6488">Фактор риска → профилактическая мера → ожидаемый эффект</div>
+`,(r,t)=>{ pop($(r,'#i-logo'),t,.2,.7); fadeUp($(r,'#i-t1'),t,.8,.8,60); fadeUp($(r,'#i-tag'),t,1.6,.6); fadeUp($(r,'#i-f'),t,2.2,.6);
+  $(r,'#i-logo').style.transform+=` rotate(${Math.sin(t*2)*2}deg)`; });
+
+/* 1. PROBLEM */
+scene(12,`
+  <div class="abs" id="p-kid" style="left:250px;top:250px">${person({style:'short',top:'#5B4BE8',topD:'#4637C8',phone:true,w:520})}</div>
+  <div class="phone" id="p-phone" style="left:1100px;top:120px"><div class="screen">
+    <div class="chathead"><div class="ava">${RECRUITER}</div><div><b>Подработка 💸</b><small>онлайн</small></div></div>
+    <div class="msgs">
+      <div class="bub" id="b1">Привет! Есть лёгкая подработка — просто прими перевод и перекинь дальше. 10% твои<span class="flagtag" id="f1">ДЕНЬГИ ЗА ПЕРЕВОД</span></div>
+      <div class="bub" id="b2">Всё легально, не парься 😉<span class="flagtag" id="f2">«ВСЁ ЛЕГАЛЬНО»</span></div>
+      <div class="bub" id="b3">Только ответь за 10 минут, а то возьмём другого<span class="flagtag" id="f3">СПЕШКА</span></div>
+    </div>
+    <div class="abs" id="timer" style="left:50%;bottom:36px;margin-left:-70px;width:140px;height:140px">
+      <svg viewBox="0 0 140 140" width="140" height="140"><circle cx="70" cy="70" r="60" fill="#fff" stroke="#E7E3FF" stroke-width="12"/><circle id="tring" cx="70" cy="70" r="60" fill="none" stroke="#F0445A" stroke-width="12" stroke-linecap="round" stroke-dasharray="377" stroke-dashoffset="0" transform="rotate(-90 70 70)"/><text id="ttext" x="70" y="82" text-anchor="middle" font-family="Unbounded" font-weight="800" font-size="30" fill="#2A1880">10:00</text></svg>
+    </div>
+  </div></div>
+  <div class="caption" id="p-cap">Вербовка бьёт в <b>первые минуты</b>: спешка, «лёгкие деньги», доверие «своим»</div>
+  <div class="abs display" id="p-q" style="left:0;right:0;top:420px;text-align:center;font-size:84px;color:#2A1880;opacity:0">Как это остановить? <span style="color:#5B4BE8">→</span></div>
+`,(r,t)=>{
+  const kid=r._kid||(r._kid=charCtl($(r,'#p-kid')));
+  kid.idle(t,0); kid.arm('R',-8+Math.sin(t*3)*2);
+  kid.mood(t<4?'neutral':t<6.5?'o':'worried'); kid.sweatOn(clamp((t-6)/0.5)*0.9);
+  slideIn($(r,'#p-phone'),t,.2,.8,200);
+  pop($(r,'#b1'),t,1.2); pop($(r,'#b2'),t,2.6); pop($(r,'#b3'),t,3.8);
+  pop($(r,'#f1'),t,5.0,.4); pop($(r,'#f2'),t,5.5,.4); pop($(r,'#f3'),t,6.0,.4);
+  const secs=Math.max(0,600-Math.max(0,t-3.8)*55); const m=Math.floor(secs/60), s=Math.floor(secs%60);
+  $(r,'#ttext').textContent=`${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+  $(r,'#tring').setAttribute('stroke-dashoffset',377*(1-secs/600));
+  pop($(r,'#timer'),t,3.8,.5);
+  fadeUp($(r,'#p-cap'),t,6.6,.6); $(r,'#p-cap').style.transform+=' translateX(-50%)';
+  // финальный вопрос
+  const k=eout(P(t,9.6,.6)); const fade=1-k;
+  ['#p-kid','#p-phone','#p-cap'].forEach(s=>{ const e=$(r,s); e.style.opacity=Math.min(parseFloat(e.style.opacity||1),fade); });
+  fadeUp($(r,'#p-q'),t,9.9,.7,50);
+});
+
+/* 2. MEASURE 1 — правило 15 минут */
+scene(14,mhead(1,'«Правило 15 минут»')+`
+  <div class="abs" id="m1-kid" style="left:250px;top:430px">${person({style:'short',top:'#5B4BE8',topD:'#4637C8',phone:true,w:430})}</div>
+  <div class="abs" id="m1-glass" style="left:110px;top:600px;font-size:120px">⏳</div>
+  <div class="thought" id="m1-q1" style="left:600px;top:390px"><span class="q">1</span>Почему мне платят «ни за что»?</div>
+  <div class="thought" id="m1-q2" style="left:640px;top:500px"><span class="q">2</span>Почему меня торопят?</div>
+  <div class="thought" id="m1-q3" style="left:600px;top:610px"><span class="q">3</span>Что будет через год?</div>
+  <div class="abs" id="m1-stop" style="left:90px;top:300px;background:#FFD21A;color:#2A1880;font-weight:800;font-size:34px;padding:14px 26px;border-radius:999px;box-shadow:0 10px 24px rgba(244,166,20,.4)">✋ Пауза 15 минут</div>
+  ${card({factor:'Решение «на бегу», без паузы',what:'Учим алгоритм паузы и 3 вопроса на классном часе; стенд с правилом в каждом классе 8–11',effect:'≥ 80 % учеников 8–11 классов называют 3 вопроса к декабрю',diff:1,diffT:'низкая'})}
+`,(r,t)=>{
+  const kid=r._kid||(r._kid=charCtl($(r,'#m1-kid')));
+  kid.idle(t,1); const down=eout(P(t,1.6,.8)); kid.arm('R',-8+down*28);
+  kid.mood(t<1.6?'worried':t<5?'neutral':'smile');
+  fadeUp($(r,'.mhead'),t,.1,.6);
+  pop($(r,'#m1-stop'),t,.9,.6);
+  pop($(r,'#m1-glass'),t,1.3,.6); $(r,'#m1-glass').style.transform+=` rotate(${Math.floor(t/1.6)%2*180}deg)`;
+  pop($(r,'#m1-q1'),t,2.4); pop($(r,'#m1-q2'),t,3.4); pop($(r,'#m1-q3'),t,4.4);
+  cardAnim(r,t,5.4);
+});
+
+/* 3. MEASURE 2 — практикум */
+scene(14,mhead(2,'Практикум «Найди флаг»')+`
+  <div class="abs" id="m2-board" style="left:120px;top:300px;width:620px;height:400px;border-radius:30px;background:#2A1880;padding:30px;box-shadow:0 20px 50px rgba(42,24,128,.3)">
+    <div style="color:#FFD21A;font-weight:800;font-size:22px;letter-spacing:.08em;margin-bottom:18px">РАЗБОР ОБЪЯВЛЕНИЯ</div>
+    <div class="ln" id="l1" style="background:#fff;border-radius:16px;padding:12px 18px;font-size:23px;font-weight:700;margin-bottom:12px;position:relative">«Работа с телефона, 5000 ₽ в день»<span class="flagtag" id="g1">🚩</span></div>
+    <div class="ln" id="l2" style="background:#fff;border-radius:16px;padding:12px 18px;font-size:23px;font-weight:700;margin-bottom:12px;position:relative">«Нужна только твоя карта»<span class="flagtag" id="g2">🚩</span></div>
+    <div class="ln" id="l3" style="background:#fff;border-radius:16px;padding:12px 18px;font-size:23px;font-weight:700;margin-bottom:12px;position:relative">«Мы из полиции, помоги поймать мошенников»<span class="flagtag" id="g3">🚩</span></div>
+    <div class="ln" id="l4" style="background:#fff;border-radius:16px;padding:12px 18px;font-size:23px;font-weight:700;position:relative">«Ответь сегодня»<span class="flagtag" id="g4">🚩</span></div>
+  </div>
+  <div class="abs" id="m2-teacher" style="left:760px;top:380px">${person({style:'bun',hair:'#6B3E2E',top:'#10B6A0',topD:'#0C927F',glasses:true,w:300})}</div>
+  <div class="abs" id="m2-s1" style="left:140px;top:720px">${person({style:'curly',hair:'#3A2A1A',top:'#FFB938',topD:'#E09A1C',w:220,skin:'#E8B48F',skinD:'#D49A75'})}</div>
+  <div class="abs" id="m2-s2" style="left:380px;top:730px">${person({style:'long',hair:'#8A4B2A',top:'#FF7A8A',topD:'#E85F70',w:210})}</div>
+  <div class="abs" id="m2-s3" style="left:600px;top:740px">${person({style:'cap',cap:'#5B4BE8',top:'#22B573',topD:'#1A9660',w:200})}</div>
+  ${card({factor:'«Это просто подработка»; вера «полиции» по телефону',what:'20-минутные разборы собирательных объявлений на информатике и обществознании — раз в четверть',effect:'Школьники узнают 8 красных флагов: тест «до / после» показывает рост верных ответов',diff:1,diffT:'низкая'})}
+`,(r,t)=>{
+  const te=r._te||(r._te=charCtl($(r,'#m2-teacher')));
+  te.idle(t,2); te.arm('L',Math.sin(t*2.4)*10+ (t>1.5?35:0)); te.talk(t,t>1&&t<5.5); if(t>=5.5) te.mood('smile');
+  ['#m2-s1','#m2-s2','#m2-s3'].forEach((s,i)=>{ const c=r['_s'+i]||(r['_s'+i]=charCtl($(r,s))); c.idle(t,i*1.7,.8);
+    const up=eout(P(t,2+i*0.9,.5))*(t<6+i*0.5?1:1-eout(P(t,6+i*0.5,.5))); c.arm(i===1?'L':'R',-up*150); c.mood(up>0.5?'smile':'neutral'); });
+  fadeUp($(r,'.mhead'),t,.1,.6); fadeUp($(r,'#m2-board'),t,.3,.7);
+  ['#g1','#g2','#g3','#g4'].forEach((s,i)=>pop($(r,s),t,2.4+i*0.9,.4));
+  cardAnim(r,t,6.0);
+});
+
+/* 4. MEASURE 3 — равный равному */
+scene(14,mhead(3,'«Равный — равному»')+`
+  <div class="abs" id="m3-old" style="left:180px;top:360px">${person({style:'short',hair:'#1F1838',top:'#2A1880',topD:'#1E1166',badge:true,w:360})}</div>
+  <div class="abs" id="m3-y1" style="left:600px;top:560px">${person({style:'curly',hair:'#3A2A1A',top:'#FFB938',topD:'#E09A1C',w:250,skin:'#E8B48F',skinD:'#D49A75'})}</div>
+  <div class="abs" id="m3-y2" style="left:830px;top:580px">${person({style:'long',hair:'#8A4B2A',top:'#7B6CFF',topD:'#5B4BE8',w:240})}</div>
+  <div class="speech" id="m3-sp" style="left:150px;top:230px;width:640px">Мне тоже писали про «подработку». Я отказался — <b style="color:#5B4BE8">и это нормально</b></div>
+  <div class="abs" id="m3-h1" style="left:560px;top:470px;font-size:56px">💜</div>
+  <div class="abs" id="m3-h2" style="left:900px;top:480px;font-size:48px">👍</div>
+  <div class="abs" id="m3-h3" style="left:760px;top:430px;font-size:44px">✨</div>
+  ${card({factor:'Доверие «своим» и пример сверстников',what:'Старшеклассники-амбассадоры (10–11 кл.) проводят разборы для 8–9 классов и делают сторис в школьном канале',effect:'Отказ становится нормой: младшие советуются со «своими», а не с вербовщиком',diff:2,diffT:'средняя'})}
+`,(r,t)=>{
+  const o=r._o||(r._o=charCtl($(r,'#m3-old'))); o.idle(t,3); o.talk(t,t>1&&t<5); if(t>=5)o.mood('smile'); o.arm('L',Math.sin(t*3)*12+20);
+  const y1=r._y1||(r._y1=charCtl($(r,'#m3-y1'))); y1.idle(t,4,.8); y1.mood(t>4?'smile':'o');
+  const y2=r._y2||(r._y2=charCtl($(r,'#m3-y2'))); y2.idle(t,5,.8); y2.mood(t>4.4?'smile':'neutral');
+  fadeUp($(r,'.mhead'),t,.1,.6); pop($(r,'#m3-sp'),t,.9,.6);
+  ['#m3-h1','#m3-h2','#m3-h3'].forEach((s,i)=>{ const e=$(r,s); const k=P(t,3.6+i*0.4,2.2); e.style.opacity=k>0&&k<1?Math.sin(k*Math.PI):0; e.style.transform=`translateY(${-k*160}px) scale(${0.6+k*0.6})`; });
+  cardAnim(r,t,5.6);
+});
+
+/* 5. MEASURE 4 — взрослый рядом */
+scene(14,mhead(4,'«Взрослый рядом»')+`
+  <div class="abs" id="m4-stand" style="left:130px;top:300px;width:330px;height:470px;border-radius:30px;background:linear-gradient(160deg,#5B4BE8,#7B6CFF);padding:28px;color:#fff;box-shadow:0 20px 50px rgba(91,75,232,.35)">
+    <div style="font-weight:800;font-size:28px;line-height:1.25">Получил странное предложение?</div>
+    <div style="margin:22px auto 16px;width:200px;height:200px;border-radius:24px;background:#fff;padding:18px">
+      <svg viewBox="0 0 7 7" width="164" height="164" shape-rendering="crispEdges"><g fill="#2A1880"><rect x="0" y="0" width="3" height="3"/><rect x="4" y="0" width="3" height="3"/><rect x="0" y="4" width="3" height="3"/><rect x="4" y="4" width="1" height="1"/><rect x="6" y="5" width="1" height="2"/><rect x="5" y="6" width="1" height="1"/><rect x="3" y="3" width="1" height="1"/><rect x="3" y="1" width="1" height="1"/></g><g fill="#fff"><rect x="1" y="1" width="1" height="1"/><rect x="5" y="1" width="1" height="1"/><rect x="1" y="5" width="1" height="1"/></g></svg>
+    </div>
+    <div style="font-weight:700;font-size:22px;text-align:center;opacity:.95">Анонимно · без наказания</div>
+  </div>
+  <div class="abs" id="m4-kid" style="left:500px;top:470px">${person({style:'short',top:'#5B4BE8',topD:'#4637C8',phone:true,w:330})}</div>
+  <div class="abs" id="m4-ped" style="left:830px;top:440px">${person({style:'short',hair:'#7A7A8C',top:'#22B573',topD:'#1A9660',glasses:true,w:330,skin:'#F1C9A5',skinD:'#DDAE88'})}</div>
+  <div class="speech" id="m4-sp" style="left:640px;top:270px;width:480px">Разберёмся вместе. <b style="color:#22B573">Без наказания.</b></div>
+  <div class="abs" id="m4-ok" style="left:590px;top:430px;font-size:54px">✅</div>
+  ${card({factor:'Рядом нет взрослого для совета',what:'Назначенный взрослый (соцпедагог) + анонимная форма по QR-коду на стенде в холле',effect:'Подросток приходит ДО перевода, а не после — когда ещё можно отказаться',diff:2,diffT:'средняя'})}
+`,(r,t)=>{
+  const k=r._k||(r._k=charCtl($(r,'#m4-kid'))); k.idle(t,6); const up=eout(P(t,1.2,.6))*(1-eout(P(t,3.2,.6))); k.arm('R',-up*60); k.mood(t<3.4?'neutral':'smile');
+  const p=r._p||(r._p=charCtl($(r,'#m4-ped'))); p.idle(t,7); p.arm('L',t>3.4?Math.sin(t*6)*25-40:0); p.talk(t,t>3.8&&t<5.8); if(t>=5.8)p.mood('smile');
+  fadeUp($(r,'.mhead'),t,.1,.6); fadeUp($(r,'#m4-stand'),t,.3,.7);
+  pop($(r,'#m4-ok'),t,2.4,.5); pop($(r,'#m4-sp'),t,3.8,.6);
+  cardAnim(r,t,5.8);
+});
+
+/* 6. MEASURE 5 — родители в курсе */
+scene(14,mhead(5,'«Родители в курсе»')+`
+  <div class="abs" id="m5-par" style="left:150px;top:400px">${person({style:'long',hair:'#5A3422',top:'#F4A614',topD:'#D98E0A',w:380})}</div>
+  <div class="abs" id="m5-kid" style="left:560px;top:530px">${person({style:'short',top:'#5B4BE8',topD:'#4637C8',w:290})}</div>
+  <div class="abs" id="m5-notif" style="left:120px;top:250px;width:560px;background:#fff;border-radius:26px;padding:18px 22px;display:flex;gap:16px;align-items:center;box-shadow:0 20px 50px rgba(60,40,160,.22);border:1px solid #DDD8FA">
+    <div style="width:60px;height:60px;border-radius:18px;background:#FFE9EC;display:grid;place-items:center;font-size:32px;flex:none">🔔</div>
+    <div><div style="font-weight:800;font-size:24px">Поступление 15 000 ₽</div><div style="font-size:20px;color:#6B6488;font-weight:600">на карту сына · от незнакомого отправителя</div></div></div>
+  <div class="abs" id="m5-memo" style="left:760px;top:330px;width:300px;background:#FFF7D1;border-radius:24px;padding:22px 24px;box-shadow:0 14px 34px rgba(244,166,20,.25);transform-origin:50% 50%">
+    <div style="font-family:Unbounded;font-weight:800;font-size:22px;color:#2A1880;margin-bottom:10px">Памятка</div>
+    <div style="font-size:21px;font-weight:700;line-height:1.5">✓ 3 вопроса паузы<br>✓ уведомления по карте<br>✓ не ругать — разобрать</div></div>
+  ${card({factor:'Своя карта с 14 лет — родители не видят операций',what:'Сообщение и памятка в родительских чатах 8–11 классов: подключить уведомления по карте ребёнка',effect:'Взрослые замечают подозрительный перевод сразу и обсуждают его с ребёнком',diff:1,diffT:'низкая'})}
+`,(r,t)=>{
+  const pa=r._pa||(r._pa=charCtl($(r,'#m5-par'))); pa.idle(t,8); pa.mood(t<2?'neutral':t<3.4?'o':'smile'); pa.talk(t,t>3.4&&t<5.4);
+  const k=r._k||(r._k=charCtl($(r,'#m5-kid'))); k.idle(t,9); k.mood(t<3.6?'neutral':'smile'); k.look(t>2?-6:0);
+  fadeUp($(r,'.mhead'),t,.1,.6);
+  pop($(r,'#m5-notif'),t,1.0,.6); $(r,'#m5-notif').style.transform+=` rotate(${t>1&&t<2.4?Math.sin(t*40)*1.5:0}deg)`;
+  pop($(r,'#m5-memo'),t,3.2,.6); $(r,'#m5-memo').style.transform+=' rotate(-4deg)';
+  cardAnim(r,t,5.4);
+});
+
+/* 7. SUMMARY */
+const SUM=[
+ ['⏳','Правило 15 минут','Решение без паузы','низкая',1],
+ ['🚩','Практикум «Найди флаг»','«Просто подработка»','низкая',1],
+ ['🤝','Равный — равному','Доверие «своим»','средняя',2],
+ ['🧑‍🏫','Взрослый рядом','Нет взрослого для совета','средняя',2],
+ ['🔔','Родители в курсе','Карта без контроля','низкая',1],
+];
+scene(12,`
+  <div class="abs display" id="s-t" style="left:90px;top:70px;font-size:62px;color:#2A1880">Фактор → мера → <span style="color:#5B4BE8">эффект</span></div>
+  <div class="abs" id="s-grid" style="left:90px;right:90px;top:210px;display:grid;grid-template-columns:repeat(5,1fr);gap:26px">
+    ${SUM.map((m,i)=>`<div class="sc" id="sc${i}" style="background:#fff;border-radius:34px;padding:30px 26px;border:1px solid #DDD8FA;box-shadow:0 20px 50px rgba(60,40,160,.12);height:470px;display:flex;flex-direction:column">
+      <div style="width:84px;height:84px;border-radius:24px;background:#F3F1FF;display:grid;place-items:center;font-size:46px">${m[0]}</div>
+      <div style="font-size:15px;font-weight:800;letter-spacing:.1em;color:#6B6488;margin-top:22px">МЕРА ${i+1}</div>
+      <div style="font-family:Unbounded;font-weight:800;font-size:27px;color:#2A1880;margin-top:6px;line-height:1.15">${m[1]}</div>
+      <div style="margin-top:auto;font-size:15px;font-weight:800;letter-spacing:.08em;color:#6B6488">СНИЖАЕТ РИСК</div>
+      <div style="display:inline-block;margin-top:8px;background:#FFE9EC;color:#B71C33;border-radius:14px;padding:8px 14px;font-size:21px;font-weight:800;align-self:flex-start">${m[2]}</div>
+      <div class="dots" style="margin-top:18px">${[1,2,3].map(j=>`<span class="${j<=m[4]?'on':''}"></span>`).join('')}<em style="font-style:normal;font-size:20px;margin-left:6px">${m[3]}</em></div>
+    </div>`).join('')}
+  </div>
+  <div class="abs" id="s-time" style="left:90px;right:90px;top:740px;display:flex;align-items:center;gap:0">
+    ${[['Сентябрь','классный час · стенды · родительские чаты'],['Каждую четверть','практикумы и разборы амбассадоров'],['Декабрь','проверка: 80 % знают 3 вопроса'],['Май','итоговый разбор для 9 и 11 классов']].map((x,i)=>`<div class="tl" id="tl${i}" style="flex:1;position:relative;padding-top:40px">
+      <div style="position:absolute;top:10px;left:0;right:0;height:8px;background:#E7E3FF;border-radius:4px"></div>
+      <div style="position:absolute;top:0;left:0;width:28px;height:28px;border-radius:50%;background:${i%2?'#FFD21A':'#5B4BE8'};box-shadow:0 0 0 6px #fff"></div>
+      <div style="font-family:Unbounded;font-weight:800;font-size:24px;color:#2A1880">${x[0]}</div>
+      <div style="font-size:20px;font-weight:700;color:#6B6488;margin-top:4px;padding-right:20px">${x[1]}</div></div>`).join('')}
+  </div>
+`,(r,t)=>{ fadeUp($(r,'#s-t'),t,.1,.6); SUM.forEach((m,i)=>fadeUp($(r,'#sc'+i),t,.5+i*0.3,.7,60)); [0,1,2,3].forEach(i=>fadeUp($(r,'#tl'+i),t,2.8+i*0.4,.6,30)); });
+
+/* 8. OUTRO */
+scene(7,`
+  <div class="abs display" id="o-t" style="left:0;right:0;top:250px;text-align:center;font-size:78px;color:#2A1880;line-height:1.12">Не «просто перевод».<br><span style="color:#5B4BE8">15 минут, которые решают</span><br>твоё будущее</div>
+  <div class="abs" id="o-logo" style="left:50%;top:700px;width:300px;margin-left:-150px"><img src="logo.png" style="width:100%"></div>
+  <div class="abs" id="o-team" style="left:0;right:0;top:900px;text-align:center;font-size:26px;font-weight:800;color:#6B6488">Команда «Бетонный файрвол» · МБОУ СОШ № 4, г. Большой Камень</div>
+`,(r,t)=>{ fadeUp($(r,'#o-t'),t,.2,.9,60); pop($(r,'#o-logo'),t,1.3,.7); fadeUp($(r,'#o-team'),t,1.9,.6); });
+
+/* ================= timeline ================= */
+const FADE=.45;
+let starts=[],acc=0; S.forEach(s=>{starts.push(acc);acc+=s.dur;});
+window.TOTAL=acc;
+window.render=function(T){
+  $(document,'#blobA').style.transform=`translate(${Math.sin(T*.3)*40}px,${Math.cos(T*.25)*30}px)`;
+  $(document,'#blobB').style.transform=`translate(${Math.cos(T*.28)*40}px,${Math.sin(T*.22)*30}px)`;
+  S.forEach((s,i)=>{
+    const lt=T-starts[i];
+    if(lt<-FADE||lt>s.dur+FADE){ s.el.style.opacity=0; s.el.style.display='none'; return; }
+    s.el.style.display='block';
+    const a=clamp((lt+FADE)/FADE), b=clamp((s.dur+FADE-lt)/FADE);
+    s.el.style.opacity=i===0?Math.min(1,b):(i===S.length-1?Math.min(a,1):Math.min(a,b));
+    s.update(s.el,Math.max(0,lt));
+  });
+};
+window.render(0);
+</script>
+</body>
+</html>
