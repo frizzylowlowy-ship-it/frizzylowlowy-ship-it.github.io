@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Факторы риска — Дроп.Нет</title>
+<link rel="stylesheet" href="fonts.css">
+<style>
+:root{
+  --violet:#5B4BE8; --violet-2:#7B6CFF; --deep:#2A1880; --ink:#1F1838; --muted:#6B6488;
+  --lav:#F3F1FF; --lav-2:#E7E3FF; --line:#DDD8FA;
+  --yellow:#FFD21A; --yellow-soft:#FFF7D1; --amber:#F4A614;
+  --red:#F0445A; --red-soft:#FFE9EC; --teal:#10B6A0; --teal-soft:#E1FAF6;
+}
+@page{ size:338.67mm 190.5mm; margin:0; }
+*{ box-sizing:border-box; }
+html,body{ margin:0; background:#fff; }
+body{ font-family:"Manrope","Liberation Sans",sans-serif; color:var(--ink); -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+b{ color:var(--deep); font-weight:800; }
+
+.slide{ position:relative; width:338.67mm; height:190.5mm; overflow:hidden; page-break-after:always; background:#fff; padding:11mm 13mm 10mm; }
+.slide:last-child{ page-break-after:auto; }
+.blob{ position:absolute; border-radius:50%; filter:blur(34px); z-index:0; pointer-events:none; }
+.blob.a{ width:150mm; height:110mm; top:-70mm; right:-50mm; background:radial-gradient(circle at 30% 60%,#FFC94A 0%,#8C5CF0 55%,transparent 72%); opacity:.45; }
+.blob.b{ width:130mm; height:130mm; bottom:-88mm; left:-70mm; background:radial-gradient(circle at 62% 30%,#FFB938 0%,#5B4BE8 55%,transparent 73%); opacity:.4; }
+.dot{ position:absolute; border-radius:50%; background:radial-gradient(circle at 70% 35%,#FFC94A 0 22%,#5B4BE8 48%); z-index:0; }
+.content{ position:relative; z-index:1; height:100%; display:flex; flex-direction:column; }
+
+/* верхняя строка слайда */
+.top{ display:flex; align-items:center; gap:4mm; margin-bottom:5mm; }
+.eyebrow{ background:var(--yellow); color:var(--deep); font-weight:800; font-size:9pt; letter-spacing:.08em; text-transform:uppercase; padding:1.4mm 3.6mm; border-radius:999px; }
+.pg{ margin-left:auto; font-weight:800; font-size:9pt; color:var(--muted); letter-spacing:.06em; }
+.mini-logo{ height:9mm; }
+h1{ font-family:"Unbounded",sans-serif; font-weight:800; color:var(--deep); font-size:25pt; line-height:1.08; margin:0; letter-spacing:-.01em; }
+h1 .v{ color:var(--violet); }
+.lead{ font-size:12pt; line-height:1.45; color:var(--muted); font-weight:500; margin:2.5mm 0 0; max-width:230mm; }
+.foot{ position:absolute; left:0; right:0; bottom:-4mm; display:flex; justify-content:space-between; font-size:7.5pt; color:#9A93B8; font-weight:700; letter-spacing:.04em; }
+.ref{ display:inline-block; font-weight:800; font-size:7.5pt; color:var(--violet); background:var(--lav-2); border-radius:6px; padding:.2mm 1.6mm; margin-left:1mm; vertical-align:1px; white-space:nowrap; }
+.ref.obs{ color:#8A5A00; background:var(--yellow-soft); }
+
+/* ---------- 1. обложка ---------- */
+.cover{ display:grid; grid-template-columns:1.25fr 1fr; gap:8mm; flex:1; min-height:0; margin-bottom:3mm; }
+.hero{ position:relative; border-radius:26px; padding:10mm 11mm; color:#fff; overflow:hidden; background:linear-gradient(125deg,#3A22B8 0%,#5B4BE8 52%,#8A6BFF 100%); display:flex; flex-direction:column; }
+.hero::after{ content:""; position:absolute; right:-25mm; top:-30mm; width:95mm; height:95mm; border-radius:50%; background:radial-gradient(circle,#FFD21A 0%,rgba(255,210,26,0) 65%); opacity:.5; }
+.hero h1{ color:#fff; font-size:26pt; margin-top:4mm; }
+.hero h1 span{ color:var(--yellow); }
+.hero .q{ font-size:12.5pt; line-height:1.4; font-weight:700; margin-top:3mm; opacity:.95; max-width:150mm; }
+.hero .meta{ margin-top:auto; display:flex; gap:2.6mm; flex-wrap:nowrap; }
+.hero .meta div{ background:rgba(255,255,255,.14); border:1px solid rgba(255,255,255,.25); border-radius:12px; padding:2mm 3.6mm; font-size:10pt; font-weight:700; }
+.hero .meta small{ display:block; font-size:7pt; letter-spacing:.1em; text-transform:uppercase; opacity:.75; font-weight:800; }
+.hero .logo{ position:absolute; right:9mm; top:9mm; width:34mm; background:#fff; border-radius:16px; padding:2.2mm 2.8mm; z-index:1; }
+.hero .logo img{ width:100%; display:block; }
+.side{ display:flex; flex-direction:column; gap:3.4mm; justify-content:space-between; }
+.card{ background:#fff; border:1px solid var(--line); border-radius:20px; padding:4mm 5mm; box-shadow:0 6px 18px rgba(60,40,160,.08); }
+.card h3{ margin:0 0 1.6mm; font-family:"Unbounded",sans-serif; font-weight:600; font-size:11pt; color:var(--deep); display:flex; align-items:center; gap:2.4mm; }
+.card p{ margin:0; font-size:10.5pt; line-height:1.45; }
+.n{ flex:none; width:7.5mm; height:7.5mm; border-radius:8px; display:grid; place-items:center; font-family:"Unbounded",sans-serif; font-size:8.5pt; font-weight:800; color:#fff; background:linear-gradient(135deg,var(--violet),var(--violet-2)); }
+.stats{ display:grid; grid-template-columns:1fr 1fr; gap:3mm; }
+.stat{ border-radius:18px; padding:4.2mm 4.4mm; background:var(--lav); border:1px solid var(--line); }
+.stat .big{ font-family:"Unbounded",sans-serif; font-weight:800; font-size:20pt; line-height:1.05; color:var(--violet); }
+.stat .l{ font-size:9pt; line-height:1.35; color:var(--muted); font-weight:700; margin-top:1.2mm; }
+.stat.hot{ background:linear-gradient(135deg,var(--violet),var(--violet-2)); border:none; }
+.stat.hot .big{ color:var(--yellow); } .stat.hot .l{ color:#ECE8FF; }
+.chain-legend{ display:flex; align-items:center; gap:1.4mm; flex-wrap:nowrap; font-weight:800; font-size:8.6pt; }
+.pill{ border-radius:999px; padding:1.2mm 2.6mm; white-space:nowrap; }
+.p-f{ background:var(--lav-2); color:var(--violet); } .p-s{ background:#EEF2FF; color:#3B55C9; }
+.p-r{ background:var(--red-soft); color:#C21F37; } .p-c{ background:#1F1838; color:#fff; }
+.arr{ color:#B9B1EE; font-weight:800; }
+
+/* ---------- 2. факторы ---------- */
+.groups{ display:grid; grid-template-columns:1fr 1fr 0.82fr; gap:4mm; flex:1; min-height:0; margin-top:3mm; }
+.group{ border-radius:22px; padding:3.6mm 4.2mm; display:flex; flex-direction:column; gap:2.4mm; }
+.group.beh{ background:linear-gradient(180deg,#F1EEFF,#FBFAFF); border:1px solid var(--line); }
+.group.soc{ background:linear-gradient(180deg,#FFF5CF,#FFFCF0); border:1px solid #F3DE8A; }
+.group.oth{ background:linear-gradient(180deg,#E3F9F5,#F7FEFC); border:1px solid #BDEDE4; }
+.gh{ display:flex; align-items:center; gap:2.6mm; }
+.gi{ width:10mm; height:10mm; border-radius:12px; display:grid; place-items:center; font-size:14pt; background:#fff; box-shadow:0 3px 8px rgba(40,20,120,.1); }
+.gh h2{ margin:0; font-family:"Unbounded",sans-serif; font-weight:800; font-size:12.5pt; color:var(--deep); line-height:1.1; }
+.gh small{ display:block; font-family:"Manrope"; font-weight:700; font-size:8.5pt; color:var(--muted); margin-top:.6mm; }
+.f{ background:#fff; border-radius:14px; padding:2.4mm 3.4mm; box-shadow:0 2px 8px rgba(40,20,120,.06); }
+.f .t{ font-weight:800; font-size:11pt; color:var(--deep); line-height:1.25; display:flex; gap:2mm; align-items:baseline; }
+.f .t i{ font-style:normal; font-family:"Unbounded"; font-size:7.5pt; color:#fff; background:var(--violet); border-radius:6px; padding:.4mm 1.4mm; flex:none; }
+.soc .f .t i{ background:var(--amber); color:var(--deep); }
+.oth .f .t i{ background:var(--teal); }
+.f .d{ font-size:9.9pt; line-height:1.38; color:#3D3658; margin-top:.8mm; }
+.note{ margin:2.6mm 0 3mm; font-size:8.8pt; color:var(--muted); font-weight:700; display:flex; gap:2mm; align-items:center; }
+.note .ic{ width:5mm; height:5mm; border-radius:50%; background:var(--yellow); color:var(--deep); display:grid; place-items:center; font-weight:800; font-size:8pt; flex:none; }
+
+/* ---------- 3. красные флаги ---------- */
+.flags{ display:grid; grid-template-columns:repeat(4,1fr); gap:3.4mm; flex:1; margin-top:1mm; }
+.flag{ position:relative; border-radius:20px; background:#fff; border:1px solid #F7C9D0; padding:3.6mm 4mm 3.4mm; box-shadow:0 6px 16px rgba(240,68,90,.08); display:flex; flex-direction:column; }
+.flag::before{ content:""; position:absolute; left:0; top:0; right:0; height:2.2mm; border-radius:20px 20px 0 0; background:linear-gradient(90deg,#F0445A,#FF8A5B); }
+.flag .fh{ display:flex; align-items:center; gap:2mm; margin-top:.8mm; }
+.flag .fi{ width:9mm; height:9mm; border-radius:10px; background:var(--red-soft); display:grid; place-items:center; font-size:13pt; flex:none; }
+.flag .fn{ font-family:"Unbounded"; font-weight:800; font-size:8pt; color:#C21F37; letter-spacing:.04em; }
+.flag .ft{ font-weight:800; font-size:12pt; color:var(--ink); line-height:1.25; margin-top:1.6mm; }
+.flag .quote{ margin-top:2.4mm; background:#FFF6F7; border-radius:12px; padding:2.4mm 3mm; font-size:10.6pt; font-style:italic; color:#8E1E30; line-height:1.3; }
+.flag .why{ margin-top:auto; padding-top:2mm; font-size:9.8pt; line-height:1.35; color:var(--muted); font-weight:600; }
+.flag .why b{ color:#C21F37; }
+
+/* ---------- 4. цепочки ---------- */
+.chains{ display:flex; flex-direction:column; gap:3mm; flex:1; margin-top:1mm; }
+.head-row{ display:grid; grid-template-columns:repeat(4,1fr); gap:6mm; padding:0 0 0 0; }
+.head-row div{ font-family:"Unbounded"; font-weight:800; font-size:8.5pt; letter-spacing:.06em; text-transform:uppercase; text-align:center; border-radius:999px; padding:1.4mm 0; }
+.chain{ display:grid; grid-template-columns:repeat(4,1fr); gap:6mm; position:relative; flex:1; }
+.node{ position:relative; border-radius:16px; padding:2.6mm 3.6mm; font-size:10pt; line-height:1.35; display:flex; align-items:center; }
+.node:not(:last-child)::after{ content:"➜"; position:absolute; right:-5.4mm; top:50%; transform:translateY(-50%); font-size:12pt; color:#A79CF5; }
+.nf{ background:var(--lav); border:1px solid var(--line); font-weight:800; color:var(--deep); }
+.ns{ background:#F4F6FF; border:1px solid #D9E0FF; }
+.nr{ background:var(--red-soft); border:1px solid #F7C9D0; color:#8E1E30; font-weight:700; font-style:italic; }
+.nc{ background:linear-gradient(135deg,#2A1880,#4B36C9); color:#fff; font-weight:700; }
+.nc .ref{ background:rgba(255,255,255,.18); color:#fff; }
+
+/* ---------- 5. приоритет ---------- */
+.final{ display:grid; grid-template-columns:1.12fr 1fr; gap:6mm; flex:1; }
+.prio{ display:flex; flex-direction:column; gap:2.6mm; }
+.pr{ display:grid; grid-template-columns:12mm 1fr; gap:3mm; align-items:center; background:#fff; border:1px solid var(--line); border-radius:18px; padding:2.6mm 3.6mm; box-shadow:0 4px 12px rgba(60,40,160,.07); }
+.pr .k{ width:12mm; height:12mm; border-radius:14px; display:grid; place-items:center; font-family:"Unbounded"; font-weight:800; font-size:14pt; color:#fff; background:linear-gradient(135deg,var(--violet),var(--violet-2)); }
+.pr:first-child .k{ background:linear-gradient(135deg,#FFC21A,#FFD84D); color:var(--deep); }
+.pr .tt{ font-weight:800; font-size:10.8pt; color:var(--deep); line-height:1.25; }
+.pr .dd{ font-size:9.8pt; line-height:1.35; color:#3D3658; margin-top:.6mm; }
+.concl{ border-radius:22px; padding:4.2mm 5.4mm; color:#fff; background:linear-gradient(125deg,#3A22B8,#5B4BE8 60%,#7B6CFF); box-shadow:0 8px 22px rgba(58,34,184,.25); }
+.concl h3{ margin:0 0 1.8mm; font-family:"Unbounded"; font-weight:800; font-size:11.5pt; color:var(--yellow); }
+.concl p{ margin:0; font-size:10pt; line-height:1.48; }
+.concl p b{ color:#fff; background:rgba(255,210,26,.22); border-radius:4px; padding:0 1mm; }
+.src{ margin-top:3mm; background:#fff; border:1px solid var(--line); border-radius:18px; padding:3mm 4mm; }
+.src h4{ margin:0 0 1.4mm; font-family:"Unbounded"; font-weight:600; font-size:9pt; color:var(--deep); }
+.src ol{ margin:0; padding-left:4.6mm; font-size:7.3pt; line-height:1.36; color:#3D3658; columns:1; }
+.src li::marker{ color:var(--violet); font-weight:800; }
+.src .u{ color:var(--violet); }
+
+/* чат-иллюстрация */
+.chat{ margin-top:4.5mm; width:128mm; background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.28); border-radius:20px; padding:3.6mm 4mm; display:flex; flex-direction:column; gap:2.2mm; }
+.chat .hd{ display:flex; align-items:center; gap:2.4mm; font-weight:800; font-size:9pt; opacity:.9; }
+.chat .av{ width:6.5mm; height:6.5mm; border-radius:50%; background:#FFD21A; color:#2A1880; display:grid; place-items:center; font-size:8pt; font-weight:800; }
+.bub{ position:relative; align-self:flex-start; max-width:92mm; background:#fff; color:#1F1838; border-radius:14px 14px 14px 4px; padding:1.8mm 3mm; font-size:10pt; font-weight:600; line-height:1.3; }
+.bub .tag{ position:absolute; right:-3mm; top:-2.4mm; background:#F0445A; color:#fff; font-size:6.8pt; font-weight:800; letter-spacing:.05em; border-radius:999px; padding:.6mm 2mm; white-space:nowrap; box-shadow:0 2px 6px rgba(240,68,90,.4); }
+.bub.me{ align-self:flex-end; background:#FFD21A; color:#2A1880; border-radius:14px 14px 4px 14px; }
+.stop{ display:inline-block; margin-left:1.4mm; background:#fff; color:#C21F37; border:1px solid #F7C9D0; font-size:7pt; border-radius:999px; padding:.2mm 1.8mm; letter-spacing:.02em; vertical-align:1px; }
+.change{ display:grid; grid-template-columns:repeat(3,1fr); gap:2.6mm; }
+.ch{ border-radius:16px; padding:2.6mm 3.2mm; border:1px solid var(--line); background:linear-gradient(180deg,#F6F4FF,#fff); }
+.ch .h{ font-family:"Unbounded"; font-weight:800; font-size:9pt; color:var(--violet); text-transform:uppercase; letter-spacing:.04em; }
+.ch .x{ font-size:9.3pt; line-height:1.35; margin-top:1mm; color:#3D3658; }
+</style>
+</head>
+<body>
+
+<!-- ================= СЛАЙД 1 ================= -->
+<section class="slide">
+  <div class="blob a"></div><div class="blob b"></div><div class="dot" style="width:6mm;height:6mm;top:60mm;right:6mm"></div>
+  <div class="content">
+    <div class="cover">
+      <div class="hero">
+        <div class="logo"><img src="logo.png" alt="Дроп.Нет"></div>
+        <span class="eyebrow" style="align-self:flex-start">Проектное задание №2 · Дроп.Нет</span>
+        <h1>Факторы риска<br>вовлечения <span>в дропперство</span></h1>
+        <div class="q">Почему школьник может согласиться стать частью схемы — и что он может заметить до того, как скажет «да».</div>
+        <div class="chat">
+          <div class="hd"><span class="av">?</span>«Подработка 💸» · чат · собирательный пример</div>
+          <div class="bub">Привет! Есть лёгкая подработка — просто прими перевод и перекинь дальше, 10 % твои<span class="tag">ДЕНЬГИ ЗА ПЕРЕВОД</span></div>
+          <div class="bub">Только быстро, ответь за 10 минут — и родителям не говори<span class="tag">СПЕШКА + СЕКРЕТ</span></div>
+          <div class="bub me">Стоп. Почему мне платят «ни за что»? ✋</div>
+        </div>
+        <div class="meta">
+          <div><small>Команда</small>«Бетонный файрвол»</div>
+          <div><small>Капитан</small>Крюков Артем</div>
+          <div><small>Школа</small>МБОУ СОШ № 4, г. Большой Камень</div>
+        </div>
+      </div>
+      <div class="side">
+        <div class="card">
+          <h3><span class="n">01</span>Аудитория и контекст</h3>
+          <p><b>Школьники 14–17 лет</b> Большого Камня (Приморский край). У них уже может быть своя карта, они общаются
+          и ищут подработку в мессенджерах, соцсетях и онлайн-играх. По нашей карте проблемы, критический момент —
+          <b>первые минуты после предложения</b><span class="ref">1</span>.</p>
+        </div>
+        <div class="stats">
+          <div class="stat hot"><div class="big">каждый 5-й</div><div class="l">дроппер в базе ЦБ — несовершеннолетний<span class="ref">2</span></div></div>
+          <div class="stat"><div class="big">50–70 %</div><div class="l">дропов — молодёжь до 25 лет<span class="ref">3</span></div></div>
+          <div class="stat"><div class="big">70 %</div><div class="l">молодых 14–35 лет получали предложения «быстрого заработка»<span class="ref">4</span></div></div>
+          <div class="stat"><div class="big">½</div><div class="l">молодёжи не знает, что такое «дропперство»<span class="ref">4</span></div></div>
+        </div>
+        <div class="card" style="padding:3.2mm 4.5mm">
+          <h3 style="font-size:9.5pt;margin-bottom:2mm">Как читать эту карту рисков</h3>
+          <div class="chain-legend"><span class="pill p-f">Фактор риска</span><span class="arr">→</span><span class="pill p-s">Ситуация</span><span class="arr">→</span><span class="pill p-r">Красный флаг</span><span class="arr">→</span><span class="pill p-c">Последствие</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="foot"><span>ДРОП.НЕТ · ФАКТОРЫ РИСКА · «БЕТОННЫЙ ФАЙРВОЛ» · СОШ № 4 г. БОЛЬШОЙ КАМЕНЬ</span><span>1 / 5</span></div>
+  </div>
+</section>
+
+<!-- ================= СЛАЙД 2 ================= -->
+<section class="slide">
+  <div class="blob a"></div><div class="blob b"></div>
+  <div class="content">
+    <div class="top"><span class="eyebrow">Карта факторов</span><span class="pg">ЧТО ДЕЛАЕТ ПОДРОСТКА УЯЗВИМЫМ</span></div>
+    <h1>Три группы <span class="v">факторов риска</span></h1>
+    <div class="groups">
+      <div class="group beh">
+        <div class="gh"><div class="gi">🧠</div><h2>Поведенческие<small>как подросток принимает решения</small></h2></div>
+        <div class="f"><div class="t"><i>П1</i>Решение «на бегу», без паузы</div>
+          <div class="d">Отвечает «ок» за минуты, чтобы не упустить деньги; вербовщики давят срочностью.<span class="ref">1</span><span class="ref obs">наблюдение команды</span></div></div>
+        <div class="f"><div class="t"><i>П2</i>Схема кажется «безобидной подработкой»</div>
+          <div class="d">Не видит связи «перевод → украденные деньги»; половина молодёжи не знает самого термина.<span class="ref">4</span><span class="ref">9</span></div></div>
+        <div class="f"><div class="t"><i>П3</i>Стремление к финансовой независимости</div>
+          <div class="d">Хочется своих денег и меньше зависеть от родителей — «лёгкий заработок» выглядит выходом.<span class="ref">2</span></div></div>
+        <div class="f"><div class="t"><i>П4</i>«Синдром пионера»</div>
+          <div class="d">Готовность сразу помочь «полиции» или «спецслужбам» выключает критическое мышление; в риске и благополучные школьники.<span class="ref">6</span></div></div>
+      </div>
+      <div class="group soc">
+        <div class="gh"><div class="gi">👥</div><h2>Социальная среда<small>кто и как влияет на решение</small></h2></div>
+        <div class="f"><div class="t"><i>С1</i>Доверие «знакомому знакомого»</div>
+          <div class="d">В небольшом городе предложение часто приходит через знакомых, и отказать сложнее.<span class="ref obs">наблюдение команды</span></div></div>
+        <div class="f"><div class="t"><i>С2</i>Вербовка через сверстников</div>
+          <div class="d">За «привод друга» обещают бонус — схема расходится по классу и компании.<span class="ref">7</span></div></div>
+        <div class="f"><div class="t"><i>С3</i>«Онлайн-друг» и наставник</div>
+          <div class="d">Вербовщик неделями завоёвывает доверие в играх и чатах, прежде чем что-то предложить.<span class="ref">5</span></div></div>
+        <div class="f"><div class="t"><i>С4</i>Не с кем посоветоваться</div>
+          <div class="d">Подросток скрывает предложение от взрослых, а родители не видят операций по его карте.<span class="ref">6</span><span class="ref">7</span></div></div>
+      </div>
+      <div class="group oth">
+        <div class="gh"><div class="gi">📱</div><h2>Цифровые и ситуативные</h2></div>
+        <div class="f"><div class="t"><i>Д1</i>Своя карта с 14 лет</div>
+          <div class="d">Карта уже есть — остаётся только «дать реквизиты» или «принять перевод».<span class="ref">8</span></div></div>
+        <div class="f"><div class="t"><i>Д2</i>Всё происходит в телефоне</div>
+          <div class="d">Главный канал вербовки — интернет: соцсети, мессенджеры, игры.<span class="ref">8</span><span class="ref">9</span></div></div>
+        <div class="f"><div class="t"><i>Д3</i>Мало официальной подработки</div>
+          <div class="d">В небольшом городе «работа с телефона» выглядит заманчивее.<span class="ref obs">гипотеза команды</span></div></div>
+      </div>
+    </div>
+    <div class="note"><span class="ic">!</span>Фактор риска — это не ярлык и не доказательство, что человек станет дроппером. Он лишь повышает вероятность не распознать опасность.</div>
+    <div class="foot"><span>ДРОП.НЕТ · ФАКТОРЫ РИСКА · «БЕТОННЫЙ ФАЙРВОЛ»</span><span>2 / 5</span></div>
+  </div>
+</section>
+
+<!-- ================= СЛАЙД 3 ================= -->
+<section class="slide">
+  <div class="blob a"></div><div class="blob b"></div>
+  <div class="content">
+    <div class="top"><span class="eyebrow">Красные флаги</span><span class="pg">СИГНАЛЫ В САМОМ ПРЕДЛОЖЕНИИ — НЕ В ЧЕЛОВЕКЕ</span></div>
+    <h1>8 сигналов: <span class="v">стоп, это вербовка</span></h1>
+    <div class="flags">
+      <div class="flag"><div class="fh"><div class="fi">💸</div><span class="fn">ФЛАГ 1</span></div>
+        <div class="ft">Платят не за работу, а за перевод или карту</div>
+        <div class="quote">«Просто прими деньги и перекинь дальше — 10 % твои»</div>
+        <div class="why"><b>Почему риск:</b> деньги «ни за что» — признак транзита чужих средств.<span class="ref">7</span></div></div>
+      <div class="flag"><div class="fh"><div class="fi">↩️</div><span class="fn">ФЛАГ 2</span></div>
+        <div class="ft">«Ошибочный» перевод и просьба вернуть на другие реквизиты</div>
+        <div class="quote">«Ой, я ошибся номером, верни, пожалуйста, вот на эту карту»</div>
+        <div class="why"><b>Почему риск:</b> так карта становится звеном цепочки.<span class="ref">10</span></div></div>
+      <div class="flag"><div class="fh"><div class="fi">⏱️</div><span class="fn">ФЛАГ 3</span></div>
+        <div class="ft">Давление временем</div>
+        <div class="quote">«Ответь за 10 минут, иначе место займут»</div>
+        <div class="why"><b>Почему риск:</b> спешка не даёт подумать и спросить взрослых.<span class="ref">1</span></div></div>
+      <div class="flag"><div class="fh"><div class="fi">🤫</div><span class="fn">ФЛАГ 4</span></div>
+        <div class="ft">Требование секретности</div>
+        <div class="quote">«Родителям и учителям не говори — это между нами»</div>
+        <div class="why"><b>Почему риск:</b> честной работе не нужна тайна от семьи.<span class="ref">1</span></div></div>
+      <div class="flag"><div class="fh"><div class="fi">🛡️</div><span class="fn">ФЛАГ 5</span></div>
+        <div class="ft">«Мы из полиции / спецслужб — помоги поймать мошенников»</div>
+        <div class="quote">«Прими деньги на карту, это спецоперация»</div>
+        <div class="why"><b>Почему риск:</b> настоящие органы так не работают — это легенда.<span class="ref">6</span><span class="ref">11</span></div></div>
+      <div class="flag"><div class="fh"><div class="fi">💳</div><span class="fn">ФЛАГ 6</span></div>
+        <div class="ft">Просят карту, коды или доступ к банку</div>
+        <div class="quote">«Оформи карту на себя и отдай» / «сдай карту в аренду на сутки»</div>
+        <div class="why"><b>Почему риск:</b> с 16 лет это уголовное преступление.<span class="ref">7</span><span class="ref">12</span></div></div>
+      <div class="flag"><div class="fh"><div class="fi">🎁</div><span class="fn">ФЛАГ 7</span></div>
+        <div class="ft">Бонус за «привод друга»</div>
+        <div class="quote">«Приведи двоих из класса — получишь больше»</div>
+        <div class="why"><b>Почему риск:</b> так вербовка расходится по сверстникам.<span class="ref">7</span></div></div>
+      <div class="flag"><div class="fh"><div class="fi">🔒</div><span class="fn">ФЛАГ 8</span></div>
+        <div class="ft">Уводят в закрытый чат или просят установить приложение</div>
+        <div class="quote">«Перейдём в другой мессенджер, тут неудобно»</div>
+        <div class="why"><b>Почему риск:</b> с этого начинаются «простые поручения».<span class="ref">5</span></div></div>
+    </div>
+    <div class="foot"><span>ДРОП.НЕТ · ФАКТОРЫ РИСКА · «БЕТОННЫЙ ФАЙРВОЛ»</span><span>3 / 5</span></div>
+  </div>
+</section>
+
+<!-- ================= СЛАЙД 4 ================= -->
+<section class="slide">
+  <div class="blob a"></div><div class="blob b"></div>
+  <div class="content">
+    <div class="top"><span class="eyebrow">Связи</span><span class="pg">КАК ФАКТОР ПРЕВРАЩАЕТСЯ В ПОСЛЕДСТВИЕ</span></div>
+    <h1>Цепочки риска: <span class="v">где можно остановиться</span></h1>
+    <div class="chains">
+      <div class="head-row"><div class="p-f">Фактор риска</div><div class="p-s">Ситуация</div><div class="p-r">Красный флаг · точка остановки ✋</div><div class="p-c">Последствие</div></div>
+      <div class="chain">
+        <div class="node nf">П1 · Решение «на бегу», без паузы</div>
+        <div class="node ns">Вечером в чате подработки пишут: «нужен человек с картой прямо сейчас»</div>
+        <div class="node nr">«Ответь за 10 минут, иначе возьмём другого»</div>
+        <div class="node nc">Карта попадает в схему → блокировка и база дропперов ЦБ<span class="ref">8</span></div>
+      </div>
+      <div class="chain">
+        <div class="node nf">С1 · Доверие «знакомому знакомого»</div>
+        <div class="node ns">Приятель старшего брата предлагает «помочь с переводом» за небольшой процент</div>
+        <div class="node nr">«Все так делают, только родителям не говори»</div>
+        <div class="node nc">Соучастие в отмывании украденных денег; с 16 лет — ст. 187 УК РФ<span class="ref">12</span></div>
+      </div>
+      <div class="chain">
+        <div class="node nf">П4 · «Синдром пионера»</div>
+        <div class="node ns">Звонок от «сотрудника полиции»: нужна помощь в поимке мошенников</div>
+        <div class="node nr">«Прими деньги на свою карту — это спецоперация, никому ни слова»</div>
+        <div class="node nc">Подросток сам становится дроппером и фигурантом дела<span class="ref">6</span><span class="ref">11</span></div>
+      </div>
+      <div class="chain">
+        <div class="node nf">П3 · Желание своих денег</div>
+        <div class="node ns">В игре «онлайн-друг» после недель общения предлагает «лёгкий заработок»</div>
+        <div class="node nr">«Платим за каждый перевод, приведи друга — бонус»</div>
+        <div class="node nc">Вовлечены и сам подросток, и его друзья; банки отказывают в операциях<span class="ref">2</span><span class="ref">5</span></div>
+      </div>
+    </div>
+    <div class="foot"><span>ДРОП.НЕТ · ФАКТОРЫ РИСКА · «БЕТОННЫЙ ФАЙРВОЛ» · ситуации — собирательные, не реальные случаи</span><span>4 / 5</span></div>
+  </div>
+</section>
+
+<!-- ================= СЛАЙД 5 ================= -->
+<section class="slide">
+  <div class="blob a"></div><div class="blob b"></div>
+  <div class="content">
+    <div class="top"><span class="eyebrow">Приоритет и вывод</span><span class="pg">НА ЧТО ВОЗДЕЙСТВОВАТЬ В ПЕРВУЮ ОЧЕРЕДЬ</span></div>
+    <h1>Топ-4 фактора <span class="v">для наших школьников</span></h1>
+    <div class="final" style="margin-top:4mm">
+      <div class="prio"><div class="k" style="font-family:Unbounded;font-weight:800;font-size:9pt;color:var(--muted);letter-spacing:.06em">ПРИОРИТЕТ КОМАНДЫ · ПОЧЕМУ ИМЕННО ЭТИ</div>
+        <div class="pr"><div class="k">1</div><div><div class="tt">Решение без паузы (П1)</div><div class="dd">Все сценарии держатся на спешке: остановить вербовку проще всего в первые минуты.</div></div></div>
+        <div class="pr"><div class="k">2</div><div><div class="tt">Доверие знакомым и сверстникам (С1, С2)</div><div class="dd">В небольшом городе предложение приходит «от своих» — ему верят без проверки.</div></div></div>
+        <div class="pr"><div class="k">3</div><div><div class="tt">«Это просто подработка» (П2)</div><div class="dd">Половина молодёжи не знает, что такое дропперство, — а значит, не видит риска.</div></div></div>
+        <div class="pr"><div class="k">4</div><div><div class="tt">Не с кем посоветоваться (С4)</div><div class="dd">Секретность — главный инструмент вербовщика; взрослые узнают слишком поздно.</div></div></div>
+        <div class="k" style="font-family:Unbounded;font-weight:800;font-size:9pt;color:var(--muted);letter-spacing:.06em;margin-top:auto">НА ЧТО ВОЗДЕЙСТВОВАТЬ ПРОЕКТУ</div>
+        <div class="change">
+          <div class="ch"><div class="h">Привычку</div><div class="x">Делать паузу, когда предлагают деньги за перевод или карту.</div></div>
+          <div class="ch"><div class="h">Знание</div><div class="x">Узнавать 8 красных флагов и понимать, что с 16 лет — уголовное дело.</div></div>
+          <div class="ch"><div class="h">Среду</div><div class="x">Взрослый, к которому можно прийти без страха наказания.</div></div>
+        </div>
+      </div>
+      <div>
+        <div class="concl">
+          <h3>Главный вывод</h3>
+          <p>Школьников 14–17 лет делает уязвимыми не «незнание закона» само по себе, а сочетание спешки, доверия к своим и восприятия схемы как безобидной подработки. Вербовщик усиливает это давлением времени, секретностью и легендами про «работу» или «полицию». Самые важные красные флаги — <b>деньги за перевод или карту</b>, <b>«ошибочный» перевод</b>, <b>спешка</b> и <b>«никому не говори»</b>. Будущий проект должен воздействовать на <b>момент первых минут</b>: научить замечать эти сигналы и делать паузу, а также снять барьер «не с кем посоветоваться».</p>
+        </div>
+        <div class="src">
+          <h4>Источники (дата обращения: 29.09.2026)</h4>
+          <ol>
+            <li>Карта проблемы команды «Бетонный файрвол» (задание №1).</li>
+            <li>Банк России, ВЭФ-2026 — по публикации «Мел»: <span class="u">mel.fm/novosti/8972560</span></li>
+            <li>Росфинмониторинг: <span class="u">fedsfm.ru/releases/10222</span></li>
+            <li>НАФИ — по публикации «Республика»: <span class="u">respublika11.ru/2026/09/14/v-rossii-usilivayut-meryi-po-finansovoy-bezopasnosti-molodezhi</span></li>
+            <li>МВД России (А. Растащенов) — «Кубанские новости», 17.09.2026: <span class="u">kubnews.ru/obshchestvo/2026/09/17</span></li>
+            <li>МВД России, «синдром пионера» — «Коммерсантъ»: <span class="u">kommersant.ru/doc/8737419</span></li>
+            <li>Роскачество. Как подростков вовлекают в мошенничество с картами: <span class="u">rskrf.ru/tips/eksperty-obyasnyayut/drop</span></li>
+            <li>Банк России (В. Уваров), 22.09.2026 — «Парламентская газета»: <span class="u">pnp.ru/economics/cb-soobshhil-o-snizhenii-vozrasta-dropperov-do-14-let.html</span></li>
+            <li>«Российская газета», 21.09.2026: <span class="u">rg.ru/2026/09/21/pochemu-molodye-liudi-stanoviatsia-dropperami-i-chto-s-etim-delat.html</span></li>
+            <li>УМВД по Приморскому краю: <span class="u">nakhodka-city.ru/events/news/item/?sid=20671</span></li>
+            <li>Уральское ГУ Банка России — схемы вербовки («Фонтанка»): <span class="u">fontanka.ru/2025/04/20/75344936</span></li>
+            <li>УК РФ, ст. 20, 187 (ред. 176-ФЗ) — КонсультантПлюс: <span class="u">consultant.ru/law/hotdocs/89782.html</span></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+    <div class="foot"><span>ДРОП.НЕТ · ФАКТОРЫ РИСКА · «БЕТОННЫЙ ФАЙРВОЛ»</span><span>5 / 5</span></div>
+  </div>
+</section>
+</body>
+</html>
