@@ -9,6 +9,7 @@ import { materialById, GROUP_CARDS } from '../content/materials.js';
 import { GAME_COLORS } from '../games/colors.js';
 import { useAuth } from '../lib/auth.jsx';
 import NotFound from './NotFound.jsx';
+import { DEMO } from '../lib/demo.js';
 
 const minLabel = (m) => (m < 1 ? '<1' : m) + ' мин';
 
@@ -89,6 +90,12 @@ export default function Material() {
 
           {/* Боковая панель */}
           <aside style={{ display: 'grid', gap: 16, position: 'sticky', top: 92 }}>
+            {DEMO ? (
+              <div className="card" style={{ padding: 22, display: 'grid', gap: 8 }}>
+                <div style={{ fontWeight: 800 }}>PDF для печати</div>
+                <p className="muted" style={{ fontSize: 14 }}>Слайды и сценарий в PDF скачиваются в полной версии сайта.</p>
+              </div>
+            ) : (
             <div className="card" style={{ padding: 22, display: 'grid', gap: 10 }}>
               <div style={{ fontWeight: 800, marginBottom: 4 }}>Скачать</div>
               <a className="btn btn-dark btn-block" href={`/materials/${m.id}-slaydy.pdf`} download><Download size={18} />Слайды, PDF</a>
@@ -98,6 +105,7 @@ export default function Material() {
                 <a className="row muted" style={{ gap: 6, fontWeight: 600 }} href={`/uchitelyam/${m.id}?print=script`} target="_blank" rel="noreferrer"><Printer size={15} />Печать сценария</a>
               </div>
             </div>
+            )}
             <div className="card" style={{ padding: 22, display: 'grid', gap: 12 }}>
               <div className="row" style={{ gap: 10 }}><Target size={18} color="var(--brand)" /><b>Цель занятия</b></div>
               <p className="ink2" style={{ fontSize: 15 }}>{m.goal}</p>

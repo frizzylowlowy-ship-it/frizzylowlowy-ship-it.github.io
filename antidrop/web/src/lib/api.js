@@ -1,5 +1,8 @@
+import { DEMO, DEMO_MSG } from './demo.js';
+
 // Обёртка над fetch: JSON, куки сессии, защитный заголовок
 export async function api(path, { method = 'GET', body } = {}) {
+  if (DEMO) { const e = new Error(DEMO_MSG); e.status = 0; throw e; }
   const res = await fetch('/api' + path, {
     method,
     credentials: 'same-origin',

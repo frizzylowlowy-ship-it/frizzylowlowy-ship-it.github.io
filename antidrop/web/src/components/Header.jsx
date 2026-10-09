@@ -6,6 +6,7 @@ import Logo from './Logo.jsx';
 import { useAuth } from '../lib/auth.jsx';
 import { colorFor, initials } from '../lib/api.js';
 import { EASE } from './ui.jsx';
+import { DEMO } from '../lib/demo.js';
 
 const NAV = [
   { to: '/uchenikam', label: 'Ученикам' },
@@ -28,6 +29,7 @@ export default function Header() {
 
   return (
     <header className="no-print" style={{ position: 'sticky', top: 0, zIndex: 100 }}>
+      {DEMO && <div style={{ background: 'var(--sun-50)', color: '#6B4A00', fontSize: 13, fontWeight: 600, textAlign: 'center', padding: '7px 16px' }}>Демо-версия: уроки, игры и материалы для учителя работают полностью. Вход, классы и кабинеты — в версии на сервере.</div>}
       <motion.div
         animate={{ boxShadow: scrolled ? '0 1px 0 rgba(43,42,61,.08)' : '0 1px 0 rgba(43,42,61,0)' }}
         transition={{ duration: 0.3 }}

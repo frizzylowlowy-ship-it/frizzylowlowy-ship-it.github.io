@@ -5,6 +5,7 @@ import PageHead, { ArtCircle } from '../components/PageHead.jsx';
 import { IlloBell } from '../components/Illo.jsx';
 import { Reveal, Icon, EASE } from '../components/ui.jsx';
 import { Accordion } from './Students.jsx';
+import { DEMO } from '../lib/demo.js';
 
 const TABS = [
   { id: 'pamyatka', label: 'Коротко о главном', icon: BookOpen },
@@ -37,7 +38,7 @@ export default function Parents() {
         art={<ParentsArt />}>
         <div className="row row-wrap" style={{ gap: 12 }}>
           <button className="btn btn-primary btn-lg" onClick={() => setTab('dengi')}><LifeBuoy size={20} />Деньги уже пришли</button>
-          <button className="btn btn-ghost btn-lg" onClick={() => window.print()}><Printer size={20} />Распечатать памятку</button>
+          {!DEMO && <button className="btn btn-ghost btn-lg" onClick={() => window.print()}><Printer size={20} />Распечатать памятку</button>}
         </div>
       </PageHead>
 
