@@ -1,0 +1,15 @@
+# /etc/systemd/system/antidrop.service — запуск без Docker
+[Unit]
+Description=Antidrop
+After=network.target
+
+[Service]
+WorkingDirectory=/opt/antidrop
+Environment=NODE_ENV=production PORT=8080 DATA_DIR=/var/lib/antidrop
+EnvironmentFile=-/opt/antidrop/.env
+ExecStart=/usr/bin/node --disable-warning=ExperimentalWarning server/index.js
+Restart=always
+User=www-data
+
+[Install]
+WantedBy=multi-user.target
